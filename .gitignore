@@ -1,0 +1,9 @@
+setup_*.exe
+misc/
+history/
+etminpro/
+nsis/
+resources/
+maps/*
+!maps/ingamaps/
+ingamaps.7z

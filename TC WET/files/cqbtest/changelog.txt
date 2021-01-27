@@ -1,0 +1,82 @@
+Alpha 0.223 4/30/2011
+* Removed far sound console spam
+* Fixed floating gun/hands during FP death animation
+* Suppressed fire, knife and grenades do not appear on radar anymore
+* Increased PPMM turning speed for stand and crouch (+33% and +50%)
+* Increased team name distance and appearance of team names near removed bodies
+* MP9 and Miniuzi now start with three clips
+* Health regeneration now starts with 3 sec delay after last inflicted damage
+* Adjusted position of FP single-handed weapons to appear a bit bigger
+* Adjusted position of FP two-handed weapons to be a bit lower and closer in shouldered position
+* Improved AABB movement code to better slide around corners where players otherwise got easily stuck
+* Faster return from freelook excursion, increased return speed by 80%
+* Decreased erratic M3S90 and SPAS12 range by 33% and damage by 10%
+* Decreased M590C damage by 10%
+* Decreased Desert Eagle damage by 17% and increased range by 25%
+* Increased .45 sidearm range by 25%
+* Increased .45 damage by 10%
+* Decreased 7.62mm sniper damage by 17%
+* Increased MP9 and MiniUzi range by 33%
+* Fixed lean bug (third-person and first-person animation were vastly off for left leaning)
+* g_leanmode is now cheat protected
+* Removed ETish camera shake near explosions
+* Removed reference to TC:E from escape menu
+* Changed health regeneration to only recover to certain levels after taking damage (80%, 64%, 50%)
+* Added perk for 25% faster reloading
+* Reworked Body perk group to represent different levels of body armor
+* Renamed Runner perk to Lightweight, replacing regular flak vest by an improved one (faster run and sprint)
+* Added Protected perk, lowering body damage by 10%
+* Changed Freeclimber perk into Tank perk, lowering body damage by 20% and decreasing movement speeds by 7.5%
+* Commando perk now also offers ledge grabbbing ability
+* Reintroduced High-grade Ammo perk which now slighly increases the range (reducing falloff effects) and exchanges 00 buckshot against shotgun slugs
+* Mossberg 590 Compact now holds 5 rounds
+* Replaced Beretta 92 by Wilson Combat CQB
+* Replaced Glock 21 by H&K USP 40
+* Replaced old TCE Desert Eagle model
+* Added sawn-off double barreled shotgun aka Shorty (+ akimbo)
+* Aiming down the sight of the right weapon during akimbo
+* Reduced akimbo spread
+* Reworked USP 40 akimbo anim
+* Fixed missing recoil during free look
+* Made toggle aiming optional (default enabled)
+* Added toggle sprint option (COD4-like)
+* Increased gravity to shorten jump length
+* Slightly increased weapon size/bulk effects on speed (from +-5% to +-7.5%)
+* Halved minimum spread for sidearms
+* Replaced ETish horse-like landing sound
+
+Alpha 0.222 4/10/2011
+* Finally fixed spawn point selection
+* Improved body removal
+* Fixed edge of blood screen shader visible at wide fov setting
+* Added first person death animation and effect (no more jumping to third person after death)
+* Increased more sprint bobbing
+* Increased footstep noise during sprint by 3 dB
+* Slightly lowered weapon sounds to avoid clipping
+* Increased bullet flyby and body impact sounds
+* Improved handling of audio events, fire sounds are now transmitted to clients independent of PVS
+
+Alpha 0.221 4/7/2011
+* Fixed random spawn point selection, now select spawnpoint farthest from all enemies 
+* Shotguns no longer clear lean ability
+* Fixed erratic overly fast sprint (about 29% too fast), now it is TCE 049b sprinting speed (between Arma2 and Insurgency)
+* Increased sprint acceleration
+* Increased standard (run) speed by 10% (now comparable to Americas Army 3)
+* Fixed shared ammo between Uzi and Glock
+* Fixed lighting origin for first person gun
+* Changed reference aspect ratio for fov to 16:10 resulting in larger fov's for 4:3 mode
+* Added ability to moderately adjust fov (cg_fovMode 0, 1, 2): 70, 75 (default), 80 @16:10 (requires respawn to take effect)
+* Added fov adjustment to UI
+* Removed some references to TC:Elite from UI
+* Fixed dead client issues with team name display and compass
+* Removed bendable ability and enabled leaning for all players
+* Removed high-grade ammo and pain killer without replacement
+* Tweaked PPMM turning speeds for more consistency, now always 480 degs/sec (120 for prone) in the frontal +- 60 degs 
+* Increased PPMM turning speed by 10%, 7% for crouch, unchanged for prone
+* Fixed missing world models and/or skins for SPAS 12, M3S90, SG-552+Eotech, Glock 18
+
+Hotfix 3/31/2011
+* Fixed linux cgame issue
+
+Alpha 0.220 3/26/2011
+* Initial release

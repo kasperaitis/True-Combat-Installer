@@ -1,0 +1,16 @@
+[Version Info]
+ExtVersion=2.60
+IntVersion=7.1
+Language=255
+Branch=0.0
+QA=3699
+
+[Product Info]
+Platform=PC
+Product=Wolfenstein - Enemy Territory
+
+[Ereg Info]
+Server=www.activision.com
+StartLocation=/webreg/register/
+Template=/webreg/register/user_env.asp?context=app
+UPC=

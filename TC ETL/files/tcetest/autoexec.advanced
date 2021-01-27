@@ -1,0 +1,96 @@
+//ANTI SNOW/VILLAGE CRASH
+seta com_hunkMegs "512"	//Can be set @ half the amount of RAM 
+seta com_zoneMegs "128"	//zonemegs + soundmegs = Half hunkmegs maximum
+seta com_soundMegs "64"	//zonemegs + soundmegs = Half hunkmegs maximum
+
+//ENABLE PUNKBUSTER
+//seta cl_punkbuster "1" //Enables Punk buster by Default
+
+//ANTI NOOB_KICK
+seta cl_maxpackets "76"	//Maxpackets = Stable FPS value (be aware pb_kick depending on values)
+seta com_maxfps "76"	//Maxpackets = Stable FPS value (be aware pb_kick depending on values)
+seta snaps "40"	//linked to pb_sv_fps. "40" reduces ping
+seta rate "25000"	//leave it as it is (pb_kick alert)
+seta cl_packetdup "1"	//leave it as it is (pb_kick alert)
+seta cl_pitchspeed "140"	//leave it as it is (pb_kick alert)
+seta cl_yawspeed "140"	//leave it as it is (pb_kick alert)
+seta cl_timeNudge "0"	//leave it as it is (pb_kick alert)
+
+//ANTI LAG
+//seta pb_Sleep "80"	//PB cvar some adjusted values can fix lag
+//seta pb_system "1"	//Try "1" or set it back to "0" if its worse
+
+//AIM
+seta sensitivity "1.800000"	
+seta cl_mouseAccel "0"	//disabled acceleration (set it to 0.001 can be good too)
+seta in_dgamouse "2" //linux acceleration "OFF"
+seta m_filter "0"
+
+//RENDER
+//seta r_mode "-1" //Allows custom resolution
+//seta r_customaspect "1"	//Allows custom resolution
+//seta r_customheight "900"	//Custom resolution
+//seta r_customwidth "1400"	//Custom resolution
+seta r_texturebits "32"	//obvious -> set to high quality
+seta r_colorbits "32" //obvious -> set to high quality
+seta r_depthbits "24"	//obvious -> set to high quality
+seta r_stencilbits "8"	//obvious -> set to high quality
+seta r_roundImagesDown "0"	//Texture Compression -> set to high quality ("5" maximum or PB kick)
+seta r_picmip "0"	//Texture Compression -> set to high quality ("2" maximum or PB kick)
+seta r_ext_compressed_textures "0" //Texture Compression -> set to high quality
+seta r_textureMode "GL_LINEAR_MIPMAP_NEAREST" // Trilinear (keep it set in coordination with ur gfx card driver settings)
+seta r_primitives "0" //Affects FPS try if "2" is better
+
+seta r_intensity "1"	//Affects Gamma "1.5" maximum or PB kick
+seta r_gamma "1"	//gamma "2" maximum or PB kick
+seta r_swapInterval "0"	//Vsync : "1" if tearing issues - Affects FPS
+seta r_finish "0"	//sync every frame "1" is mouse lag - Affects FPS
+seta r_dynamiclight "2"	//obvious -> set to high quality
+seta r_lodbias "0"	//obvious -> set to high quality
+seta r_lodCurveError "250"	//leave it as it is (pb_kick alert)
+seta r_ignoreFastPath "0"	//leave it as it is (FPS drop alert)
+seta r_subdivisions "4"	//obvious -> set to high quality
+seta r_ignorehwgamma "1"	//Special Gamma (less white) - Requires Vid_Restart for any r_gamma change
+seta r_detailtextures "1"	//Increase Texture quality (if possible)
+
+//CUSTOMIZATION
+seta cg_aspectMode "1"	//Screen Ratio Adaptation
+seta cg_aspectFovMode "2"	//Screen Ratio Adaptation & balance
+seta cg_atmosphericEffects "1"
+seta cg_wolfparticles "1"
+seta cg_dynamicEye "1"	//HDR .49 setting
+seta cg_showblood "1"
+seta cg_bloodFlash "0.5"
+seta cg_bloodDamageBlend "0.5"
+//seta cg_teamChatHeight "3"	//Chat reduced to 3 lines
+//seta cg_teamChatTime "3000"	//Chat display time reduced
+seta cg_bloodTime "120"
+seta cg_marktime "20000"	//set it it to "0" if you have firelag
+seta cg_brassTime "20000"
+seta cg_freeAim "1"	//.49 Freeaim
+//seta cg_gunPosition "2"	//more to the right
+seta cg_toggleCrouch "0"
+seta cg_toggleAiming "1"	
+//seta cg_noVoiceText "0"	//VoiceChat text can be removed "1"
+//seta cg_noVoiceChats "1"	//No more voice spam
+seta cg_bobyaw "0.00"	
+seta cg_bobroll "0.00"
+seta cg_bobpitch "0.00"	
+seta cg_bobup "0.00"
+seta cg_runroll "0.00"
+seta cg_runpitch "0.00"
+seta cg_railTrailTime "400"	//Hitbox/Laser setting
+seta cg_weaponCycleDelay "15"	//Avoids mousewheel bugs if used for weapon switching
+//seta cg_drawFPS "2"
+seta cl_doubletapdelay "0"	//removes autoprone
+
+//MISC / USELESS
+//seta demo_drawTimeScale "0"
+//seta ui_bigFont "0.5"
+//seta ui_smallFont "0.15"
+//seta ui_r_picmip "0"
+//seta g_warmup "10"	//changes warmup time on local server
+//seta scr_conspeed "69"	//Speed of console opening 
+
+seta s_khz "44"
+seta r_maxpolyverts "16384"
