@@ -4,13 +4,13 @@
 `Wolfenstein Enemy Territory` 2.60b, Downloads WET Assets, Punkbuster, True Combat Elite 0.49b, True Combat CQB 0.223, ETMinPro Minimizer, Some Fixes, Downloads Optional Maps, Gets etkey from etkey.org, Activates PunkBuster.
 
 Compiled:
-http://tc.garagegame.eu/files/private/setup_tc_wet_1.8.6.exe
+http://tc.oneladgames.com/files/installer/setup_tc_wet_1.8.7.exe
 
 ### Enemy Territory: Legacy (TC ETL)
-`Enemy Territory: Legacy` 2.76, Downloads WET Assets, True Combat Elite 0.49b, Close Quarters Battle 0.223, Downloads Optional Maps.
+`Enemy Territory: Legacy` 2.81.1, Downloads WET Assets, True Combat Elite 0.49b, Close Quarters Battle 0.223, Downloads Optional Maps.
 
 Compiled:
-http://tc.garagegame.eu/files/private/setup_tc_etl_1.0.3.exe
+http://tc.oneladgames.com/files/installer/setup_tc_etl_1.0.4.exe
 
 ### Folder Structure
 
