@@ -1,4 +1,4 @@
-//=============================================================================
+﻿//=============================================================================
 //
 //  Santa's Grotto 1.2 - santas_grotto_v1_2
 //
@@ -13,20 +13,11 @@
 
 /****************************************************
 Path mapping updated and script by Mateos
-Correspondant WAY file size: -
-Last update: 21st December 2018
+Correspondant WAY file size: 149 Ko (153 440 octets)
+Last update: 1st January 2019
 ****************************************************/
 
-/*
- * TODO List:
- * - Check if upon Second Gate Key secured if far-away Axis suicide
- * - ROLE on CHECKPOINT_north_pole_flag: add ATTACK/DEFEND spots to defend it!
- * - Reinforce Axis defence during the Fuse Box part
- * - Fix the Axis Mortar during the Fuse Box phase, behind the Gate
- * - Check server stuckage file
- */
-
- global Spawns =
+global Spawns =
  {
     OLD_FISHING_HOUSE = 1,
     LANCASTER_BOMBER_DEPLOYMENT = 2,
@@ -173,7 +164,6 @@ global Map =
             {
                 voice = "defend",   // Signals voice chat to randomly announce
                 numbots = 2,        // Maximum of 2 bots
-                //MinBotsForRole = 5, // Only assign this role if there are already 5 Axis bots in game
             },
         },
 
@@ -184,81 +174,8 @@ global Map =
             {
                 voice = "attack",   // Signals voice chat to randomly announce
                 numbots = 2,        // Maximum of 2 bots
-                //MinBotsForRole = 4, // Only assign this role if there are already 4 Allied bots in game
             },
         },
-    },
-
-    /**
-     * Builds and returns the game time left, formatted as mm:ss.
-     */
-    GetFormattedTimeLeft = function()
-    {
-        gameTimeLeft = Floor( GetGameTimeLeft() );
-        minutes = Floor( gameTimeLeft / 60 );
-        seconds = gameTimeLeft - minutes * 60;
-        return " (" + minutes + ":" + seconds + " left)";
-    },
-
-    /**
-     * Builds and returns the elapsed time since the round has started.
-     */
-    GetFormattedElaspedTime = function()
-    {
-        totalTimeInMinutes = 30;
-        totalTimeInSeconds = totalTimeInMinutes * 60;
-        gameTimeLeftInSeconds = Floor( GetGameTimeLeft() );
-        elapsedTimeInSeconds = totalTimeInSeconds - gameTimeLeftInSeconds;
-
-        elapsedTimeMinutes = Floor( elapsedTimeInSeconds / 60 );
-        elapsedTimeSeconds = elapsedTimeInSeconds - elapsedTimeMinutes * 60;
-
-        return " (" + elapsedTimeMinutes + ":" + elapsedTimeSeconds + " elapsed)";
-    },
-
-    /**
-     * Upon Gate Key Returned event,
-     * if an Axis bot is far away from the Key,
-     * and its spawn time it close, just selfkill.
-     * Note: The distance calculation is only done on XY plane (that's enough).
-     */
-    AxisSuicideOnGateKeyReturned = function()
-    {
-        selfkill = Map.CanAxisSelfkill( 5 );
-        if ( !selfkill )
-        {
-            return;
-        }
-
-        keyPosition = GetGoal( "FLAG_gate_key" ).GetPosition();
-        foreach ( id and bot in BotTable )
-        {
-            if ( bot.GetTeam() == TEAM.AXIS )
-            {
-                botPosition = bot.GetPosition();
-                x = botPosition.x - keyPosition.x;
-                y = botPosition.y - keyPosition.y;
-                distance = Sqrt( x * x + y * y );
-                if ( distance > 1000. )
-                {
-                    bot.ExecCommand( "kill" );
-                    Util.MapDebugPrint( bot.Name + "^b selfkilled because he was too far away (" + distance + ") from the key", true );
-                }
-            }
-        }
-    },
-    
-    /**
-     * Indicates if Axis can selfkill based on a given time left.
-     * @param seconds Number of seconds below which reinforce time will allow selfkill.
-     */
-    CanAxisSelfkill = function( seconds )
-    {
-        axisReinforceTime = Spawns.GetAxisReinforceTime();
-        selfkill = axisReinforceTime <= seconds;
-        Util.MapDebugPrint( "Axis reinforce time: " + axisReinforceTime + " => Suicide: " + selfkill, true );
-        
-        return selfkill;
     },
 
     // *** TRIGGER CALLBACKS ***
@@ -280,7 +197,7 @@ global Map =
             "CAPPOINT_Secondgate",
         });
 
-        Util.MapDebugPrint( "First_Gate_Destroyed" + Map.GetFormattedElaspedTime() + Map.GetFormattedTimeLeft() );
+        Functions.Print( "First_Gate_Destroyed", true );
     },
 
     gate_key_Taken = function( trigger )
@@ -296,7 +213,7 @@ global Map =
 
     gate_key_returned = function( trigger )
     {
-        Map.AxisSuicideOnGateKeyReturned();
+        Functions.AxisSuicideOnGateKeyReturned();
 
         Util.EnableGoal( "ATTACK_SG.*" );
         Util.DisableGoal( "ATTACK_SFB.*" );
@@ -309,19 +226,29 @@ global Map =
 
     Secondgate_Captured = function( trigger )
     {
+        Functions.AxisSuicideOnGateKeySecured();
+
+        // Just for Axis mobile mortar
+        Cabinets.Factory( true );
+
         SetAvailableMapGoals( TEAM.AXIS, false, {
             ".*AxisSecondGate.*",
             "ATTACK_SFB.*",
         });
         SetAvailableMapGoals( TEAM.AXIS, true, {
             ".*AxisCharlie.*",
-            "ATTACK_TG.*",
+            "CAMP_FuseBox.*",
             "CHECKPOINT_.*",
+            "DEFEND_Flag.*",
+            "DEFEND_FuseBox.*",
         });
+
+        // Disabled because the ceiling is f***ed
+        SetAvailableMapGoals( TEAM.AXIS, false, "MOBILEMORTAR_AxisCharlie" );
 
         SetAvailableMapGoals( TEAM.ALLIES, false, "CAPPOINT_Secondgate" );
 
-        Util.MapDebugPrint( "Secondgate_Captured" + Map.GetFormattedElaspedTime() + Map.GetFormattedTimeLeft() );
+        Functions.Print( "Secondgate_Captured", true );
     },
 
     Second_Gate_Open = function( trigger )
@@ -329,16 +256,11 @@ global Map =
         // blockwall flags refresh
         sleep( 1 );
 
-        SetAvailableMapGoals( TEAM.ALLIES, false, "ATTACK_SFB.*" );
-        SetAvailableMapGoals( TEAM.ALLIES, true, {
-            "ATTACK_TG.*",
-            "CHECKPOINT_.*",
-        });
-
         Cabinets.Garage( false );
-        Cabinets.North_Pole( true );
 
-        SetAvailableMapGoals( TEAM.ALLIES, true, "BUILD_Fuse_Box" );
+        SetAvailableMapGoals( TEAM.ALLIES, false, "ATTACK_SFB.*" );
+
+        Goals.Second_Gate( true );
 
         Util.MapDebugPrint( "Second_Gate_Open" );
     },
@@ -381,7 +303,7 @@ global Map =
 
         SetAvailableMapGoals( TEAM.AXIS, false, ".*AxisCharlie.*" );
 
-        Util.MapDebugPrint( "Fuse_Box_Built" + Map.GetFormattedElaspedTime() + Map.GetFormattedTimeLeft() );
+        Functions.Print( "Fuse_Box_Built", true );
     },
 
     Third_Gate_Open = function( trigger )
@@ -400,7 +322,7 @@ global Map =
 
         // Move Axis to Elf's Hut spawn,
         // and selfkill if the spawn time is equal or below 5 seconds
-        selfkill = Map.CanAxisSelfkill( 5 );
+        selfkill = Functions.CanAxisSelfkill( 5 );
         Spawns.SetSpawn( TEAM.AXIS, Spawns.ELF_S_HUT, selfkill );
 
         if ( Map.isFuseBoxBuilt )
@@ -452,6 +374,9 @@ global Map =
 
             SetAvailableMapGoals( TEAM.AXIS, true, ".*AxisCharlie.*" );
 
+            // Disabled because the ceiling is f***ed
+            SetAvailableMapGoals( TEAM.AXIS, false, "MOBILEMORTAR_AxisCharlie" );
+
             Cabinets.North_Pole( true );
         }
 
@@ -460,12 +385,14 @@ global Map =
 
     sack_secured = function( trigger )
     {
-        Util.MapDebugPrint( "sack_secured" + Map.GetFormattedElaspedTime() + Map.GetFormattedTimeLeft(), true );
+        Functions.Print( "sack_secured", false );
     },
 };
 
 global OnMapLoad = function()
 {
+    Functions.timeLimitInMinutes = Ceil( GetGameTimeLeft() ) / 60;
+
     // *** TRIGGERS ***
     OnTrigger( "^1Allies have blown the First Gate!", Map.First_Gate_Destroyed );
     OnTrigger( "^1Key for the Second Gate has been stolen by Allies!", Map.gate_key_Taken );
@@ -480,7 +407,7 @@ global OnMapLoad = function()
     OnTrigger( "^1Santa's Sack has been taken back to the Factory!", Map.sack_returned );
     OnTrigger( "^1Santa's Sack has been returned to Santa, Christmas can continue! :D", Map.sack_secured );
 
-    // *** CLEAR ALL GOALS AND ROLES FOR BOTH TEAMS ***
+    // *** CLEAR ALL GOALS FOR BOTH TEAMS ***
     Util.DisableGoal( ".*", true ); // All but Routes
 
     Goals.First_Gate( true );
@@ -502,9 +429,9 @@ global OnMapLoad = function()
     SetMapGoalProperties( "MOUNTMG42_.*",   { MinCampTime = 15, MaxCampTime = 60 } );
 
     // *** ROLES ***
-    ClearGoalRole( "CHECKPOINT_north_pole_flag", { ROLE.ATTACKER, ROLE.DEFENDER } );
-    SetGoalRole( "CHECKPOINT_north_pole_flag", ROLE.ATTACKER );
-    SetGoalRole( "CHECKPOINT_north_pole_flag", ROLE.DEFENDER );
+    SetGoalRole( "CHECKPOINT_north_pole_flag", { ROLE.ATTACKER, ROLE.DEFENDER } );
+    SetGoalRole( "ATTACK_Flag.*", ROLE.ATTACKER );
+    SetGoalRole( "DEFEND_Flag.*", ROLE.DEFENDER );
 
     Util.MapDebugPrint( "Omni-Bot 0.8x map script for Santa's Grotto 1.2 by Mateos executed." );
 };
@@ -512,7 +439,6 @@ global OnMapLoad = function()
 global OnBotJoin = function( bot )
 {
     bot.MaxViewDistance = 1000.0;
-    bot.TargetBreakableDist = 300.0;
 };
 
 global Goals =
@@ -549,14 +475,23 @@ global Goals =
 
         if ( bAvailability )
         {
-            Util.EnableGoal( "ATTACK_TG.*" );
+            Util.EnableGoal( "CAMP_FuseBox.*" );
         }
         else
         {
-            Util.DisableGoal( "ATTACK_TG.*" );
+            Util.DisableGoal( "CAMP_FuseBox.*" );
         }
 
-        SetAvailableMapGoals( TEAM.ALLIES, bAvailability, "BUILD_Fuse_Box" );
+        SetAvailableMapGoals( TEAM.AXIS, bAvailability, {
+            "DEFEND_Flag.*",
+            "DEFEND_FuseBox.*",
+        });
+
+        SetAvailableMapGoals( TEAM.ALLIES, bAvailability, {
+            "ATTACK_Flag.*",
+            "ATTACK_FuseBox.*",
+            "BUILD_Fuse_Box",
+        });
     },
 
     Factory = function( bAvailability )
@@ -797,5 +732,129 @@ global Cabinets =
             Util.DisableGoal( "AMMOCAB_t66" );
             Util.DisableGoal( "HEALTHCAB_t67" );
         }
+    },
+};
+
+global Functions =
+{
+    /**
+     * Map time limit.
+     */
+    timeLimitInMinutes,
+
+    /**
+     * Prints a text with elapsed and left times.
+     * @param text Text to print.
+     * @param printActiveGoals Either print or not active goals.
+     */
+    Print = function( text, printActiveGoals )
+    {
+        Util.MapDebugPrint( text + Functions.GetFormattedElaspedTime() + Functions.GetFormattedTimeLeft(), !printActiveGoals );
+    },
+
+    /**
+     * Builds and returns the elapsed time since the round has started.
+     */
+    GetFormattedElaspedTime = function()
+    {
+        totalTimeInSeconds = Functions.timeLimitInMinutes * 60;
+        gameTimeLeftInSeconds = Floor( GetGameTimeLeft() );
+        elapsedTimeInSeconds = totalTimeInSeconds - gameTimeLeftInSeconds;
+
+        elapsedTimeMinutes = Floor( elapsedTimeInSeconds / 60 );
+        elapsedTimeSeconds = elapsedTimeInSeconds - elapsedTimeMinutes * 60;
+        if ( elapsedTimeSeconds < 10 )
+        {
+            elapsedTimeSeconds = "0" + elapsedTimeSeconds;
+        }
+
+        return " (" + elapsedTimeMinutes + ":" + elapsedTimeSeconds + " elapsed)";
+    },
+
+    /**
+     * Builds and returns the game time left, formatted as mm:ss.
+     */
+    GetFormattedTimeLeft = function()
+    {
+        gameTimeLeft = Floor( GetGameTimeLeft() );
+        minutes = Floor( gameTimeLeft / 60 );
+        seconds = gameTimeLeft - minutes * 60;
+        if ( seconds < 10 )
+        {
+            seconds = "0" + seconds;
+        }
+
+        return " (" + minutes + ":" + seconds + " left)";
+    },
+
+    /**
+     * Upon Gate Key Returned event,
+     * if an Axis bot is far away from the Key,
+     * and its spawn time it close, just selfkill.
+     * Note: The distance calculation is only done on XY plane (that's enough).
+     */
+    AxisSuicideOnGateKeyReturned = function()
+    {
+        selfkill = Functions.CanAxisSelfkill( 5 );
+        if ( !selfkill )
+        {
+            return;
+        }
+
+        keyPosition = GetGoal( "FLAG_gate_key" ).GetPosition();
+        foreach ( id and bot in BotTable )
+        {
+            if ( bot.GetTeam() == TEAM.AXIS )
+            {
+                botPosition = bot.GetPosition();
+                x = botPosition.x - keyPosition.x;
+                y = botPosition.y - keyPosition.y;
+                distance = Sqrt( x * x + y * y );
+                if ( distance > 1000. )
+                {
+                    bot.ExecCommand( "kill" );
+                    Util.MapDebugPrint( bot.Name + "^b selfkilled because he was too far away (" + distance + ") from the key", true );
+                }
+            }
+        }
+    },
+
+    /**
+     * Upon Gate Key Secured event,
+     * if an Axis bot is far away from the Second Gate,
+     * and its spawn time is below 10 seconds, just selfkill.
+     */
+    AxisSuicideOnGateKeySecured = function()
+    {
+        if ( !Functions.CanAxisSelfkill( 10 ) )
+        {
+            return;
+        }
+
+        foreach ( id and bot in BotTable )
+        {
+            if ( bot.GetTeam() == TEAM.AXIS )
+            {
+                botPosition = bot.GetPosition();
+                if ( botPosition.x > 830. && botPosition.y > 3875. )
+                {
+                    bot.ExecCommand( "kill" );
+                    Util.MapDebugPrint( bot.Name + "^b selfkilled because he was too far away", true );
+                }
+            }
+        }
+    },
+
+    /**
+     * Indicates if Axis can selfkill based on a given time left.
+     * @param seconds Number of seconds below which reinforce time will allow selfkill.
+     */
+    CanAxisSelfkill = function( seconds )
+    {
+        axisReinforceTime = Spawns.GetAxisReinforceTime();
+        selfkill = axisReinforceTime <= seconds;
+        Util.MapDebugPrint( "Axis reinforce time: " + axisReinforceTime + " => Suicide: " + selfkill, true );
+
+        return selfkill;
     },
 };

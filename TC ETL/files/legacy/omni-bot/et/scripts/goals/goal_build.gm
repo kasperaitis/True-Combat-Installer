@@ -74,6 +74,7 @@ this.Exit = function()
 	this.Bot.ReleaseButton(BTN.CROUCH, BTN.PRONE, BTN.ATTACK1);
 	this.MapGoal = null;
 	this.TargetEntity = null;
+	this.Bot.DoNotKill = null;
 };
 
 this.Update = function()
@@ -168,9 +169,13 @@ this.Update = function()
 
 		// for voice chat 'im constructing'
 		signal(this.Bot.Name + "_construct");
+		this.Bot.DoNotKill = true;
 
 		if (hasEnt)
 		{
+			if (this.MapGoal.EntityName) {
+				this.Position = GetEntPosition(this.TargetEntity);
+			}
 			this.AddAimRequest(Priority.High, "position", this.Position);
 		}
 		else

@@ -1,6 +1,6 @@
 
 -- WolfAdmin module for Wolfenstein: Enemy Territory servers.
--- Copyright (C) 2015-2019 Timo 'Timothy' Smit
+-- Copyright (C) 2015-2020 Timo 'Timothy' Smit
 
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -15,10 +15,10 @@
 -- You should have received a copy of the GNU General Public License
 -- along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-local db = require (wolfa_getLuaPath()..".db.db")
+local db = wolfa_requireModule("db.db")
 
-local bits = require (wolfa_getLuaPath()..".util.bits")
-local events = require (wolfa_getLuaPath()..".util.events")
+local bits = wolfa_requireModule("util.bits")
+local events = wolfa_requireModule("util.events")
 
 local players = {}
 
@@ -49,10 +49,6 @@ end
 
 function players.getProtocol(clientId)
     return data[clientId]["protocol"]
-end
-
-function players.getVersion(clientId)
-    return data[clientId]["version"]
 end
 
 function players.isBot(clientId)
@@ -162,8 +158,6 @@ function players.onClientBegin(clientId)
 
     -- this is now available
     local clientInfo = et.trap_GetUserinfo(clientId)
-
-    data[clientId]["version"] = et.Info_ValueForKey(clientInfo, "cg_etVersion")
 end
 events.handle("onClientBegin", players.onClientBegin)
 

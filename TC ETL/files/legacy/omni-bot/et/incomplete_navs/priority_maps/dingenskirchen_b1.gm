@@ -376,15 +376,22 @@ global Map =
 
         Map.CastleGateDestroyed = 1;
 
-        Util.EnableGoal( "FLAG_.*" );
+        SetAvailableMapGoals( TEAM.AXIS, true, {
+             "BUILD_Axis_Command_Post",
+             "CAPPOINT_treasure_axis",
+        });
 
         SetAvailableMapGoals( TEAM.ALLIES, true, {
             // TODO: "ATTACK_Delta.*",
+            "CAPPOINT_treasure",
+            "CAPPOINT_microfilm",
+            "FLAG_gold",
             "PLANT_Axis_Command_Post",
             "PLANT_Bergfried_Wall",
             "PLANT_Conference_Room",
             "PLANT_Sewers_Gate",
             "PLANT_Side_Wall",
+            "SWITCH_Shock_Treatment",
         });
         SetAvailableMapGoals( TEAM.ALLIES, false, {
             "ATTACK_Charlie.*",
@@ -439,51 +446,39 @@ global Map =
         Util.MapDebugPrint( "Tank_Barrier_Destroyed" );
     },
 
-    GetBotWithFlag = function(goal)
+    Shock_Treatment_Activated = function( trigger )
     {
-        ent = GetGoal(goal).GetEntity();
-        owner = GetEntOwner(ent);
-        if ( EntityIsValid(owner) && GetEntFlags(owner, ENTFLAG.CARRYINGGOAL) )
-        {
-            n = 1;
-        }
-        else
-        {
-            // Function GetEntOwner sometimes does not work
-            Util.MapDebugPrint( "GetEntOwner failed for " + goal, 2 );
-            n = 0;
-            for ( i = 0; i < 64; i += 1 )
-            {
-                if ( EntityIsValid(i) && GetEntFlags(i, ENTFLAG.CARRYINGGOAL) ){
-                    owner = i;
-                    n += 1;
-                }
-            }
-        }
-        if (n==1)
-        {
-            Util.MapDebugPrint( goal + " taken by " + GetEntName(owner), 1 );
-            return Util.IsBot( owner );
-        }
+        SetAvailableMapGoals( TEAM.AXIS, true, "SWITCH_Shock_Treatment" );
 
-        // Enable both cappoints
-        foreach ( bot in BotTable ) {
-            if ( bot.IsCarryingFlag() ) {
-                Util.MapDebugPrint( "Enabled both cappoints for bot " + bot.Name, 1 );
-                bot.SetRoles( ROLE.DEFENDER2, ROLE.DEFENDER3 );
-            }
-        }
-        return null;
+        SetAvailableMapGoals( TEAM.ALLIES, false, "SWITCH_Shock_Treatment" );
+
+        // No need to print active goals even though the goal table just got modified
+        Util.MapDebugPrint( "Shock_Treatment_Activated", true );
+    },
+
+    Shock_Treatment_Deactivated = function( trigger )
+    {
+        SetAvailableMapGoals( TEAM.AXIS, false, "SWITCH_Shock_Treatment" );
+
+        SetAvailableMapGoals( TEAM.ALLIES, true, "SWITCH_Shock_Treatment" );
+
+        // No need to print active goals even though the goal table just got modified
+        Util.MapDebugPrint( "Shock_Treatment_Deactivated", true );
+    },
+
+    Dead_Prisoner_Barbecued = function( trigger )
+    {
+        Util.DisableGoal( "SWITCH_Shock_Treatment" );
+
+        // Microfim is now... well... "accessible"
+        SetAvailableMapGoals( TEAM.ALLIES, true, "FLAG_microfilm" );
+
+        Util.MapDebugPrint( "Dead_Prisoner_Barbecued" );
     },
 
     gold_Taken = function( trigger )
     {
-        bot = Map.GetBotWithFlag( "FLAG_gold" );
-        if (bot)
-        {
-            bot.ClearRoles( ROLE.DEFENDER2 );
-            bot.SetRoles( ROLE.DEFENDER3 );
-        }
+        Util.CappointForFlag( "FLAG_gold", "CAPPOINT_treasure" );
 
         Util.MapDebugPrint( "gold_Taken" );
     },
@@ -495,11 +490,8 @@ global Map =
 
     gold_Secured = function( trigger )
     {
-        // TODO Check
-        //SetAvailableMapGoals( TEAM.ALLIES, false, "FLAG_gold" );
-        //SetAvailableMapGoals( TEAM.AXIS, true, "FLAG__gold" );
-        Util.DisableGoal( "FLAG_gold" );
-        Util.DisableGoal( "CAPPOINT_treasure" );
+        SetAvailableMapGoals( TEAM.ALLIES, false, "FLAG_gold" );
+        SetAvailableMapGoals( TEAM.AXIS, true, "FLAG__gold" );
 
         Util.MapDebugPrint( "gold_Secured" );
     },
@@ -524,12 +516,7 @@ global Map =
 
     microfilm_Taken = function( trigger )
     {
-        bot = Map.GetBotWithFlag( "FLAG_microfilm" );
-        if ( bot )
-        {
-            bot.ClearRoles( ROLE.DEFENDER3 );
-            bot.SetRoles( ROLE.DEFENDER2 );
-        }
+        Util.CappointForFlag( "FLAG_microfilm", "CAPPOINT_microfilm" );
 
         Util.MapDebugPrint( "microfilm_Taken" );
     },
@@ -807,6 +794,10 @@ global OnMapLoad = function()
     OnTrigger( "^5The Allies have destroyed the Side Wall!", Map.Side_Wall_Destroyed );
     OnTrigger( "^5The Allies have destroyed the Tank Barrier!", Map.Tank_Barrier_Destroyed );
 
+    OnTrigger( "^5Shock Treatment activated!", Map.Shock_Treatment_Activated );
+    OnTrigger( "^1Shock Treatment deactivated!", Map.Shock_Treatment_Deactivated );
+    OnTrigger( "^5The Allies have barbecued the Dead Prisoner!", Map.Dead_Prisoner_Barbecued );
+
     OnTrigger( "Allies have stolen the Treasure!", Map.gold_Taken );
     OnTrigger( "^1The Axis have returned the Treasure!", Map.gold_Returned );
     OnTrigger( "^5The Allies have secured the Treasure!", Map.gold_Secured );
@@ -892,8 +883,6 @@ global OnMapLoad = function()
     // *** ROLES ***
     Util.SetRoleForGoals( "ATTACK_VillageFlag.*",       ROLE.ATTACKER );
     // Util.SetRoleForGoals( "CHECKPOINT_village_flag",    ROLE.ATTACKER );
-    Util.SetRoleForGoals( "CAPPOINT_microfilm",         ROLE.DEFENDER2 );
-    Util.SetRoleForGoals( "CAPPOINT_treasure",          ROLE.DEFENDER3 );
 
     // Max users per goal
     Util.SetMaxUsers( 1, ".*" );
@@ -910,6 +899,7 @@ global OnMapLoad = function()
     ETUtil.SetStartIndex( "ESCORT_Tank", 0 );   // Behind the Tank
 
     SetGoalPriority( "BUILD_Allied_Command_Post", 0.80);    // Was 0.9
+    SetGoalPriority( "SWITCH_Shock_Treatment", 0.8 );
 
     Util.SetGoalOffset( -32,   0, -32, "MOUNTMG42_forward_gate_mg" );   // To avoid pathfailed issue
     Util.SetGoalOffset( 275,   0,  10, "PLANT_Tank_Barrier" );          // Behind the wall

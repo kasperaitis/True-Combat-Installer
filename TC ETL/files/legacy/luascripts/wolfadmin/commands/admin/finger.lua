@@ -1,6 +1,6 @@
 
 -- WolfAdmin module for Wolfenstein: Enemy Territory servers.
--- Copyright (C) 2015-2019 Timo 'Timothy' Smit
+-- Copyright (C) 2015-2020 Timo 'Timothy' Smit
 
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -15,13 +15,14 @@
 -- You should have received a copy of the GNU General Public License
 -- along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-local auth = require (wolfa_getLuaPath()..".auth.auth")
+local auth = wolfa_requireModule("auth.auth")
 
-local commands = require (wolfa_getLuaPath()..".commands.commands")
+local commands = wolfa_requireModule("commands.commands")
 
-local players = require (wolfa_getLuaPath()..".players.players")
+local players = wolfa_requireModule("players.players")
 
-local settings = require (wolfa_getLuaPath()..".util.settings")
+local settings = wolfa_requireModule("util.settings")
+local util = wolfa_requireModule("util.util")
 
 function commandFinger(clientId, command, victim)
     local cmdClient
@@ -46,22 +47,21 @@ function commandFinger(clientId, command, victim)
         return true
     end
 
-    local stats = {
-        ["name"] = players.getName(cmdClient),
-        ["cleanname"] = players.getName(cmdClient):gsub("%^[^^]", ""),
-        ["codedsname"] = players.getName(cmdClient):gsub("%^([^^])", "^^2%1"),
-        ["slot"] = cmdClient,
-        ["guid"] = players.getGUID(cmdClient),
-        ["ip"] = players.getIP(cmdClient),
-        ["version"] = players.getVersion(cmdClient)
-    }
+    local name = players.getName(cmdClient)
+    local cleanname = util.removeColors(players.getName(cmdClient))
+    local codedname = players.getName(cmdClient):gsub("%^([^^])", "^^2%1")
+    local slot = cmdClient
+    local level = auth.getPlayerLevel(cmdClient)
+    local levelName = util.removeColors(auth.getLevelName(level))
+    local guid = players.getGUID(cmdClient)
+    local ip = players.getIP(cmdClient)
 
-    et.trap_SendConsoleCommand(et.EXEC_APPEND, "csay "..clientId.." \"^dInformation about ^7"..stats["name"].."^d:\";")
-    et.trap_SendConsoleCommand(et.EXEC_APPEND, "csay "..clientId.." \"^dName:    ^2"..stats["cleanname"].." ("..stats["codedsname"]..")\";")
-    et.trap_SendConsoleCommand(et.EXEC_APPEND, "csay "..clientId.." \"^dSlot:    ^2"..stats["slot"]..(stats["slot"] < tonumber(et.trap_Cvar_Get("sv_privateClients")) and " ^9(private)" or "").."\";")
-    et.trap_SendConsoleCommand(et.EXEC_APPEND, "csay "..clientId.." \"^dGUID:    ^2"..stats["guid"].."\";")
-    et.trap_SendConsoleCommand(et.EXEC_APPEND, "csay "..clientId.." \"^dIP:      ^2"..stats["ip"].."\";")
-    et.trap_SendConsoleCommand(et.EXEC_APPEND, "csay "..clientId.." \"^dVersion: ^2"..stats["version"].."\";")
+    et.trap_SendConsoleCommand(et.EXEC_APPEND, "csay "..clientId.." \"^dInformation about ^7"..name.."^d:\";")
+    et.trap_SendConsoleCommand(et.EXEC_APPEND, "csay "..clientId.." \"^dName:    ^2"..cleanname.." ("..codedname..")\";")
+    et.trap_SendConsoleCommand(et.EXEC_APPEND, "csay "..clientId.." \"^dSlot:    ^2"..slot..(slot < tonumber(et.trap_Cvar_Get("sv_privateClients")) and " ^9(private)" or "").."\";")
+    et.trap_SendConsoleCommand(et.EXEC_APPEND, "csay "..clientId.." \"^dLevel:   ^2"..level.." ("..levelName..")\";")
+    et.trap_SendConsoleCommand(et.EXEC_APPEND, "csay "..clientId.." \"^dGUID:    ^2"..guid.."\";")
+    et.trap_SendConsoleCommand(et.EXEC_APPEND, "csay "..clientId.." \"^dIP:      ^2"..ip.."\";")
 
     return true
 end

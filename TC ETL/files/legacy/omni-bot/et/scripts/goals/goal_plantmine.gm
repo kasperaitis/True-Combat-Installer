@@ -25,6 +25,11 @@ this.Enter = function()
 	if(!this.MarkInProgress()) { this.Finished(); }
 };
 
+this.Exit = function()
+{
+	this.Bot.DoNotKill = null;
+};
+
 this.PositionToBot = function(pos, distance)
 {
 	v = this.Bot.GetPosition() - pos;
@@ -44,6 +49,7 @@ this.Update = function()
 	//wait for charge
 	while (!this.Bot.IsWeaponCharged(WEAPON.LANDMINE)){ sleep(0.2); }
 	this.ExplosiveEntity = null;
+	this.Bot.DoNotKill = true;
 
 	//move to the position
 	goalPos = this.MapGoal.GetPosition();

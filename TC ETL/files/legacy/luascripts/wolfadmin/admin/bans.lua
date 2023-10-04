@@ -1,6 +1,6 @@
 
 -- WolfAdmin module for Wolfenstein: Enemy Territory servers.
--- Copyright (C) 2015-2019 Timo 'Timothy' Smit
+-- Copyright (C) 2015-2020 Timo 'Timothy' Smit
 
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -15,11 +15,16 @@
 -- You should have received a copy of the GNU General Public License
 -- along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-local db = require (wolfa_getLuaPath()..".db.db")
+local db = wolfa_requireModule("db.db")
 
-local players = require (wolfa_getLuaPath()..".players.players")
+local players = wolfa_requireModule("players.players")
+
+local events = wolfa_requireModule("util.events")
+local timers = wolfa_requireModule("util.timers")
 
 local bans = {}
+
+local storedBanTimer
 
 function bans.get(banId)
     return db.getBan(banId)
@@ -47,5 +52,16 @@ end
 function bans.remove(banId)
     db.removeBan(banId)
 end
+
+function bans.checkStoredBans()
+    db.removeExpiredBans()
+end
+
+function bans.onInit()
+    if db.isConnected() then
+        storedBanTimer = timers.add(bans.checkStoredBans, 60000, 0, false, false)
+    end
+end
+events.handle("onGameInit", bans.onInit)
 
 return bans

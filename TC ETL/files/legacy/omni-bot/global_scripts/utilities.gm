@@ -851,7 +851,7 @@ member ShowEntityInfo = function (traceType)
 		output = "Entity found:" + s;
 	}
 
-	print( "Util.ShowEntityInfo:", output );
+	print( "Util.ShowEntityInfo:", output, ",", tr.end );
 	EchoToScreen( displaytime, output );
 
 	return info;
@@ -2244,15 +2244,23 @@ member ShowActiveGoals = function(render, routes, showuse)
 						break;
 					}
 				}
+				r = "";
+				foreach ( id and role in ROLE ) {
+					if(goal.HasRole(role)) { r += " " + id; }
+				}
+				bonus = 0;
+				if(r.Length()){ bonus = goal.RolePriorityBonus; }
 				if(diff){
-					foreach(prior in P){ s+= " " + prior; }
+					foreach(prior in P) {
+						if(prior > 0){ prior += bonus; }
+						s+= " " + prior;
+					}
 				}else{
+					if(defaultPrior > 0){ defaultPrior += bonus; }
 					s+= " " + defaultPrior;
 				}
 				//role
-				foreach ( id and role in ROLE ) {
-					if(goal.HasRole(role)) { s += " " + id; }
-				}
+				s+=r;
 			} else {
 				s = format(" inUse: %d - inProgress: %d", goal.MaxUsers_InUse(), goal.MaxUsers_InProgress());
 			}
@@ -2886,6 +2894,53 @@ member GetPositionFromParam = function(param)
 					return wp.position;
 				}
 			}
+		}
+	}
+	return null;
+};
+
+///////////////////////////////////////////////////////////////////////////////
+//
+member CappointForFlag = function(flag, cappoint)
+{
+	goal = this.GetGoal(flag, "Util.CappointForFlag");
+	if (!goal){ return; }
+	owner = GetEntOwner(goal.GetEntity());
+	if ( EntityIsValid(owner) && GetEntFlags(owner, ENTFLAG.CARRYINGGOAL) )
+	{
+		n = 1;
+	}
+	else
+	{
+		// Function GetEntOwner does not work after any player who is carrying a goal has been kicked from the server
+		Util.MapDebugPrint( "GetEntOwner failed for " + flag, 2 );
+		n = 0;
+		for ( i = 0; i < 64; i += 1 )
+		{
+			if ( EntityIsValid(i) && GetEntFlags(i, ENTFLAG.CARRYINGGOAL) ){
+				owner = i;
+				n += 1;
+			}
+		}
+	}
+
+	if ( n == 1 )
+	{
+		Util.MapDebugPrint( flag + " taken by " + GetEntName(owner), 1 );
+		bot = Util.IsBot(owner);
+		if (bot){
+			bot.CappointGoal = this.GetGoal(cappoint, "Util.CappointForFlag");
+		}
+		return;
+	}
+
+	// Enable all cappoints
+	foreach ( bot in BotTable )
+	{
+		if ( bot.IsCarryingFlag() )
+		{
+			Util.MapDebugPrint( "Enabled all cappoints for bot " + bot.Name, 1 );
+			bot.CappointGoal = null;
 		}
 	}
 	return null;

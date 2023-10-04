@@ -133,8 +133,7 @@ this.CurePoisonWithNeedle = function()
 		return false;
 	}
 
-	mod = GetModName();
-	switch(mod)
+	switch(GetModName())
 	{
 		case "nitmod":
 		{
@@ -145,10 +144,6 @@ this.CurePoisonWithNeedle = function()
 		case "noquarter":
 		{
 			return true;
-		}
-		default:
-		{
-			return false;
 		}
 	}
 
@@ -169,18 +164,47 @@ this.CanHealWithNeedle = function()
 	if ( !this.TargetEntity ) {
 		return false;
 	}
-
-	// modname is "etmain" in old legacy versions but g_misc is no vanilla cvar
-	if ( GetCvar("g_misc") & 2 && (GetModName() == "etmain" || GetModName() == "legacy")) {
-		return this.CheckHealthForNeedle();
+	switch(GetModName())
+	{
+		case "etmain": //"etmain" was in old legacy version < 2.75, but g_misc is no vanilla cvar
+		case "legacy":
+		{
+			if ( !(GetCvar("g_misc") & 2) ) {
+				return false;
+			}
+		}
+		case "nitmod":
+		{
+			if ( !(GetCvar("g_medics") & 8) ) {
+				return false;
+			}
+		}
+		case "Jaymod":
+		{
+			return false;
+		}
+		default: //noquarter, silEnT, etpub, chaos, etblight
+		{
+			if ( !(GetCvar("g_medics") & 64) ) {
+				return false;
+			}
+		}
 	}
-
-	// todo: check all mods for the cvar. etpub and nq for sure have g_medics. and probably nitmod, chaos and silentmod
-	if ( !(GetCvar("g_medics") & 64) ) {
-		return false;
-	}
-
 	return this.CheckHealthForNeedle();
+};
+
+this.CanKillTarget = function()
+{
+	if (this.KillTarget && !this.Bot.HasTarget() && !GetEntFlags(this.TargetEntity, ENTFLAG.CARRYINGGOAL, ENTFLAG.MOUNTED, ENTFLAG.DISGUISED)) {
+		targetBot = Util.IsBot(this.TargetEntity);
+		if (!targetBot || !targetBot.DoNotKill) {
+			w = GetEntEquippedWeapon(this.TargetEntity);
+			if (w!=WEAPON.PLIERS && w!=WEAPON.DYNAMITE && w!=WEAPON.SATCHEL && w!=WEAPON.SATCHEL_DET) {
+				return true;
+			}
+		}
+	}
+	return false;
 };
 
 this.Update = function()
@@ -233,23 +257,21 @@ this.Update = function()
 				}
 			}
 
-			hasNeedle = Util.HasAmmoForWeapon(this.Bot, WEAPON.SYRINGE) > 0;
-
-			if ( hasNeedle && this.CanHealWithNeedle() ) {
-				this.State = this.SWITCH_TO_SYRINGE;
-				this.HealingWithNeedle = true;
-			}
-			else if ( hasNeedle && this.CurePoisonWithNeedle() ) {
-				this.State = this.SWITCH_TO_SYRINGE;
-				this.CuringPoisonWithNeedle = true;
-			}
-			else if ( !this.KillTarget || !hasNeedle || this.Bot.HasTarget()
-				|| GetEntFlags(this.TargetEntity, ENTFLAG.CARRYINGGOAL, ENTFLAG.MOUNTED) ) {
-				this.State = this.DELIVER_PACKS;
-			}
-			else {
-				this.State = this.KILL_TARGET;
-				this.Bot.KillingForRevive = true; // for voice chats
+			this.State = this.DELIVER_PACKS;
+			if ( Util.HasAmmoForWeapon(this.Bot, WEAPON.SYRINGE) > 0 )
+			{
+				if ( this.CanHealWithNeedle() ) {
+					this.State = this.SWITCH_TO_SYRINGE;
+					this.HealingWithNeedle = true;
+				}
+				else if ( this.CurePoisonWithNeedle() ) {
+					this.State = this.SWITCH_TO_SYRINGE;
+					this.CuringPoisonWithNeedle = true;
+				}
+				else if ( this.CanKillTarget()) {
+					this.State = this.KILL_TARGET;
+					this.Bot.KillingForRevive = true; // for voice chats
+				}
 			}
 
 			this.TimeOnTarget = 0;
@@ -466,7 +488,9 @@ this.UpdateHealWithNeedle = function()
 {
 	// give them 5 seconds to complete
 	if ( this.TimeOnTarget > 100 ) {
-		this.Finished();
+		this.TimeOnTarget = 0;
+		this.State = this.DELIVER_PACKS;
+		return;
 	}
 	pos = GetEntPosition(this.TargetEntity);
 
@@ -494,6 +518,8 @@ this.UpdateHealWithNeedle = function()
 
 	if (!GetEntFlags(this.TargetEntity, ENTFLAG.PRONE, ENTFLAG.CROUCHED)) {
 		pos += Vector3(0,0,32);
+	} else if (GetEntFlags(this.TargetEntity, ENTFLAG.PRONE)) {
+		this.Bot.HoldButton(BTN.CROUCH, 1);
 	}
 	this.AddAimRequest(Priority.High, "position", pos);
 

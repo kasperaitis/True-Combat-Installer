@@ -1,6 +1,6 @@
 
 -- WolfAdmin module for Wolfenstein: Enemy Territory servers.
--- Copyright (C) 2015-2019 Timo 'Timothy' Smit
+-- Copyright (C) 2015-2020 Timo 'Timothy' Smit
 
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -15,13 +15,13 @@
 -- You should have received a copy of the GNU General Public License
 -- along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-local db = require (wolfa_getLuaPath()..".db.db")
+local db = wolfa_requireModule("db.db")
 
-local players = require (wolfa_getLuaPath()..".players.players")
+local players = wolfa_requireModule("players.players")
 
-local events = require (wolfa_getLuaPath()..".util.events")
-local settings = require (wolfa_getLuaPath()..".util.settings")
-local util = require (wolfa_getLuaPath()..".util.util")
+local events = wolfa_requireModule("util.events")
+local settings = wolfa_requireModule("util.settings")
+local util = wolfa_requireModule("util.util")
 
 local admin = {}
 
@@ -32,7 +32,7 @@ function admin.putPlayer(clientId, teamId)
 end
 
 function admin.kickPlayer(victimId, invokerId, reason)
-    et.trap_DropClient(victimId, "You have been kicked, Reason: "..(reason and reason or "kicked by admin"), 0)
+    et.trap_DropClient(victimId, "You have been kicked, Reason: "..reason, 0)
 end
 
 function admin.setPlayerLevel(clientId, level)
@@ -45,8 +45,8 @@ function admin.onClientConnectAttempt(clientId, firstTime, isBot)
     if firstTime and db.isConnected() then
         local guid = et.Info_ValueForKey(et.trap_GetUserinfo(clientId), "cl_guid")
 
-        if guid == "" or guid == "NO_GUID" or guid == "unknown" then
-            return "\n\nIt appears you do not have a ^7GUID^9/^7etkey^9. In order to play on this server, enable ^7PunkBuster ^9(use ^7\\pb_cl_enable^9) ^9and/or create an ^7etkey^9.\n\nMore info: ^7www.etkey.org"
+        if string.len(guid) < 32 then
+            return "\n\nIt appears you do not have a ^7GUID^9/^7etkey^9. In order to play on this server, create an ^7etkey^9.\n\nMore info: ^7www.etkey.org"
         end
 
         if settings.get("g_standalone") ~= 0 then

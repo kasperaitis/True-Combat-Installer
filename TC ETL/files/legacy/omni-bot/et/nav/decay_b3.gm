@@ -8,6 +8,7 @@
 //	Native12	13.08.2016	Released for testing
 //	Native12	02.04.2017	Fixed bug with variable Secret_Docs_Taken => should be SecretDocsTaken
 //					added roles for CappointPlace goals
+//	Native12	04.01.2019	Adapted for new function Util.CappointForFlag
 //
 //	Bugs and suggestions: PM on http://omni-bot.invisionzone.com/index.php?/index
 //==========================================================================================
@@ -340,8 +341,10 @@ global Map =
 		
 		if ( !Map.SecretDocsSecured )
 		{
-			SetAvailableMapGoals( 0, true, "BUILD_Neutral_Command_Post" );
-			SetAvailableMapGoals( 0, true, "PLANT_Neutral_Command_Post" );
+			SetAvailableMapGoals( 0, true, {
+				"BUILD_Neutral_Command_Post",
+				"PLANT_Neutral_Command_Post",
+			});
 			
 			if ( !Map.Fence )
 			{
@@ -366,52 +369,14 @@ global Map =
 			
 			if ( Map.Generator )
 			{
-				SetAvailableMapGoals( TEAM.ALLIES, true, "PLANT_Generator" );
-				SetAvailableMapGoals( TEAM.ALLIES, true, "ATTACK_Allies_Generator_.*" );
+				SetAvailableMapGoals( TEAM.ALLIES, true, {
+					"PLANT_Generator",
+					"ATTACK_Allies_Generator_.*",
+				});
 			}
 		}
 		
 		Util.MapDebugPrint( "Side_Gate_Destroyed" );
-	},
-	
-	//====================================================================================================================
-	//Flag and Cappoint settings - to avoid placing Flag goals on wrong Cappoint places (if two cappoint goals are active)
-	GetBotWithFlag = function(goal)
-	{
-		ent = GetGoal(goal).GetEntity();
-		owner = GetEntOwner(ent);
-		if ( EntityIsValid(owner) && GetEntFlags(owner, ENTFLAG.CARRYINGGOAL) )
-		{
-			n = 1;
-		}
-		else
-		{
-			Util.MapDebugPrint( "GetEntOwner failed for " + goal, 2 );
-			n = 0;
-			for ( i = 0; i < 64; i += 1 )
-			{
-				if ( EntityIsValid(i) && GetEntFlags(i, ENTFLAG.CARRYINGGOAL) ){
-					owner = i;
-					n += 1;
-				}
-			}
-		}
-		if (n==1)
-		{
-			Util.MapDebugPrint( goal + " taken by " + GetEntName(owner), 1 );
-			return Util.IsBot(owner);
-		}
-
-		// Enable both cappoints
-		foreach ( bot in BotTable )
-		{
-			if ( bot.IsCarryingFlag() ) 
-			{
-				Util.MapDebugPrint( "Enabled both cappoints for bot " + bot.Name, 1 );
-				bot.SetRoles( ROLE.AMBUSHER, ROLE.ROAMER );
-			}
-		}
-		return null;
 	},
 	
 	Gold_Taken = function( trigger )
@@ -420,25 +385,17 @@ global Map =
 		{
 			Map.Gold_1_Taken = true;
 			
-			if ( Map.SecretDocsTaken )
-			{
-				bot = Map.GetBotWithFlag( "FLAG_axis_gold1" );
-				SetGoalRole( "CAPPOINT_Truck", ROLE.ROAMER );
-				
-				if (bot)
-				{
-					bot.ClearRoles( ROLE.AMBUSHER );
-					bot.SetRoles( ROLE.ROAMER );
-				}
-			}
+			Util.CappointForFlag( "FLAG_axis_gold1", "CAPPOINT_Truck" );
 			
 			SetAvailableMapGoals( TEAM.ALLIES, false, "SMOKEBOMB_Allies_Gold_.*" );
 			
 			SetAvailableMapGoals( TEAM.AXIS, true, "DEFEND_Axis_CappointPlace_.*" );
 			
-			SetAvailableMapGoals( TEAM.ALLIES, true, "ATTACK_Allies_CappointPlace_.*" );
-			SetAvailableMapGoals( TEAM.ALLIES, true, "CAMP_Allies_Gold_.*" );
-			SetAvailableMapGoals( TEAM.ALLIES, true, "CAPPOINT_Truck" );
+			SetAvailableMapGoals( TEAM.ALLIES, true, {
+				"ATTACK_Allies_CappointPlace_.*",
+				"CAMP_Allies_Gold_.*",
+				"CAPPOINT_Truck",
+			});
 			
 			Util.MapDebugPrint( "Gold_1_Taken" );
 		}
@@ -446,17 +403,7 @@ global Map =
 		{
 			Map.Gold_2_Taken = true;
 			
-			if ( Map.SecretDocsTaken )
-			{
-				bot = Map.GetBotWithFlag( "FLAG_axis_gold2" );
-				SetGoalRole( "CAPPOINT_Truck", ROLE.ROAMER );
-				
-				if (bot)
-				{
-					bot.ClearRoles( ROLE.AMBUSHER );
-					bot.SetRoles( ROLE.ROAMER );
-				}
-			}
+			Util.CappointForFlag( "FLAG_axis_gold2", "CAPPOINT_Truck" );
 			
 			SetAvailableMapGoals( TEAM.AXIS, false, ".*_Axis_Gold_.*" );
 			
@@ -464,8 +411,10 @@ global Map =
 			
 			SetAvailableMapGoals( TEAM.AXIS, true, ".*_Axis_CappointPlace_.*" );
 			
-			SetAvailableMapGoals( TEAM.ALLIES, true, ".*_Allies_CappointPlace_.*" );
-			SetAvailableMapGoals( TEAM.ALLIES, true, "CAPPOINT_Truck" );
+			SetAvailableMapGoals( TEAM.ALLIES, true, {
+				".*_Allies_CappointPlace_.*",
+				"CAPPOINT_Truck",
+			});
 			
 			Util.MapDebugPrint( "Gold_2_Taken" );
 		}
@@ -473,16 +422,6 @@ global Map =
 	
 	Gold_1_Dropped = function( trigger )
 	{
-		foreach ( bot in BotTable )
-		{
-			if ( bot.HasRole(ROLE.ROAMER) )
-			{
-				bot.ClearRoles( ROLE.ROAMER );
-				
-				Util.MapDebugPrint( "Gold_1_Dropped => clear role Roamer" );
-			}
-		}
-		
 		SetAvailableMapGoals( TEAM.ALLIES, false, "CAPPOINT_Truck" );
 		
 		Util.MapDebugPrint( "Gold_1_Dropped" );
@@ -494,8 +433,10 @@ global Map =
 		
 		SetAvailableMapGoals( TEAM.AXIS, false, "DEFEND_Axis_CappointPlace_.*" );
 		
-		SetAvailableMapGoals( TEAM.ALLIES, false, "ATTACK_Allies_CappointPlace_.*" );
-		SetAvailableMapGoals( TEAM.ALLIES, false, "CAMP_Allies_Gold_.*" );
+		SetAvailableMapGoals( TEAM.ALLIES, false, {
+			"ATTACK_Allies_CappointPlace_.*",
+			"CAMP_Allies_Gold_.*",
+		});
 		
 		SetAvailableMapGoals( TEAM.ALLIES, true, "SMOKEBOMB_Allies_Gold_.*" );
 		
@@ -509,16 +450,6 @@ global Map =
 		
 		Util.DisableGoal( "FLAG_axis_gold1" );
 		
-		foreach ( bot in BotTable )
-		{
-			if ( bot.HasRole(ROLE.ROAMER) )
-			{
-				bot.ClearRoles( ROLE.ROAMER );
-				
-				Util.MapDebugPrint( "Gold_1_Secured => clear role Roamer" );
-			}
-		}
-		
 		ClearGoalRole( "DEFEND_Axis_CappointPlace_.*", { ROLE.DEFENDER2, ROLE.DEFENDER3 } );
 		
 		ClearGoalRole( "ATTACK_Allies_CappointPlace_.*", { ROLE.ATTACKER2, ROLE.ATTACKER3 } );
@@ -531,26 +462,21 @@ global Map =
 		
 		sleep(4);
 		
-		SetAvailableMapGoals( TEAM.ALLIES, false, "CAMP_Allies_Gold_.*" );
-		SetAvailableMapGoals( TEAM.ALLIES, false, "ATTACK_Allies_CappointPlace_.*" );
-		
-		SetAvailableMapGoals( TEAM.ALLIES, true, "FLAG_axis_gold2" );
+		if ( !Map.Gold_2_Taken )
+		{
+			SetAvailableMapGoals( TEAM.ALLIES, false, {
+				"CAMP_Allies_Gold_.*",
+				"ATTACK_Allies_CappointPlace_.*",
+			});
+			
+			SetAvailableMapGoals( TEAM.ALLIES, true, "FLAG_axis_gold2" );
+		}
 		
 		Util.MapDebugPrint( "Gold_1_Secured" );
 	},
 
 	Gold_2_Dropped = function( trigger )
 	{
-		foreach ( bot in BotTable )
-		{
-			if ( bot.HasRole(ROLE.ROAMER) )
-			{
-				bot.ClearRoles( ROLE.ROAMER );
-				
-				Util.MapDebugPrint( "Gold_2_Dropped => clear role Roamer" );
-			}
-		}
-		
 		SetAvailableMapGoals( TEAM.ALLIES, false, "CAPPOINT_Truck" );
 		
 		Util.MapDebugPrint( "Gold_2_Dropped" );
@@ -576,16 +502,6 @@ global Map =
 		Map.Gold_2_Taken = false;
 		Map.Gold2_Secured = true;
 		
-		foreach ( bot in BotTable )
-		{
-			if ( bot.HasRole(ROLE.ROAMER) )
-			{
-				bot.ClearRoles( ROLE.ROAMER );
-				
-				Util.MapDebugPrint( "Gold_2_Secured => clear role Roamer" );
-			}
-		}
-		
 		Util.DisableGoal( "FLAG_axis_gold2" );
 		Util.DisableGoal( "CAPPOINT_Truck" );
 		
@@ -599,17 +515,7 @@ global Map =
 	{
 		Map.SecretDocsTaken = true;
 		
-		if ( Map.Gold_1_Taken or Map.Gold_2_Taken )
-		{
-			bot = Map.GetBotWithFlag( "FLAG_secretdocs" );
-			SetGoalRole( "CAPPOINT_Radio", ROLE.AMBUSHER );
-			
-			if (bot)
-			{
-				bot.ClearRoles( ROLE.ROAMER );
-				bot.SetRoles( ROLE.AMBUSHER );
-			}
-		}
+		Util.CappointForFlag( "FLAG_secretdocs", "CAPPOINT_Radio" );
 		
 		SetAvailableMapGoals( TEAM.ALLIES, false, "FLAG_secretdocs" );
 		
@@ -621,16 +527,6 @@ global Map =
 	Secret_Docs_Dropped = function( trigger )
 	{
 		Util.SetGoalRange("FLAGRETURN_secretdocs_dropped", 800);
-		
-		foreach ( bot in BotTable )
-		{
-			if ( bot.HasRole(ROLE.AMBUSHER) )
-			{
-				bot.ClearRoles( ROLE.AMBUSHER );
-				
-				Util.MapDebugPrint( "Secret_Docs_Dropped => clear role Ambusher" );
-			}
-		}
 		
 		SetGoalRole( "FLAGRETURN_secretdocs_dropped", { ROLE.DEFENDER, ROLE.DEFENDER2 } );
 		SetGoalRole( "FLAG_secretdocs_dropped", { ROLE.ATTACKER, ROLE.ATTACKER1, ROLE.ATTACKER2 } );
@@ -661,37 +557,30 @@ global Map =
 		Util.DisableGoal( "FLAG_secretdocs" );
 		Util.DisableGoal( "CAPPOINT_Radio" );
 		
-		//End of Flag and Cappoint settings
-		//====================================================================================================================
-		
-		foreach ( bot in BotTable )
-		{
-			if ( bot.HasRole(ROLE.AMBUSHER) )
-			{
-				bot.ClearRoles( ROLE.AMBUSHER );
-				
-				Util.MapDebugPrint( "Secret_Docs_Secured => clear role Ambusher" );
-			}
-		}
-		
 		ClearGoalRole( "BUILD_Fence", ROLE.DEFENDER3 );
 		ClearGoalRole( "DEFEND_Axis_Generator_.*", ROLE.DEFENDER3 );
 		
-		SetAvailableMapGoals( 0, false, "HEALTHCAB_cabinet_health_model" );
-		SetAvailableMapGoals( 0, false, "AMMOCAB_cabinet_ammo_model" );
-		SetAvailableMapGoals( 0, false, "CHECKPOINT_forward_flag" );
-		SetAvailableMapGoals( 0, false, "MOUNTMG42_Forward_Spawn" );
-		SetAvailableMapGoals( 0, false, "REPAIRMG42_Forward_Spawn" );
+		SetAvailableMapGoals( 0, false, {
+			"HEALTHCAB_cabinet_health_model",
+			"AMMOCAB_cabinet_ammo_model",
+			"CHECKPOINT_forward_flag",
+			"MOUNTMG42_Forward_Spawn",
+			"REPAIRMG42_Forward_Spawn",
+		});
 		
-		SetAvailableMapGoals( 0, true, "BUILD_Neutral_Command_Post" );
-		SetAvailableMapGoals( 0, true, "PLANT_Neutral_Command_Post" );
+		SetAvailableMapGoals( 0, true, {
+			"BUILD_Neutral_Command_Post",
+			"PLANT_Neutral_Command_Post",
+		});
 		
-		SetAvailableMapGoals( TEAM.AXIS, false, "BUILD_Ramp" );
-		SetAvailableMapGoals( TEAM.AXIS, false, ".*_Axis_ForwardFlag_GroundFloor_.*" );
-		SetAvailableMapGoals( TEAM.AXIS, false, "DEFEND_Axis_ForwardFlag_FirstFloor_.*" );
-		SetAvailableMapGoals( TEAM.AXIS, false, "DEFEND_Axis_CappointRadio_.*" );
-		SetAvailableMapGoals( TEAM.AXIS, false, "DEFEND_Axis_SideGate_.*" );
-		SetAvailableMapGoals( TEAM.AXIS, false, ".*_Axis_ForwardFlag_.*" );
+		SetAvailableMapGoals( TEAM.AXIS, false, {
+			"BUILD_Ramp",
+			".*_Axis_ForwardFlag_GroundFloor_.*",
+			"DEFEND_Axis_ForwardFlag_FirstFloor_.*",
+			"DEFEND_Axis_CappointRadio_.*",
+			"DEFEND_Axis_SideGate_.*",
+			".*_Axis_ForwardFlag_.*",
+		});
 		
 		if ( Map.Ramp_Dyno > 1 )
 		{
@@ -723,10 +612,12 @@ global Map =
 		
 		ClearGoalRole( "ATTACK_Allies_Generator_.*", ROLE.ATTACKER3 );
 		
-		SetAvailableMapGoals( TEAM.ALLIES, false, "PLANT_Ramp" );
-		SetAvailableMapGoals( TEAM.ALLIES, false, "FLAG_secretdocs" );
-		SetAvailableMapGoals( TEAM.ALLIES, false, "ATTACK_Allies_SideGate_.*" );
-		SetAvailableMapGoals( TEAM.ALLIES, false, ".*_Allies_ForwardFlag_.*" );
+		SetAvailableMapGoals( TEAM.ALLIES, false, {
+			"PLANT_Ramp",
+			"FLAG_secretdocs",
+			"ATTACK_Allies_SideGate_.*",
+			".*_Allies_ForwardFlag_.*",
+		});
 		
 		if ( Map.Fence )
 		{
@@ -735,8 +626,10 @@ global Map =
 		
 		if ( Map.Generator )
 		{
-			SetAvailableMapGoals( TEAM.ALLIES, true, "PLANT_Generator" );
-			SetAvailableMapGoals( TEAM.ALLIES, true, ".*_Allies_Generator_.*" );
+			SetAvailableMapGoals( TEAM.ALLIES, true, {
+				"PLANT_Generator",
+				".*_Allies_Generator_.*",
+			});
 		}
 		
 		if ( Map.Side_Gate )

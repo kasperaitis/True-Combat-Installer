@@ -53,6 +53,18 @@ this.GetPriority = function()
 					if (!ent || !this.Bot.CanGrabItem(ent)) {
 						continue;
 					}
+				} else { //state == this.CARRYING_TO_CAP
+					if (this.Bot.CappointGoal) //it is set by Util.CappointForFlag
+					{
+						foreach ( goal2 in Util.QueryTable )
+						{
+							if ( goal2 == this.Bot.CappointGoal )
+							{
+								goal = goal2;
+								break;
+							}
+						}
+					}
 				}
 				this.GoalState = state;
 				this.MapGoal = goal;

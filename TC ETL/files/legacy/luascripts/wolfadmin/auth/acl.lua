@@ -1,6 +1,6 @@
 
 -- WolfAdmin module for Wolfenstein: Enemy Territory servers.
--- Copyright (C) 2015-2019 Timo 'Timothy' Smit
+-- Copyright (C) 2015-2020 Timo 'Timothy' Smit
 
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -15,13 +15,13 @@
 -- You should have received a copy of the GNU General Public License
 -- along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-local db = require (wolfa_getLuaPath()..".db.db")
+local db = wolfa_requireModule("db.db")
 
-local players = require (wolfa_getLuaPath()..".players.players")
+local players = wolfa_requireModule("players.players")
 
-local events = require (wolfa_getLuaPath()..".util.events")
-local settings = require (wolfa_getLuaPath()..".util.settings")
-local tables = require (wolfa_getLuaPath()..".util.tables")
+local events = wolfa_requireModule("util.events")
+local settings = wolfa_requireModule("util.settings")
+local tables = wolfa_requireModule("util.tables")
 
 local acl = {}
 
@@ -126,7 +126,7 @@ end
 function acl.copyLevelPermissions(levelId, newLevelId)
     db.copyLevelPermissions(levelId, newLevelId)
 
-    cachedLevels[newLevelId] = tables.copy(cachedLevels[levelId])
+    cachedLevels[newLevelId] = tables.merge(cachedLevels[newLevelId], cachedLevels[levelId])
 end
 
 function acl.removeLevelPermissions(levelId)

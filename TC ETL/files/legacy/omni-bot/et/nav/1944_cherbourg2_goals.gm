@@ -7,7 +7,6 @@ global _MG =
 			[0] = Vec3(-0.028, -0.545, 0.838),
 		},
 		GoalType = "AIRSTRIKE",
-		MinRadius = 32,
 		Position = Vec3(1272.062, 2418.147, -614.875),
 		Radius = 32,
 		Roles = 
@@ -23,7 +22,6 @@ global _MG =
 			[0] = Vec3(-0.070, -0.783, 0.619),
 		},
 		GoalType = "AIRSTRIKE",
-		MinRadius = 32,
 		Position = Vec3(2857.759, 1855.985, -658.556),
 		Radius = 32,
 		Roles = 
@@ -39,7 +37,6 @@ global _MG =
 			[0] = Vec3(0.178, 0.703, 0.688),
 		},
 		GoalType = "AIRSTRIKE",
-		MinRadius = 32,
 		Position = Vec3(1053.611, 1495.778, -558.875),
 		Radius = 32,
 		Roles = 
@@ -55,7 +52,6 @@ global _MG =
 			[0] = Vec3(0.176, 0.635, 0.752),
 		},
 		GoalType = "AIRSTRIKE",
-		MinRadius = 32,
 		Position = Vec3(2408.598, 861.948, -566.875),
 		Radius = 32,
 		Roles = 
@@ -71,7 +67,6 @@ global _MG =
 			[0] = Vec3(-0.556, 0.522, 0.647),
 		},
 		GoalType = "AIRSTRIKE",
-		MinRadius = 32,
 		Position = Vec3(3424.799, 1130.445, -566.875),
 		Radius = 32,
 		Roles = 
@@ -109,7 +104,6 @@ global _MG =
 		GoalType = "Attack",
 		MaxCampTime = 20,
 		MinCampTime = 10,
-		MinRadius = 32,
 		Position = Vec3(2410.126, -1653.356, -551.156),
 		Radius = 32,
 		Roles = 
@@ -129,7 +123,6 @@ global _MG =
 		GoalType = "Attack",
 		MaxCampTime = 20,
 		MinCampTime = 10,
-		MinRadius = 32,
 		Position = Vec3(2613.874, -1675.464, -551.321),
 		Radius = 32,
 		Roles = 
@@ -149,7 +142,6 @@ global _MG =
 		GoalType = "Attack",
 		MaxCampTime = 20,
 		MinCampTime = 10,
-		MinRadius = 32,
 		Position = Vec3(2170.127, -1635.087, -458.875),
 		Radius = 32,
 		Roles = 
@@ -169,7 +161,6 @@ global _MG =
 		GoalType = "Attack",
 		MaxCampTime = 20,
 		MinCampTime = 10,
-		MinRadius = 32,
 		Position = Vec3(2313.873, -1274.125, -358.875),
 		Radius = 32,
 		Roles = 
@@ -189,7 +180,6 @@ global _MG =
 		GoalType = "Attack",
 		MaxCampTime = 20,
 		MinCampTime = 10,
-		MinRadius = 32,
 		Position = Vec3(2313.875, -1367.875, -358.875),
 		Radius = 32,
 		Roles = 
@@ -209,7 +199,6 @@ global _MG =
 		GoalType = "Attack",
 		MaxCampTime = 40,
 		MinCampTime = 20,
-		MinRadius = 32,
 		Position = Vec3(1429.569, -1274.125, -550.875),
 		Radius = 32,
 		Roles = 
@@ -229,7 +218,6 @@ global _MG =
 		GoalType = "Attack",
 		MaxCampTime = 40,
 		MinCampTime = 20,
-		MinRadius = 32,
 		Position = Vec3(1275.994, -1528.801, -550.875),
 		Radius = 32,
 		Roles = 
@@ -249,7 +237,6 @@ global _MG =
 		GoalType = "Attack",
 		MaxCampTime = 40,
 		MinCampTime = 20,
-		MinRadius = 32,
 		Position = Vec3(1674.896, -1407.934, -558.875),
 		Radius = 32,
 		Roles = 
@@ -270,7 +257,6 @@ global _MG =
 		GoalType = "Attack",
 		MaxCampTime = 40,
 		MinCampTime = 20,
-		MinRadius = 32,
 		Position = Vec3(1285.684, -1723.099, -567.010),
 		Radius = 32,
 		Roles = 
@@ -308,7 +294,6 @@ global _MG =
 		GoalType = "Attack",
 		MaxCampTime = 20,
 		MinCampTime = 10,
-		MinRadius = 32,
 		Position = Vec3(1769.095, -476.544, -390.875),
 		Radius = 32,
 		Roles = 
@@ -326,7 +311,6 @@ global _MG =
 		GoalType = "Attack",
 		MaxCampTime = 20,
 		MinCampTime = 10,
-		MinRadius = 32,
 		Position = Vec3(1821.083, -164.570, -390.875),
 		Radius = 32,
 		Roles = 
@@ -344,7 +328,6 @@ global _MG =
 		GoalType = "Attack",
 		MaxCampTime = 20,
 		MinCampTime = 10,
-		MinRadius = 32,
 		Position = Vec3(1473.170, -288.648, -390.875),
 		Radius = 32,
 		Roles = 
@@ -362,7 +345,6 @@ global _MG =
 		GoalType = "Attack",
 		MaxCampTime = 20,
 		MinCampTime = 10,
-		MinRadius = 32,
 		Position = Vec3(1644.495, -157.807, -390.875),
 		Radius = 32,
 		Roles = 
@@ -382,7 +364,6 @@ global _MG =
 		GoalType = "Attack",
 		MaxCampTime = 20,
 		MinCampTime = 10,
-		MinRadius = 32,
 		Position = Vec3(4837.875, -992.373, -566.875),
 		Radius = 32,
 		Roles = 
@@ -402,7 +383,6 @@ global _MG =
 		GoalType = "Attack",
 		MaxCampTime = 20,
 		MinCampTime = 10,
-		MinRadius = 32,
 		Position = Vec3(4833.221, -720.875, -566.875),
 		Radius = 32,
 		Roles = 
@@ -423,7 +403,6 @@ global _MG =
 		GoalType = "Attack",
 		MaxCampTime = 20,
 		MinCampTime = 10,
-		MinRadius = 32,
 		Position = Vec3(4322.125, -791.125, -566.875),
 		Radius = 32,
 		Roles = 
@@ -443,7 +422,6 @@ global _MG =
 		GoalType = "Attack",
 		MaxCampTime = 20,
 		MinCampTime = 10,
-		MinRadius = 32,
 		Position = Vec3(4837.875, 21.875, -566.875),
 		Radius = 32,
 		Roles = 
@@ -462,7 +440,6 @@ global _MG =
 		GoalType = "Attack",
 		MaxCampTime = 20,
 		MinCampTime = 10,
-		MinRadius = 32,
 		Position = Vec3(4349.514, 21.875, -566.875),
 		Radius = 32,
 		Roles = 
@@ -481,7 +458,6 @@ global _MG =
 		GoalType = "Attack",
 		MaxCampTime = 20,
 		MinCampTime = 10,
-		MinRadius = 32,
 		Position = Vec3(-981.873, -2261.874, -630.875),
 		Radius = 32,
 		Roles = 
@@ -500,7 +476,6 @@ global _MG =
 		GoalType = "Attack",
 		MaxCampTime = 20,
 		MinCampTime = 10,
-		MinRadius = 32,
 		Position = Vec3(-1024.162, -1842.126, -630.875),
 		Radius = 32,
 		Roles = 
@@ -519,7 +494,6 @@ global _MG =
 		GoalType = "Attack",
 		MaxCampTime = 20,
 		MinCampTime = 10,
-		MinRadius = 32,
 		Position = Vec3(-1051.475, -2261.874, -534.875),
 		Radius = 32,
 		Roles = 
@@ -539,7 +513,6 @@ global _MG =
 		GoalType = "Attack",
 		MaxCampTime = 20,
 		MinCampTime = 10,
-		MinRadius = 32,
 		Position = Vec3(-650.125, -2209.903, -630.875),
 		Radius = 32,
 		Roles = 
@@ -558,7 +531,6 @@ global _MG =
 		GoalType = "Attack",
 		MaxCampTime = 20,
 		MinCampTime = 10,
-		MinRadius = 32,
 		Position = Vec3(-885.875, -2331.655, -614.264),
 		Radius = 32,
 		Roles = 
@@ -578,7 +550,6 @@ global _MG =
 		GoalType = "Attack",
 		MaxCampTime = 40,
 		MinCampTime = 20,
-		MinRadius = 32,
 		Position = Vec3(3645.817, -2221.875, -538.863),
 		Radius = 32,
 		Roles = 
@@ -597,7 +568,6 @@ global _MG =
 		GoalType = "Attack",
 		MaxCampTime = 40,
 		MinCampTime = 20,
-		MinRadius = 32,
 		Position = Vec3(3645.875, -2082.720, -539.532),
 		Radius = 32,
 		Roles = 
@@ -616,7 +586,6 @@ global _MG =
 		GoalType = "Attack",
 		MaxCampTime = 40,
 		MinCampTime = 20,
-		MinRadius = 32,
 		Position = Vec3(3158.125, -2221.874, -550.875),
 		Radius = 32,
 		Roles = 
@@ -635,7 +604,6 @@ global _MG =
 		GoalType = "Attack",
 		MaxCampTime = 40,
 		MinCampTime = 20,
-		MinRadius = 32,
 		Position = Vec3(3026.125, -2176.013, -545.480),
 		Radius = 32,
 		Roles = 
@@ -654,7 +622,6 @@ global _MG =
 		GoalType = "Attack",
 		MaxCampTime = 40,
 		MinCampTime = 20,
-		MinRadius = 32,
 		Position = Vec3(3026.125, -2065.538, -536.811),
 		Radius = 32,
 		Roles = 
@@ -673,7 +640,6 @@ global _MG =
 		GoalType = "Attack",
 		MaxCampTime = 40,
 		MinCampTime = 20,
-		MinRadius = 32,
 		Position = Vec3(3026.127, -2221.875, -492.875),
 		Radius = 32,
 		Roles = 
@@ -693,7 +659,6 @@ global _MG =
 		GoalType = "Attack",
 		MaxCampTime = 40,
 		MinCampTime = 20,
-		MinRadius = 32,
 		Position = Vec3(3645.875, -1920.162, -545.058),
 		Radius = 32,
 		Roles = 
@@ -713,7 +678,6 @@ global _MG =
 		GoalType = "Attack",
 		MaxCampTime = 40,
 		MinCampTime = 20,
-		MinRadius = 32,
 		Position = Vec3(3436.235, -1780.197, -551.875),
 		Radius = 32,
 		Roles = 
@@ -732,7 +696,6 @@ global _MG =
 		GoalType = "Attack",
 		MaxCampTime = 40,
 		MinCampTime = 20,
-		MinRadius = 32,
 		Position = Vec3(2960.667, -1825.722, -534.857),
 		Radius = 32,
 		Roles = 
@@ -750,7 +713,6 @@ global _MG =
 		GoalType = "Attack",
 		MaxCampTime = 20,
 		MinCampTime = 10,
-		MinRadius = 32,
 		Position = Vec3(56.089, 1557.641, -574.875),
 		Radius = 32,
 		Roles = 
@@ -768,7 +730,6 @@ global _MG =
 		GoalType = "Attack",
 		MaxCampTime = 20,
 		MinCampTime = 10,
-		MinRadius = 32,
 		Position = Vec3(-35.723, 1282.875, -574.875),
 		Radius = 32,
 		Roles = 
@@ -786,7 +747,6 @@ global _MG =
 		GoalType = "Attack",
 		MaxCampTime = 20,
 		MinCampTime = 10,
-		MinRadius = 32,
 		Position = Vec3(-193.943, 1453.874, -574.875),
 		Radius = 32,
 		Roles = 
@@ -804,7 +764,6 @@ global _MG =
 		GoalType = "Attack",
 		MaxCampTime = 20,
 		MinCampTime = 10,
-		MinRadius = 32,
 		Position = Vec3(-14.072, 1379.741, -529.869),
 		Radius = 32,
 		Roles = 
@@ -823,7 +782,6 @@ global _MG =
 		GoalType = "Attack",
 		MaxCampTime = 20,
 		MinCampTime = 10,
-		MinRadius = 32,
 		Position = Vec3(109.874, 1651.300, -574.875),
 		Radius = 32,
 		Roles = 
@@ -842,7 +800,6 @@ global _MG =
 		GoalType = "Attack",
 		MaxCampTime = 40,
 		MinCampTime = 20,
-		MinRadius = 32,
 		Position = Vec3(2213.875, -2722.550, -558.755),
 		Radius = 32,
 		Roles = 
@@ -861,7 +818,6 @@ global _MG =
 		GoalType = "Attack",
 		MaxCampTime = 40,
 		MinCampTime = 20,
-		MinRadius = 32,
 		Position = Vec3(1826.125, -2691.769, -563.183),
 		Radius = 32,
 		Roles = 
@@ -880,7 +836,6 @@ global _MG =
 		GoalType = "Attack",
 		MaxCampTime = 40,
 		MinCampTime = 20,
-		MinRadius = 32,
 		Position = Vec3(1826.125, -3181.875, -550.875),
 		Radius = 32,
 		Roles = 
@@ -899,7 +854,6 @@ global _MG =
 		GoalType = "Attack",
 		MaxCampTime = 40,
 		MinCampTime = 20,
-		MinRadius = 32,
 		Position = Vec3(2405.875, -3098.125, -534.875),
 		Radius = 32,
 		Roles = 
@@ -918,7 +872,6 @@ global _MG =
 		GoalType = "Attack",
 		MaxCampTime = 40,
 		MinCampTime = 20,
-		MinRadius = 32,
 		Position = Vec3(2413.874, -2972.026, -534.875),
 		Radius = 32,
 		Roles = 
@@ -937,7 +890,6 @@ global _MG =
 		GoalType = "Attack",
 		MaxCampTime = 40,
 		MinCampTime = 20,
-		MinRadius = 32,
 		Position = Vec3(2413.874, -2866.131, -534.875),
 		Radius = 32,
 		Roles = 
@@ -956,7 +908,6 @@ global _MG =
 		GoalType = "Attack",
 		MaxCampTime = 40,
 		MinCampTime = 20,
-		MinRadius = 32,
 		Position = Vec3(1826.125, -2498.128, -563.061),
 		Radius = 32,
 		Roles = 
@@ -975,7 +926,6 @@ global _MG =
 		GoalType = "Attack",
 		MaxCampTime = 40,
 		MinCampTime = 20,
-		MinRadius = 32,
 		Position = Vec3(2213.875, -2813.538, -552.255),
 		Radius = 32,
 		Roles = 
@@ -994,7 +944,6 @@ global _MG =
 		GoalType = "Attack",
 		MaxCampTime = 40,
 		MinCampTime = 20,
-		MinRadius = 32,
 		Position = Vec3(1826.126, -2861.571, -565.688),
 		Radius = 32,
 		Roles = 
@@ -1012,7 +961,6 @@ global _MG =
 		GoalType = "Attack",
 		MaxCampTime = 40,
 		MinCampTime = 20,
-		MinRadius = 32,
 		Position = Vec3(1473.351, -288.582, -390.875),
 		Radius = 32,
 		Roles = 
@@ -1030,7 +978,6 @@ global _MG =
 		GoalType = "Attack",
 		MaxCampTime = 40,
 		MinCampTime = 20,
-		MinRadius = 32,
 		Position = Vec3(1643.315, -155.817, -390.875),
 		Radius = 32,
 		Roles = 
@@ -1048,7 +995,6 @@ global _MG =
 		GoalType = "Attack",
 		MaxCampTime = 40,
 		MinCampTime = 20,
-		MinRadius = 32,
 		Position = Vec3(1820.437, -164.668, -390.875),
 		Radius = 32,
 		Roles = 
@@ -1137,7 +1083,6 @@ global _MG =
 		GoalType = "CAMP",
 		MaxCampTime = 20,
 		MinCampTime = 10,
-		MinRadius = 32,
 		Position = Vec3(-10.126, 2798.973, -629.857),
 		Radius = 32,
 		Roles = 
@@ -1154,7 +1099,6 @@ global _MG =
 		GoalType = "CAMP",
 		MaxCampTime = 20,
 		MinCampTime = 10,
-		MinRadius = 32,
 		Position = Vec3(18.326, 3175.867, -670.870),
 		Radius = 32,
 		Roles = 
@@ -1171,7 +1115,6 @@ global _MG =
 		GoalType = "CAMP",
 		MaxCampTime = 20,
 		MinCampTime = 10,
-		MinRadius = 32,
 		Position = Vec3(-10.126, 2992.140, -670.875),
 		Radius = 32,
 		Roles = 
@@ -1188,7 +1131,6 @@ global _MG =
 		GoalType = "CAMP",
 		MaxCampTime = 20,
 		MinCampTime = 10,
-		MinRadius = 32,
 		Position = Vec3(-10.125, 2899.992, -655.315),
 		Radius = 32,
 		Roles = 
@@ -1205,7 +1147,6 @@ global _MG =
 		GoalType = "CAMP",
 		MaxCampTime = 20,
 		MinCampTime = 10,
-		MinRadius = 32,
 		Position = Vec3(-125.874, 2717.523, -614.875),
 		Radius = 32,
 		Roles = 
@@ -1222,7 +1163,6 @@ global _MG =
 		GoalType = "CAMP",
 		MaxCampTime = 20,
 		MinCampTime = 10,
-		MinRadius = 32,
 		Position = Vec3(1210.118, 2923.282, -614.875),
 		Radius = 32,
 		Roles = 
@@ -1239,7 +1179,6 @@ global _MG =
 		GoalType = "CAMP",
 		MaxCampTime = 20,
 		MinCampTime = 10,
-		MinRadius = 32,
 		Position = Vec3(1590.389, 2704.026, -670.875),
 		Radius = 32,
 		Roles = 
@@ -1256,7 +1195,6 @@ global _MG =
 		GoalType = "CAMP",
 		MaxCampTime = 20,
 		MinCampTime = 10,
-		MinRadius = 32,
 		Position = Vec3(1234.125, 3378.547, -614.875),
 		Radius = 32,
 		Roles = 
@@ -1273,7 +1211,6 @@ global _MG =
 		GoalType = "CAMP",
 		MaxCampTime = 20,
 		MinCampTime = 10,
-		MinRadius = 32,
 		Position = Vec3(1877.874, 3815.754, -614.875),
 		Radius = 32,
 		Roles = 
@@ -1290,7 +1227,6 @@ global _MG =
 		GoalType = "CAMP",
 		MaxCampTime = 20,
 		MinCampTime = 10,
-		MinRadius = 32,
 		Position = Vec3(1426.286, 3031.848, -660.279),
 		Radius = 32,
 		Roles = 
@@ -1307,7 +1243,6 @@ global _MG =
 		GoalType = "CAMP",
 		MaxCampTime = 20,
 		MinCampTime = 10,
-		MinRadius = 32,
 		Position = Vec3(2729.941, 2856.392, -670.875),
 		Radius = 32,
 		Roles = 
@@ -1325,7 +1260,6 @@ global _MG =
 		GoalType = "CAMP",
 		MaxCampTime = 20,
 		MinCampTime = 10,
-		MinRadius = 32,
 		Position = Vec3(2514.128, 2423.096, -670.875),
 		Radius = 32,
 		Roles = 
@@ -1343,7 +1277,6 @@ global _MG =
 		GoalType = "CAMP",
 		MaxCampTime = 20,
 		MinCampTime = 10,
-		MinRadius = 32,
 		Position = Vec3(2824.378, 1766.989, -640.064),
 		Radius = 32,
 		Roles = 
@@ -1361,7 +1294,6 @@ global _MG =
 		GoalType = "CAMP",
 		MaxCampTime = 20,
 		MinCampTime = 10,
-		MinRadius = 32,
 		Position = Vec3(2654.274, 1860.918, -659.481),
 		Radius = 32,
 		Roles = 
@@ -1379,7 +1311,6 @@ global _MG =
 		GoalType = "CAMP",
 		MaxCampTime = 20,
 		MinCampTime = 10,
-		MinRadius = 32,
 		Position = Vec3(2963.544, 1708.422, -535.968),
 		Radius = 32,
 		Roles = 
@@ -1397,7 +1328,6 @@ global _MG =
 		GoalType = "CAMP",
 		MaxCampTime = 20,
 		MinCampTime = 10,
-		MinRadius = 32,
 		Position = Vec3(2861.874, 1661.333, -612.642),
 		Radius = 32,
 		Roles = 
@@ -1415,7 +1345,6 @@ global _MG =
 		GoalType = "CAMP",
 		MaxCampTime = 20,
 		MinCampTime = 10,
-		MinRadius = 32,
 		Position = Vec3(2648.635, 2070.120, -670.875),
 		Radius = 32,
 		Roles = 
@@ -1433,7 +1362,6 @@ global _MG =
 		GoalType = "CAMP",
 		MaxCampTime = 20,
 		MinCampTime = 10,
-		MinRadius = 32,
 		Position = Vec3(2845.697, 2155.787, -670.875),
 		Radius = 32,
 		Roles = 
@@ -1451,7 +1379,6 @@ global _MG =
 		GoalType = "CAMP",
 		MaxCampTime = 20,
 		MinCampTime = 10,
-		MinRadius = 32,
 		Position = Vec3(2613.066, 2908.911, -670.875),
 		Radius = 32,
 		Roles = 
@@ -1470,7 +1397,6 @@ global _MG =
 		GoalType = "CAMP",
 		MaxCampTime = 20,
 		MinCampTime = 10,
-		MinRadius = 32,
 		Position = Vec3(3013.453, 2078.938, -486.875),
 		Radius = 32,
 		Roles = 
@@ -1490,7 +1416,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(2815.759, -2221.875, -486.875),
 		Radius = 32,
 		Roles = 
@@ -1509,7 +1434,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(2971.664, -2049.164, -474.875),
 		Radius = 32,
 		Roles = 
@@ -1548,7 +1472,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(3357.271, -1670.817, -550.875),
 		Radius = 32,
 		Roles = 
@@ -1567,7 +1490,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(-981.875, -2261.875, -630.875),
 		Radius = 32,
 		Roles = 
@@ -1586,7 +1508,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(-1050.372, -2261.875, -534.875),
 		Radius = 32,
 		Roles = 
@@ -1606,7 +1527,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(-1024.127, -1842.334, -630.875),
 		Radius = 32,
 		Roles = 
@@ -1625,7 +1545,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(-1031.281, -2046.903, -630.875),
 		Radius = 32,
 		Roles = 
@@ -1644,7 +1563,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(-1206.748, -2217.267, -630.875),
 		Radius = 32,
 		Roles = 
@@ -1663,7 +1581,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(-1137.250, -1867.307, -630.875),
 		Radius = 32,
 		Roles = 
@@ -1682,7 +1599,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(-1099.197, -1740.231, -632.154),
 		Radius = 32,
 		Roles = 
@@ -1702,8 +1618,7 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
-		Position = Vec3(-678.031, -1274.986, -579.126),
+		Position = Vec3(-757.017, -1268.591, -590.058),
 		Radius = 32,
 		Roles = 
 		{
@@ -1722,7 +1637,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(-832.840, -1265.630, -598.116),
 		Radius = 32,
 		Roles = 
@@ -1742,7 +1656,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(-650.125, -2209.623, -630.875),
 		Radius = 32,
 		Roles = 
@@ -1762,7 +1675,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(3645.875, -2221.875, -538.848),
 		Radius = 32,
 		Roles = 
@@ -1782,7 +1694,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(3435.309, -1658.367, -551.875),
 		Radius = 32,
 		Roles = 
@@ -1803,7 +1714,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(3645.875, -1920.161, -544.835),
 		Radius = 32,
 		Roles = 
@@ -1824,7 +1734,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(3158.125, -2221.875, -550.875),
 		Radius = 32,
 		Roles = 
@@ -1845,7 +1754,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(3067.497, -1811.034, -543.311),
 		Radius = 32,
 		Roles = 
@@ -1865,7 +1773,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(3026.125, -2221.875, -492.875),
 		Radius = 32,
 		Roles = 
@@ -1886,7 +1793,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(3026.126, -2066.228, -537.000),
 		Radius = 32,
 		Roles = 
@@ -1906,7 +1812,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(2961.007, -1826.751, -535.875),
 		Radius = 32,
 		Roles = 
@@ -1926,7 +1831,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(3353.510, -1734.034, -551.875),
 		Radius = 32,
 		Roles = 
@@ -1946,7 +1850,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(3261.002, -2221.875, -551.875),
 		Radius = 32,
 		Roles = 
@@ -1966,7 +1869,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(346.125, -31.126, -558.875),
 		Radius = 32,
 		Roles = 
@@ -1984,7 +1886,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(902.750, -269.875, -526.875),
 		Radius = 32,
 		Roles = 
@@ -2004,7 +1905,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(250.659, 636.060, -558.875),
 		Radius = 32,
 		Roles = 
@@ -2024,7 +1924,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(346.125, 69.874, -500.875),
 		Radius = 32,
 		Roles = 
@@ -2044,7 +1943,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(997.875, 274.125, -558.875),
 		Radius = 32,
 		Roles = 
@@ -2063,7 +1961,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(-1125.875, -1364.376, -782.875),
 		Radius = 32,
 		Roles = 
@@ -2081,7 +1978,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(-847.798, -1063.479, -599.930),
 		Radius = 32,
 		Roles = 
@@ -2100,7 +1996,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(-706.837, -1064.459, -582.843),
 		Radius = 32,
 		Roles = 
@@ -2119,7 +2014,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(-992.292, -1192.175, -622.651),
 		Radius = 32,
 		Roles = 
@@ -2138,7 +2032,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(-922.126, -1181.875, -782.873),
 		Radius = 32,
 		Roles = 
@@ -2158,7 +2051,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(2709.875, 249.242, -574.875),
 		Radius = 32,
 		Roles = 
@@ -2177,7 +2069,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(2074.147, 423.488, -564.738),
 		Radius = 32,
 		Roles = 
@@ -2197,7 +2088,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(2089.655, 1085.875, -566.875),
 		Radius = 32,
 		Roles = 
@@ -2217,7 +2107,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(2701.874, 433.028, -566.875),
 		Radius = 32,
 		Roles = 
@@ -2237,7 +2126,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(2717.875, 29.873, -551.875),
 		Radius = 32,
 		Roles = 
@@ -2255,7 +2143,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(3217.247, 786.125, -566.875),
 		Radius = 32,
 		Roles = 
@@ -2274,7 +2161,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(3490.125, 889.717, -486.875),
 		Radius = 32,
 		Roles = 
@@ -2293,7 +2179,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(3533.875, 978.126, -566.875),
 		Radius = 32,
 		Roles = 
@@ -2312,7 +2197,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(3505.840, 1190.363, -566.875),
 		Radius = 32,
 		Roles = 
@@ -2331,7 +2215,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(3325.449, 786.125, -566.875),
 		Radius = 32,
 		Roles = 
@@ -2369,7 +2252,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(2682.125, -1955.514, -535.875),
 		Radius = 32,
 		Roles = 
@@ -2388,7 +2270,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(2645.875, -1295.875, -606.875),
 		Radius = 32,
 		Roles = 
@@ -2407,7 +2288,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(4322.268, -1501.874, -566.875),
 		Radius = 32,
 		Roles = 
@@ -2427,7 +2307,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(3743.705, -1666.125, -607.713),
 		Radius = 32,
 		Roles = 
@@ -2447,13 +2326,83 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(4580.450, -1301.127, -566.875),
 		Radius = 32,
 		Roles = 
 		{
 			[0] = "DEFENDER",
 		},
+		Stance = "crouch",
+	},
+	DEFEND_Axis_Forced_DockAAGunDefend_10 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(0.215, 0.976, 0.035),
+			[1] = Vec3(-0.963, 0.265, 0.052),
+		},
+		GoalType = "Defend",
+		MaxCampTime = 60,
+		MinCampTime = 40,
+		Position = Vec3(-239.588, -2741.875, -558.875),
+		Radius = 32,
+		Stance = "crouch",
+	},
+	DEFEND_Axis_Forced_DockAAGunDefend_11 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(-0.122, 0.992, 0.017),
+			[1] = Vec3(-0.661, -0.750, 0.029),
+		},
+		DisableCM = 1,
+		GoalType = "Defend",
+		MaxCampTime = 60,
+		MinCampTime = 40,
+		Position = Vec3(101.875, -2234.129, -542.875),
+		Radius = 32,
+		Stance = "crouch",
+	},
+	DEFEND_Axis_Forced_DockAAGunDefend_12 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(0.355, 0.934, 0.040),
+			[1] = Vec3(0.743, -0.666, 0.062),
+		},
+		GoalType = "Defend",
+		MaxCampTime = 60,
+		MinCampTime = 40,
+		Position = Vec3(-253.875, -2351.875, -558.875),
+		Radius = 32,
+		Stance = "crouch",
+	},
+	DEFEND_Axis_Forced_DockAAGunDefend_13 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(-0.192, 0.980, 0.052),
+			[1] = Vec3(-0.995, -0.079, 0.064),
+		},
+		GoalType = "Defend",
+		MaxCampTime = 60,
+		MinCampTime = 40,
+		Position = Vec3(101.875, -2149.875, -553.932),
+		Radius = 32,
+		Stance = "crouch",
+	},
+	DEFEND_Axis_Forced_DockAAGunDefend_14 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(0.705, 0.706, 0.071),
+			[1] = Vec3(0.450, -0.891, 0.065),
+		},
+		GoalType = "Defend",
+		MaxCampTime = 60,
+		MinCampTime = 40,
+		Position = Vec3(-253.875, -2066.938, -558.875),
+		Radius = 32,
 		Stance = "crouch",
 	},
 	DEFEND_Axis_Help_EastAAGun_01 = 
@@ -2466,7 +2415,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(2772.571, -1951.300, -534.875),
 		Radius = 32,
 		Roles = 
@@ -2485,7 +2433,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(2722.083, -2094.547, -534.875),
 		Radius = 32,
 		Roles = 
@@ -2504,7 +2451,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(3194.526, -1784.991, -550.875),
 		Radius = 32,
 		Roles = 
@@ -2522,7 +2468,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(3822.242, -1709.875, -606.875),
 		Radius = 32,
 		Roles = 
@@ -2542,7 +2487,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(-446.824, 1305.480, -574.875),
 		Radius = 32,
 		Roles = 
@@ -2562,7 +2506,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(-376.912, 1445.619, -574.875),
 		Radius = 32,
 		Roles = 
@@ -2582,7 +2525,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(-493.761, 1211.945, -574.875),
 		Radius = 32,
 		Roles = 
@@ -2603,7 +2545,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(235.004, 1694.593, -468.439),
 		Radius = 32,
 		Roles = 
@@ -2623,7 +2564,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(-87.349, 1234.284, -574.875),
 		Radius = 32,
 		Roles = 
@@ -2643,7 +2583,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(1557.872, 1062.735, -558.875),
 		Radius = 32,
 		Roles = 
@@ -2663,7 +2602,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(850.125, 1005.875, -558.875),
 		Radius = 32,
 		Roles = 
@@ -2683,7 +2621,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(983.779, 518.579, -542.875),
 		Radius = 32,
 		Roles = 
@@ -2703,7 +2640,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(1557.875, 762.741, -517.399),
 		Radius = 32,
 		Roles = 
@@ -2723,7 +2659,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(262.800, 380.696, -558.875),
 		Radius = 32,
 		Roles = 
@@ -2742,7 +2677,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(2013.875, 762.127, -566.875),
 		Radius = 32,
 		Roles = 
@@ -2761,7 +2695,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(2074.125, 688.553, -566.875),
 		Radius = 32,
 		Roles = 
@@ -2780,7 +2713,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(2893.874, 848.777, -566.875),
 		Radius = 32,
 		Roles = 
@@ -2799,7 +2731,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(2736.669, 1077.874, -566.875),
 		Radius = 32,
 		Roles = 
@@ -2817,7 +2748,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(2553.215, 908.256, -566.875),
 		Radius = 32,
 		Roles = 
@@ -2836,7 +2766,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(2993.970, 1042.126, -566.875),
 		Radius = 32,
 		Roles = 
@@ -2855,7 +2784,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(3549.875, 1453.875, -478.875),
 		Radius = 32,
 		Roles = 
@@ -2875,7 +2803,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(3549.875, 1306.125, -478.875),
 		Radius = 32,
 		Roles = 
@@ -2895,7 +2822,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(3282.632, 1467.579, -552.826),
 		Radius = 32,
 		Roles = 
@@ -2914,7 +2840,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(3529.859, 1118.397, -566.875),
 		Radius = 32,
 		Roles = 
@@ -2934,7 +2859,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(2613.875, -1675.472, -551.360),
 		Radius = 32,
 		Roles = 
@@ -2954,7 +2878,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(2410.127, -1653.275, -551.158),
 		Radius = 32,
 		Roles = 
@@ -2974,7 +2897,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(2171.566, -1638.471, -458.875),
 		Radius = 32,
 		Roles = 
@@ -2994,7 +2916,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(2355.127, -1212.125, -550.875),
 		Radius = 32,
 		Roles = 
@@ -3014,7 +2935,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(2645.875, -1351.851, -550.875),
 		Radius = 32,
 		Roles = 
@@ -3034,7 +2954,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(2355.125, -1306.662, -550.875),
 		Radius = 32,
 		Roles = 
@@ -3054,7 +2973,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(482.125, -1557.875, -550.875),
 		Radius = 32,
 		Roles = 
@@ -3075,7 +2993,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(742.251, -1557.875, -550.875),
 		Radius = 32,
 		Roles = 
@@ -3096,7 +3013,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(1765.875, -2002.127, -374.875),
 		Radius = 32,
 		Roles = 
@@ -3108,21 +3024,21 @@ global _MG =
 	{
 		AimVectors = 
 		{
-			[0] = Vec3(-0.998, -0.063, -0.022),
-			[1] = Vec3(0.560, -0.828, -0.033),
-			[2] = Vec3(-0.148, -0.989, -0.009),
+			[0] = Vec3(-0.997, -0.068, -0.022),
+			[1] = Vec3(-0.329, -0.944, -0.027),
+			[2] = Vec3(-0.796, 0.108, 0.596),
 		},
 		DisableCM = 1,
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
-		Position = Vec3(1689.083, -1278.183, -550.875),
+		Position = Vec3(1770.049, -1293.922, -522.875),
 		Radius = 32,
 		Roles = 
 		{
 			[0] = "DEFENDER1",
 		},
+		Stance = "crouch",
 	},
 	DEFEND_Axis_Second_CPArea_05 = 
 	{
@@ -3136,7 +3052,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(1617.772, -1221.875, -342.875),
 		Radius = 32,
 		Roles = 
@@ -3155,7 +3070,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(4234.125, 549.875, -518.875),
 		Radius = 32,
 		Roles = 
@@ -3175,7 +3089,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(4557.762, 544.586, -534.875),
 		Radius = 32,
 		Roles = 
@@ -3194,7 +3107,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(4348.950, 21.874, -566.875),
 		Radius = 32,
 		Roles = 
@@ -3214,7 +3126,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(4837.875, 21.875, -566.875),
 		Radius = 32,
 		Roles = 
@@ -3233,7 +3144,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(4322.126, -791.125, -566.875),
 		Radius = 32,
 		Roles = 
@@ -3252,7 +3162,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(4821.875, -1290.607, -566.875),
 		Radius = 32,
 		Roles = 
@@ -3271,7 +3180,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(-650.125, -2208.503, -630.875),
 		Radius = 32,
 		Roles = 
@@ -3291,7 +3199,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(-885.875, -2331.005, -614.463),
 		Radius = 32,
 		Roles = 
@@ -3311,7 +3218,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(-658.125, -2451.194, -577.738),
 		Radius = 32,
 		Roles = 
@@ -3331,7 +3237,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(-885.875, -2741.875, -542.875),
 		Radius = 32,
 		Roles = 
@@ -3350,7 +3255,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(-885.856, -2492.673, -565.064),
 		Radius = 32,
 		Roles = 
@@ -3369,7 +3273,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(-738.125, -2749.874, -542.875),
 		Radius = 32,
 		Roles = 
@@ -3388,7 +3291,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(2120.511, -2498.125, -560.560),
 		Radius = 32,
 		Roles = 
@@ -3408,7 +3310,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(1826.125, -2561.824, -562.950),
 		Radius = 32,
 		Roles = 
@@ -3427,7 +3328,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(1826.314, -2691.636, -562.930),
 		Radius = 32,
 		Roles = 
@@ -3446,7 +3346,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(2213.875, -2721.715, -558.814),
 		Radius = 32,
 		Roles = 
@@ -3465,7 +3364,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(1826.125, -3181.875, -550.875),
 		Radius = 32,
 		Roles = 
@@ -3484,7 +3382,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(2213.875, -2814.279, -551.969),
 		Radius = 32,
 		Roles = 
@@ -3503,7 +3400,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(2405.875, -3098.125, -534.875),
 		Radius = 32,
 		Roles = 
@@ -3522,8 +3418,7 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
-		Position = Vec3(2413.875, -2972.289, -534.875),
+		Position = Vec3(2413.875, -2985.830, -535.875),
 		Radius = 32,
 		Roles = 
 		{
@@ -3541,7 +3436,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(2290.148, -2866.126, -534.875),
 		Radius = 32,
 		Roles = 
@@ -3560,7 +3454,6 @@ global _MG =
 		GoalType = "Defend",
 		MaxCampTime = 60,
 		MinCampTime = 40,
-		MinRadius = 32,
 		Position = Vec3(1826.125, -2860.059, -565.593),
 		Radius = 32,
 		Roles = 
@@ -3802,6 +3695,449 @@ global _MG =
 		TagName = "south_healthcabinet",
 		TeamAvailability = 6,
 	},
+	MOBILEMG42_Axis_DockAAGun_20 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(-0.264, -0.965, 0.002),
+		},
+		GoalType = "MOBILEMG42",
+		MaxCampTime = 180,
+		MinCampTime = 120,
+		MinRadius = 32,
+		Position = Vec3(-673.028, -1206.352, -578.722),
+		Roles = 
+		{
+			[0] = "DEFENDER",
+		},
+	},
+	MOBILEMG42_Axis_DockAAGun_21 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(0.999, -0.030, 0.042),
+		},
+		GoalType = "MOBILEMG42",
+		MaxCampTime = 180,
+		MinCampTime = 120,
+		MinRadius = 32,
+		Position = Vec3(-853.264, -2632.116, -542.875),
+		Roles = 
+		{
+			[0] = "DEFENDER",
+		},
+	},
+	MOBILEMG42_Axis_EastAAGun_20 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(0.966, -0.227, 0.128),
+		},
+		GoalType = "MOBILEMG42",
+		MaxCampTime = 180,
+		MinCampTime = 120,
+		MinRadius = 32,
+		Position = Vec3(2769.415, -1804.302, -534.875),
+		Roles = 
+		{
+			[0] = "DEFENDER3",
+		},
+	},
+	MOBILEMG42_Axis_First_CPArea_10 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(0.410, 0.912, 0.013),
+		},
+		GoalType = "MOBILEMG42",
+		MaxCampTime = 180,
+		MinCampTime = 120,
+		MinRadius = 32,
+		Position = Vec3(369.044, -316.680, -526.875),
+		Roles = 
+		{
+			[0] = "DEFENDER1",
+		},
+	},
+	MOBILEMG42_Axis_First_CPArea_11 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(0.401, 0.916, 0.018),
+		},
+		GoalType = "MOBILEMG42",
+		MaxCampTime = 180,
+		MinCampTime = 120,
+		MinRadius = 32,
+		Position = Vec3(438.823, -652.865, -558.875),
+		Roles = 
+		{
+			[0] = "DEFENDER1",
+		},
+	},
+	MOBILEMG42_Axis_First_DockArea_10 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(-0.044, 0.998, 0.036),
+		},
+		GoalType = "MOBILEMG42",
+		MaxCampTime = 180,
+		MinCampTime = 120,
+		MinRadius = 32,
+		Position = Vec3(-961.496, -1747.502, -782.875),
+		Roles = 
+		{
+			[0] = "DEFENDER",
+		},
+	},
+	MOBILEMG42_Axis_First_DockArea_11 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(0.130, 0.991, 0.042),
+		},
+		GoalType = "MOBILEMG42",
+		MaxCampTime = 180,
+		MinCampTime = 120,
+		MinRadius = 32,
+		Position = Vec3(-1092.103, -1586.741, -782.875),
+		Roles = 
+		{
+			[0] = "DEFENDER",
+		},
+	},
+	MOBILEMG42_Axis_First_OuterBlockadeCP_10 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(0.248, 0.968, 0.040),
+		},
+		GoalType = "MOBILEMG42",
+		MaxCampTime = 180,
+		MinCampTime = 120,
+		MinRadius = 32,
+		Position = Vec3(2306.670, -13.891, -566.875),
+		Roles = 
+		{
+			[0] = "DEFENDER2",
+		},
+	},
+	MOBILEMG42_Axis_First_OuterBlockadeCP_11 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(0.352, 0.936, 0.014),
+		},
+		GoalType = "MOBILEMG42",
+		MaxCampTime = 180,
+		MinCampTime = 120,
+		MinRadius = 32,
+		Position = Vec3(2153.399, -98.691, -550.875),
+		Roles = 
+		{
+			[0] = "DEFENDER2",
+		},
+	},
+	MOBILEMG42_Axis_First_OuterBlockadeR_10 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(-0.510, 0.857, 0.080),
+		},
+		GoalType = "MOBILEMG42",
+		MaxCampTime = 180,
+		MinCampTime = 120,
+		MinRadius = 32,
+		Position = Vec3(3661.867, 364.987, -574.875),
+		Roles = 
+		{
+			[0] = "DEFENDER3",
+		},
+	},
+	MOBILEMG42_Axis_First_OuterBlockadeR_11 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(-0.352, 0.934, 0.066),
+		},
+		GoalType = "MOBILEMG42",
+		MaxCampTime = 180,
+		MinCampTime = 120,
+		MinRadius = 32,
+		Position = Vec3(3649.356, 164.527, -574.875),
+		Roles = 
+		{
+			[0] = "DEFENDER3",
+		},
+	},
+	MOBILEMG42_Axis_Forced_DockAAGunDefend_00 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(-0.202, 0.978, 0.044),
+		},
+		GoalType = "MOBILEMG42",
+		MaxCampTime = 180,
+		MinCampTime = 120,
+		MinRadius = 32,
+		Position = Vec3(96.543, -2532.179, -558.875),
+	},
+	MOBILEMG42_Axis_Forced_DockAAGunDefend_01 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(0.251, 0.967, 0.041),
+		},
+		GoalType = "MOBILEMG42",
+		MaxCampTime = 180,
+		MinCampTime = 120,
+		MinRadius = 32,
+		Position = Vec3(-242.181, -2520.111, -558.875),
+	},
+	MOBILEMG42_Axis_HotelGate_20 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(-0.833, 0.554, 0.006),
+		},
+		GoalType = "MOBILEMG42",
+		MaxCampTime = 180,
+		MinCampTime = 120,
+		MinRadius = 32,
+		Position = Vec3(316.341, 1385.822, -528.875),
+		Roles = 
+		{
+			[0] = "DEFENDER",
+		},
+	},
+	MOBILEMG42_Axis_HotelGate_21 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(-0.992, -0.049, 0.118),
+		},
+		GoalType = "MOBILEMG42",
+		MaxCampTime = 180,
+		MinCampTime = 120,
+		MinRadius = 32,
+		Position = Vec3(303.666, 1568.766, -574.875),
+		Roles = 
+		{
+			[0] = "DEFENDER",
+		},
+	},
+	MOBILEMG42_Axis_MainGates_20 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(0.015, 0.998, 0.057),
+		},
+		GoalType = "MOBILEMG42",
+		MaxCampTime = 180,
+		MinCampTime = 120,
+		MinRadius = 32,
+		Position = Vec3(1046.938, 631.988, -558.828),
+		Roles = 
+		{
+			[0] = "DEFENDER1",
+		},
+	},
+	MOBILEMG42_Axis_MainGates_21 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(0.588, 0.808, 0.041),
+		},
+		GoalType = "MOBILEMG42",
+		MaxCampTime = 180,
+		MinCampTime = 120,
+		MinRadius = 32,
+		Position = Vec3(540.390, 255.146, -558.875),
+		Roles = 
+		{
+			[0] = "DEFENDER1",
+		},
+	},
+	MOBILEMG42_Axis_OuterBlockade_CP_20 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(-0.021, 1.000, -0.012),
+		},
+		GoalType = "MOBILEMG42",
+		MaxCampTime = 180,
+		MinCampTime = 120,
+		MinRadius = 32,
+		Position = Vec3(2819.307, 652.394, -566.875),
+		Roles = 
+		{
+			[0] = "DEFENDER2",
+			[1] = "DEFENDER3",
+		},
+	},
+	MOBILEMG42_Axis_OuterBlockade_CP_21 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(0.944, 0.322, 0.066),
+		},
+		GoalType = "MOBILEMG42",
+		MaxCampTime = 180,
+		MinCampTime = 120,
+		MinRadius = 32,
+		Position = Vec3(2163.423, 1008.802, -566.875),
+		Roles = 
+		{
+			[0] = "DEFENDER2",
+			[1] = "DEFENDER3",
+		},
+	},
+	MOBILEMG42_Axis_OuterBlockade_R_20 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(-0.908, 0.418, 0.044),
+		},
+		GoalType = "MOBILEMG42",
+		MaxCampTime = 180,
+		MinCampTime = 120,
+		MinRadius = 32,
+		Position = Vec3(3497.250, 1018.039, -566.875),
+		Roles = 
+		{
+			[0] = "DEFENDER2",
+			[1] = "DEFENDER3",
+		},
+	},
+	MOBILEMG42_Axis_Second_BunkerSewGr_10 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(0.183, 0.983, -0.008),
+		},
+		GoalType = "MOBILEMG42",
+		MaxCampTime = 180,
+		MinCampTime = 120,
+		MinRadius = 32,
+		Position = Vec3(2283.457, -1988.881, -342.875),
+		Roles = 
+		{
+			[0] = "DEFENDER2",
+		},
+	},
+	MOBILEMG42_Axis_Second_BunkerSewGr_11 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(-0.235, 0.960, 0.151),
+		},
+		GoalType = "MOBILEMG42",
+		MaxCampTime = 180,
+		MinCampTime = 120,
+		MinRadius = 32,
+		Position = Vec3(2601.266, -2010.891, -554.578),
+		Roles = 
+		{
+			[0] = "DEFENDER2",
+		},
+	},
+	MOBILEMG42_Axis_Second_CPArea_10 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(-0.995, -0.092, 0.032),
+		},
+		GoalType = "MOBILEMG42",
+		MaxCampTime = 180,
+		MinCampTime = 120,
+		MinRadius = 32,
+		Position = Vec3(1689.292, -1278.244, -550.875),
+		Roles = 
+		{
+			[0] = "DEFENDER1",
+		},
+	},
+	MOBILEMG42_Axis_Second_CPArea_11 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(0.996, -0.074, 0.042),
+		},
+		GoalType = "MOBILEMG42",
+		MaxCampTime = 180,
+		MinCampTime = 120,
+		MinRadius = 32,
+		Position = Vec3(-178.578, -1246.391, -550.875),
+		Roles = 
+		{
+			[0] = "DEFENDER1",
+		},
+	},
+	MOBILEMG42_Axis_Second_CourtyardSewGr_10 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(0.144, 0.988, 0.055),
+		},
+		GoalType = "MOBILEMG42",
+		MaxCampTime = 180,
+		MinCampTime = 120,
+		MinRadius = 32,
+		Position = Vec3(4345.271, -1336.773, -566.875),
+		Roles = 
+		{
+			[0] = "DEFENDER3",
+		},
+	},
+	MOBILEMG42_Axis_Second_DockArea_10 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(0.941, 0.329, 0.082),
+		},
+		GoalType = "MOBILEMG42",
+		MaxCampTime = 180,
+		MinCampTime = 120,
+		MinRadius = 32,
+		Position = Vec3(-1179.661, -2229.854, -630.875),
+		Roles = 
+		{
+			[0] = "DEFENDER",
+		},
+	},
+	MOBILEMG42_Axis_Second_DockArea_11 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(0.678, -0.731, 0.075),
+		},
+		GoalType = "MOBILEMG42",
+		MaxCampTime = 180,
+		MinCampTime = 120,
+		MinRadius = 32,
+		Position = Vec3(-1086.529, -1860.840, -630.630),
+		Roles = 
+		{
+			[0] = "DEFENDER",
+		},
+	},
+	MOBILEMG42_Axis_WestAAGun_20 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(-0.996, 0.031, 0.082),
+		},
+		GoalType = "MOBILEMG42",
+		MaxCampTime = 180,
+		MinCampTime = 120,
+		MinRadius = 32,
+		Position = Vec3(2383.906, -2906.764, -535.875),
+		Roles = 
+		{
+			[0] = "DEFENDER2",
+		},
+	},
 	MOBILEMORTAR_Axis_HotelGate_10 = 
 	{
 		GoalType = "MOBILEMORTAR",
@@ -3811,6 +4147,10 @@ global _MG =
 			[0] = Vec3(-0.372, 0.928, -0.002),
 		},
 		Position = Vec3(2114.536, -2914.046, -534.875),
+		Roles = 
+		{
+			[0] = "DEFENDER",
+		},
 	},
 	MOUNTMG42_axis_inner_blockade_mg42 = 
 	{
@@ -3859,34 +4199,6 @@ global _MG =
 		},
 		Vehicle = "MOVER_tank",
 	},
-	MOVER_aagun_1_clip = 
-	{
-		CreateOnLoad = 0,
-		GoalType = "MOVER",
-		Position = Vec3(2151.999, -3060.000, -464.000),
-		TeamAvailability = 6,
-	},
-	MOVER_aagun_2_clip = 
-	{
-		CreateOnLoad = 0,
-		GoalType = "MOVER",
-		Position = Vec3(3273.501, -1910.485, -480.000),
-		TeamAvailability = 6,
-	},
-	MOVER_aagun_3_clip = 
-	{
-		CreateOnLoad = 0,
-		GoalType = "MOVER",
-		Position = Vec3(-1131.234, -2017.501, -560.000),
-		TeamAvailability = 6,
-	},
-	MOVER_allywall = 
-	{
-		CreateOnLoad = 0,
-		GoalType = "MOVER",
-		Position = Vec3(-106.000, 2056.250, -540.000),
-		TeamAvailability = 6,
-	},
 	MOVER_allywall_1 = 
 	{
 		CreateOnLoad = 0,
@@ -3902,21 +4214,6 @@ global _MG =
 		Position = Vec3(3664.000, -403.999, -480.000),
 		TeamAvailability = 6,
 	},
-	MOVER_apt_door_1_1 = 
-	{
-		CreateOnLoad = 0,
-		GoalType = "MOVER",
-		Position = Vec3(3669.194, -430.113, -547.300),
-		TagName = "apt_door_1",
-		TeamAvailability = 6,
-	},
-	MOVER_apt_door_2 = 
-	{
-		CreateOnLoad = 0,
-		GoalType = "MOVER",
-		Position = Vec3(3677.194, -1430.113, -549.938),
-		TeamAvailability = 6,
-	},
 	MOVER_apt_door_2_1 = 
 	{
 		CreateOnLoad = 0,
@@ -3924,35 +4221,6 @@ global _MG =
 		Position = Vec3(3672.000, -1395.999, -480.000),
 		TagName = "apt_door_2",
 		TeamAvailability = 6,
-	},
-	MOVER_axis_doors_control = 
-	{
-		CreateOnLoad = 0,
-		GoalType = "MOVER",
-		Position = Vec3(2728.000, -2212.000, -472.000),
-		TeamAvailability = 6,
-	},
-	MOVER_axis_doors_control_1 = 
-	{
-		CreateOnLoad = 0,
-		GoalType = "MOVER",
-		Position = Vec3(2728.000, -2408.000, -480.000),
-		TagName = "axis_doors_control",
-		TeamAvailability = 6,
-	},
-	MOVER_axis_gates = 
-	{
-		CreateOnLoad = 0,
-		GoalType = "MOVER",
-		Position = Vec3(1218.000, 2253.000, -608.000),
-		TeamAvailability = 6,
-	},
-	MOVER_axis_outer_blockade = 
-	{
-		CreateOnLoad = 0,
-		GoalType = "MOVER",
-		Position = Vec3(2700.000, 1334.000, -531.997),
-		TeamAvailability = 2,
 	},
 	MOVER_axis_outer_blockade_1 = 
 	{
@@ -3962,34 +4230,11 @@ global _MG =
 		TagName = "axis_outer_blockade",
 		TeamAvailability = 2,
 	},
-	MOVER_axis_outer_blockade_2 = 
-	{
-		CreateOnLoad = 0,
-		GoalType = "MOVER",
-		Position = Vec3(2704.000, 1068.001, -527.300),
-		TagName = "axis_outer_blockade",
-		TeamAvailability = 6,
-	},
 	MOVER_church_alley_door = 
 	{
 		CreateOnLoad = 0,
 		GoalType = "MOVER",
 		Position = Vec3(2259.999, -584.000, -462.007),
-		TeamAvailability = 6,
-	},
-	MOVER_church_alley_door_1 = 
-	{
-		CreateOnLoad = 0,
-		GoalType = "MOVER",
-		Position = Vec3(2278.813, -547.780, -547.548),
-		TagName = "church_alley_door",
-		TeamAvailability = 6,
-	},
-	MOVER_fueltanks = 
-	{
-		CreateOnLoad = 0,
-		GoalType = "MOVER",
-		Position = Vec3(196.000, -3464.000, -484.000),
 		TeamAvailability = 6,
 	},
 	MOVER_fueltanks_1 = 
@@ -4000,100 +4245,12 @@ global _MG =
 		TagName = "fueltanks",
 		TeamAvailability = 6,
 	},
-	MOVER_fueltanks_2 = 
-	{
-		CreateOnLoad = 0,
-		GoalType = "MOVER",
-		Position = Vec3(262.501, -3166.000, -352.000),
-		TagName = "fueltanks",
-		TeamAvailability = 6,
-	},
-	MOVER_fueltanks_3 = 
-	{
-		CreateOnLoad = 0,
-		GoalType = "MOVER",
-		Position = Vec3(220.020, -3182.813, -268.000),
-		TagName = "fueltanks",
-		TeamAvailability = 6,
-	},
-	MOVER_hotelgate = 
-	{
-		CreateOnLoad = 0,
-		GoalType = "MOVER",
-		Position = Vec3(-268.000, 1380.000, -566.000),
-		TeamAvailability = 6,
-	},
-	MOVER_neutral_compost_clip = 
-	{
-		CreateOnLoad = 0,
-		GoalType = "MOVER",
-		Position = Vec3(1631.000, -546.000, -340.000),
-		TeamAvailability = 6,
-	},
-	MOVER_neutral_compost_closed_clip = 
-	{
-		CreateOnLoad = 0,
-		GoalType = "MOVER",
-		Position = Vec3(1629.500, -546.500, -340.000),
-		TeamAvailability = 6,
-	},
-	MOVER_sewer_grate = 
-	{
-		CreateOnLoad = 0,
-		GoalType = "MOVER",
-		Position = Vec3(2606.000, -1309.499, -587.000),
-		TeamAvailability = 6,
-	},
-	MOVER_south_ammocabinet_clip = 
-	{
-		CreateOnLoad = 0,
-		GoalType = "MOVER",
-		Position = Vec3(2334.000, -2798.000, -533.000),
-		TeamAvailability = 6,
-	},
-	MOVER_south_ammocabinet_clip_1 = 
-	{
-		CreateOnLoad = 0,
-		GoalType = "MOVER",
-		Position = Vec3(726.000, 3746.000, -589.000),
-		TagName = "south_ammocabinet_clip",
-		TeamAvailability = 6,
-	},
-	MOVER_south_healthcabinet_clip = 
-	{
-		CreateOnLoad = 0,
-		GoalType = "MOVER",
-		Position = Vec3(2471.000, -2800.000, -539.500),
-		TeamAvailability = 6,
-	},
-	MOVER_south_healthcabinet_clip_1 = 
-	{
-		CreateOnLoad = 0,
-		GoalType = "MOVER",
-		Position = Vec3(863.000, 3744.000, -595.500),
-		TagName = "south_healthcabinet_clip",
-		TeamAvailability = 6,
-	},
 	MOVER_tank = 
 	{
 		CreateOnLoad = 0,
 		GoalType = "MOVER",
 		Position = Vec3(652.000, -1064.000, -498.000),
 		TeamAvailability = 2,
-	},
-	MOVER_tankbay_commandpost_wires = 
-	{
-		CreateOnLoad = 0,
-		GoalType = "MOVER",
-		Position = Vec3(1659.500, -568.500, -325.001),
-		TeamAvailability = 6,
-	},
-	MOVER_tower = 
-	{
-		CreateOnLoad = 0,
-		GoalType = "MOVER",
-		Position = Vec3(2012.625, 3439.805, -579.178),
-		TeamAvailability = 6,
 	},
 	MOVER_tower_base = 
 	{
@@ -4183,15 +4340,6 @@ global _MG =
 			[0] = "ATTACKER1",
 		},
 		TagName = "Axis Main Gates",
-		TeamAvailability = 4,
-	},
-	PLANT_Axis_Outer_Blockade = 
-	{
-		CreateOnLoad = 0,
-		ExplosiveType = 1,
-		GoalType = "PLANT",
-		Position = Vec3(2717.000, 1321.167, -534.761),
-		TagName = "Axis Outer Blockade",
 		TeamAvailability = 4,
 	},
 	PLANT_Command_Post = 
@@ -4465,8 +4613,14 @@ global _MG =
 	ROUTE_BunkerSewerGrate_Entrance = 
 	{
 		GoalType = "ROUTE",
-		Position = Vec3(2558.864, -1233.050, -606.875),
+		Position = Vec3(2566.239, -1698.143, -621.875),
 		Radius = 125,
+	},
+	ROUTE_CP_Spawn = 
+	{
+		GoalType = "ROUTE",
+		Position = Vec3(1392.750, -905.351, -406.875),
+		Radius = 250,
 	},
 	ROUTE_Church_AleyDoor = 
 	{
@@ -4484,6 +4638,12 @@ global _MG =
 	{
 		GoalType = "ROUTE",
 		Position = Vec3(-213.371, -2573.834, -558.875),
+		Radius = 125,
+	},
+	ROUTE_CourtyardSewerGrate_Entrance = 
+	{
+		GoalType = "ROUTE",
+		Position = Vec3(4416.158, -1576.112, -606.875),
 		Radius = 125,
 	},
 	ROUTE_Dock_Ladder = 

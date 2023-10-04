@@ -160,36 +160,31 @@ global Map =
 		},
 	},
 
-	DepotRoofCounter = 0,
 	DepotRoof =
 	{
 		Name = "DepotRoof",
 		TriggerOnClass = CLASS.ANYPLAYER,
+		playerList = {},
 		OnEnter = function(ent)
 		{
-			// only for allied players
-			if ( GetEntTeam(ent) != TEAM.ALLIES ) {
-				return;
+			if ( GetEntTeam(ent) == TEAM.ALLIES ) {
+				Map.DepotRoof.playerList[ent] = true;
+				if ( tableCount(Map.DepotRoof.playerList) == 1 ) {
+					// enable axis CAMP goals if there are any allied players on the roof
+					Util.EnableGroup( "depotroof", TEAM.AXIS );
+				}
 			}
-
-			Map.DepotRoofCounter += 1;
-
-			// some goals to clear out the roof
-			Util.EnableGroup( "depotroof", TEAM.AXIS );
 		},
 		OnExit = function(ent)
 		{
-			// only for allied players
-			if ( GetEntTeam(ent) != TEAM.ALLIES ) {
-				return;
-			}
-
-			Map.DepotRoofCounter -= 1;
-
-			// is the roof clear?
-			if ( Map.DepotRoofCounter < 1 ) {
-				Util.DisableGroup( "depotroof", TEAM.AXIS );
-			}
+			if (Map.DepotRoof.playerList[ent])
+			{
+				Map.DepotRoof.playerList[ent] = null;
+				if ( tableCount(Map.DepotRoof.playerList) == 0 ) {
+					// the roof is clear
+					Util.DisableGroup( "depotroof", TEAM.AXIS );
+				}
+			};
 		},
 	},
 
@@ -1037,6 +1032,7 @@ global OnMapLoad = function()
 	Util.AddUseWp( "REPAIRMG42_Side_MG_1", "Side_MG_WP_3" );
 	Util.AddUseWp( "PLANT_Side_MG", "Side_MG_WP_3" );
 
+	Util.AddUsePoint( "PLANT_Tunnel_MG", Vec3(-3506.156, -1856.850, 724.274));
 	// randomize plant goal position
 	Util.AddUsePoint( "PLANT_Fuel_Dump", { Vec3(-10840,-7310,450), Vec3(-10830,-7570,250), Vec3(-10890,-7430,250),  Vec3(-10750,-7423,250) });
 

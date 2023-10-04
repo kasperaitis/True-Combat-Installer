@@ -347,20 +347,12 @@ global _MG =
 		GoalType = "CapPoint",
 		Position = Vec3(-6164.335, 4641.875, -271.875),
 		Radius = 35,
-		Roles = 
-		{
-			[0] = "DEFENDER2",
-		},
 	},
 	CAPPOINT_treasure = 
 	{
 		GoalType = "CapPoint",
 		Position = Vec3(-6222.542, 4208.410, -287.875),
 		Radius = 35,
-		Roles = 
-		{
-			[0] = "DEFENDER3",
-		},
 	},
 	CAPPOINT_treasure_axis = 
 	{
@@ -1281,6 +1273,14 @@ global _MG =
 		Position = Vec3(2289.172, 7624.735, -552.250),
 		Radius = 32,
 		Stance = "prone",
+	},
+	SWITCH_Shock_Treatment = 
+	{
+		AimPosition = Vec3(-779.875, 4643.809, -181.427),
+		Facing = Vec3(0.000, 0.000, 0.000),
+		GoalType = "SWITCH",
+		Position = Vec3(-747.064, 4648.010, -239.875),
+		Radius = 32,
 	},
 	Version = 1,
 };

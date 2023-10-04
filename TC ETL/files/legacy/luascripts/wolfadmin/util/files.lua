@@ -1,6 +1,6 @@
 
 -- WolfAdmin module for Wolfenstein: Enemy Territory servers.
--- Copyright (C) 2015-2019 Timo 'Timothy' Smit
+-- Copyright (C) 2015-2020 Timo 'Timothy' Smit
 
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -15,7 +15,7 @@
 -- You should have received a copy of the GNU General Public License
 -- along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-local settings = require (wolfa_getLuaPath()..".util.settings")
+local settings = wolfa_requireModule("util.settings")
 
 local files = {}
 
@@ -24,9 +24,9 @@ function files.ls(directory)
     local entries = {}
     
     if platform == "unix" then
-        command = 'ls -1 "'..wolfa_getBasePath()..wolfa_getLuaPath():gsub("%.", "/").."/"..directory..'"'
+        command = 'ls -1 "'..wolfa_getBasePath()..wolfa_getLuaModsPath():gsub("%.", "/").."/"..directory..'"'
     elseif platform == "windows" then
-        command = 'dir "'..wolfa_getBasePath()..wolfa_getLuaPath():gsub("%.", "/").."/"..directory..'" /b'
+        command = 'dir "'..wolfa_getBasePath()..wolfa_getLuaModsPath():gsub("%.", "/").."/"..directory..'" /b'
     end
 
     for filename in io.popen(command):lines() do
@@ -34,6 +34,18 @@ function files.ls(directory)
     end
     
     return entries
+end
+
+function files.exists(fileName)
+    local fileDescriptor, fileLength = et.trap_FS_FOpenFile(fileName, et.FS_READ)
+
+    if fileLength ~= -1 then
+        et.trap_FS_FCloseFile(fileDescriptor)
+
+        return true
+    end
+
+    return false
 end
 
 function files.loadFromCFG(fileName, idExpr)

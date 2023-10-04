@@ -1,6 +1,6 @@
 
 -- WolfAdmin module for Wolfenstein: Enemy Territory servers.
--- Copyright (C) 2015-2019 Timo 'Timothy' Smit
+-- Copyright (C) 2015-2020 Timo 'Timothy' Smit
 
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -15,15 +15,22 @@
 -- You should have received a copy of the GNU General Public License
 -- along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-local players = require (wolfa_getLuaPath()..".players.players")
+local players = wolfa_requireModule("players.players")
 
-local settings = require (wolfa_getLuaPath()..".util.settings")
+local files = wolfa_requireModule("util.files")
+local settings = wolfa_requireModule("util.settings")
 
 local logs = {}
 
 function logs.writeChat(clientId, type, ...)
     if settings.get("g_logChat") == "" then
         return
+    end
+
+    if not files.exists(settings.get("g_logChat")) then
+        local fileDescriptor, _ = et.trap_FS_FOpenFile(settings.get("g_logChat"), et.FS_WRITE)
+
+        et.trap_FS_FCloseFile(fileDescriptor)
     end
 
     local fileDescriptor, _ = et.trap_FS_FOpenFile(settings.get("g_logChat"), et.FS_APPEND)
@@ -50,6 +57,12 @@ end
 function logs.writeAdmin(clientId, command, victimId, ...)
     if settings.get("g_logAdmin") == "" then
         return
+    end
+
+    if not files.exists(settings.get("g_logAdmin")) then
+        local fileDescriptor, _ = et.trap_FS_FOpenFile(settings.get("g_logAdmin"), et.FS_WRITE)
+
+        et.trap_FS_FCloseFile(fileDescriptor)
     end
 
     local fileDescriptor, _ = et.trap_FS_FOpenFile(settings.get("g_logAdmin"), et.FS_APPEND)

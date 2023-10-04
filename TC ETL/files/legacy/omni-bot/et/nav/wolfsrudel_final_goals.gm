@@ -999,7 +999,7 @@ global _MG =
 		TagName = "MG 42 Nest",
 		TeamAvailability = 4,
 	},
-	PLANT_Main_Radiomast_1 = 
+	PLANT_Main_Radiomast = 
 	{
 		CreateOnLoad = 0,
 		ExplosiveType = 1,

@@ -148,6 +148,155 @@ global _MG =
 		Radius = 32,
 		Stance = "prone",
 	},
+	ATTACK_Golf1 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(-0.051, -0.993, 0.103),
+			[1] = Vec3(0.972, 0.233, 0.034),
+			[2] = Vec3(0.549, 0.790, 0.272),
+		},
+		GoalType = "Attack",
+		MaxCampTime = 120,
+		MinCampTime = 60,
+		Position = Vec3(-2811.981, 6446.962, 337.125),
+		Radius = 32,
+		Stance = "crouch",
+	},
+	ATTACK_Golf2 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(1.000, 0.022, -0.004),
+			[1] = Vec3(0.035, -0.999, 0.001),
+			[2] = Vec3(0.628, 0.700, 0.341),
+		},
+		GoalType = "Attack",
+		MaxCampTime = 120,
+		MinCampTime = 60,
+		Position = Vec3(-2797.950, 6720.148, 337.125),
+		Radius = 32,
+	},
+	ATTACK_Golf3 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(-0.056, 0.994, 0.099),
+			[1] = Vec3(0.313, 0.932, 0.182),
+			[2] = Vec3(0.698, 0.716, 0.031),
+			[3] = Vec3(0.893, 0.449, -0.013),
+			[4] = Vec3(0.991, -0.130, -0.016),
+		},
+		GoalType = "Attack",
+		MaxCampTime = 120,
+		MinCampTime = 60,
+		Position = Vec3(-2812.379, 5793.511, 340.087),
+		Radius = 32,
+		Stance = "crouch",
+	},
+	ATTACK_Golf4 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(-0.349, -0.937, -0.008),
+			[1] = Vec3(0.976, -0.218, -0.020),
+			[2] = Vec3(0.646, -0.763, -0.020),
+		},
+		GoalType = "Attack",
+		MaxCampTime = 120,
+		MinCampTime = 60,
+		Position = Vec3(-2500.055, 7148.108, 351.756),
+		Radius = 32,
+	},
+	ATTACK_Golf5 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(-0.606, 0.792, 0.069),
+			[1] = Vec3(0.701, 0.713, 0.007),
+			[2] = Vec3(0.993, 0.118, 0.006),
+		},
+		GoalType = "Attack",
+		MaxCampTime = 120,
+		MinCampTime = 60,
+		Position = Vec3(-2309.422, 5360.764, 329.304),
+		Radius = 32,
+		Stance = "prone",
+	},
+	ATTACK_Golf6 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(-0.322, 0.937, 0.134),
+			[1] = Vec3(-0.811, 0.584, 0.017),
+		},
+		GoalType = "Attack",
+		MaxCampTime = 120,
+		MinCampTime = 60,
+		Position = Vec3(-1637.204, 5210.494, 327.072),
+		Radius = 32,
+		Stance = "crouch",
+	},
+	ATTACK_Golf7 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(0.342, 0.940, -0.002),
+			[1] = Vec3(-0.229, 0.968, 0.107),
+			[2] = Vec3(0.975, 0.222, -0.031),
+		},
+		GoalType = "Attack",
+		MaxCampTime = 120,
+		MinCampTime = 60,
+		Position = Vec3(-1495.214, 5293.403, 320.841),
+		Radius = 32,
+		Stance = "crouch",
+	},
+	ATTACK_Golf8 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(-0.961, -0.275, 0.035),
+			[1] = Vec3(-0.925, 0.335, 0.180),
+			[2] = Vec3(-0.233, -0.973, 0.008),
+		},
+		GoalType = "Attack",
+		MaxCampTime = 120,
+		MinCampTime = 60,
+		Position = Vec3(-844.837, 6710.125, 327.938),
+		Radius = 32,
+		Stance = "crouch",
+	},
+	ATTACK_RadarMG = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(0.999, 0.052, -0.007),
+		},
+		GoalType = "Attack",
+		MaxCampTime = 20,
+		MinCampTime = 10,
+		Position = Vec3(-2338.831, 7446.125, 597.125),
+		Radius = 32,
+		Stance = "crouch",
+	},
+	ATTACK_SafeSpot = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(-0.680, 0.690, 0.249),
+		},
+		GoalType = "Attack",
+		MaxCampTime = 120,
+		MinCampTime = 60,
+		Position = Vec3(-375.957, 6578.125, 241.125),
+		Radius = 32,
+		Roles = 
+		{
+			[0] = "OFFENSECAPTAIN",
+		},
+		Stance = "crouch",
+	},
 	BUILD_Allied_MG_nest = 
 	{
 		CreateOnLoad = 0,
@@ -658,6 +807,10 @@ global _MG =
 		MinCampTime = 60,
 		Position = Vec3(-2477.586, 89.444, 233.125),
 		Radius = 32,
+		Roles = 
+		{
+			[0] = "DEFENDER2",
+		},
 		Stance = "crouch",
 	},
 	CAMP_FlagB2 = 
@@ -672,6 +825,10 @@ global _MG =
 		MinCampTime = 60,
 		Position = Vec3(-2340.781, 586.901, 233.125),
 		Radius = 32,
+		Roles = 
+		{
+			[0] = "DEFENDER2",
+		},
 		Stance = "crouch",
 	},
 	CAMP_FlagB3 = 
@@ -688,6 +845,10 @@ global _MG =
 		MinCampTime = 60,
 		Position = Vec3(-2046.838, 1253.875, 233.125),
 		Radius = 32,
+		Roles = 
+		{
+			[0] = "DEFENDER2",
+		},
 		Stance = "crouch",
 	},
 	CAMP_FlagB4 = 
@@ -703,6 +864,10 @@ global _MG =
 		MinCampTime = 60,
 		Position = Vec3(-2477.874, 961.983, 233.125),
 		Radius = 32,
+		Roles = 
+		{
+			[0] = "DEFENDER2",
+		},
 		Stance = "crouch",
 	},
 	CAMP_FlagB5 = 
@@ -718,6 +883,10 @@ global _MG =
 		MinCampTime = 60,
 		Position = Vec3(-1784.325, 1007.368, 233.125),
 		Radius = 32,
+		Roles = 
+		{
+			[0] = "DEFENDER2",
+		},
 		Stance = "crouch",
 	},
 	CAMP_FlagB6 = 
@@ -732,6 +901,10 @@ global _MG =
 		MinCampTime = 60,
 		Position = Vec3(-1754.502, 464.318, 233.125),
 		Radius = 32,
+		Roles = 
+		{
+			[0] = "DEFENDER2",
+		},
 		Stance = "crouch",
 	},
 	CAMP_FlagB7 = 
@@ -745,6 +918,10 @@ global _MG =
 		MinCampTime = 60,
 		Position = Vec3(-2415.119, -43.948, 227.773),
 		Radius = 32,
+		Roles = 
+		{
+			[0] = "DEFENDER2",
+		},
 		Stance = "prone",
 	},
 	CAMP_FlagT1 = 
@@ -930,121 +1107,6 @@ global _MG =
 		Radius = 32,
 		Stance = "crouch",
 	},
-	CAMP_Golf1 = 
-	{
-		AimVectors = 
-		{
-			[0] = Vec3(0.888, -0.419, -0.189),
-			[1] = Vec3(-0.257, -0.948, -0.186),
-		},
-		GoalType = "CAMP",
-		MaxCampTime = 120,
-		MinCampTime = 60,
-		Position = Vec3(-646.255, 7478.623, 597.233),
-		Radius = 32,
-		Stance = "crouch",
-	},
-	CAMP_Golf2 = 
-	{
-		AimVectors = 
-		{
-			[0] = Vec3(0.999, -0.010, -0.049),
-			[1] = Vec3(-0.474, -0.880, -0.015),
-		},
-		GoalType = "CAMP",
-		MaxCampTime = 120,
-		MinCampTime = 60,
-		Position = Vec3(-970.985, 6762.510, 332.762),
-		Radius = 32,
-		Stance = "crouch",
-	},
-	CAMP_Golf3 = 
-	{
-		AimVectors = 
-		{
-			[0] = Vec3(0.995, 0.079, -0.058),
-			[1] = Vec3(-0.783, -0.622, 0.025),
-		},
-		GoalType = "CAMP",
-		MaxCampTime = 120,
-		MinCampTime = 60,
-		Position = Vec3(-531.050, 6633.860, 337.154),
-		Radius = 32,
-		Stance = "crouch",
-	},
-	CAMP_Golf4 = 
-	{
-		AimVectors = 
-		{
-			[0] = Vec3(0.978, -0.202, -0.045),
-			[1] = Vec3(-0.897, -0.442, -0.011),
-		},
-		GoalType = "CAMP",
-		MaxCampTime = 120,
-		MinCampTime = 60,
-		Position = Vec3(-533.075, 5680.425, 337.125),
-		Radius = 32,
-		Stance = "crouch",
-	},
-	CAMP_Golf5 = 
-	{
-		AimVectors = 
-		{
-			[0] = Vec3(0.992, -0.112, -0.061),
-			[1] = Vec3(-0.902, -0.424, -0.077),
-		},
-		GoalType = "CAMP",
-		MaxCampTime = 120,
-		MinCampTime = 60,
-		Position = Vec3(-1214.775, 5581.867, 346.912),
-		Radius = 32,
-		Stance = "crouch",
-	},
-	CAMP_Golf6 = 
-	{
-		AimVectors = 
-		{
-			[0] = Vec3(0.341, -0.940, -0.012),
-			[1] = Vec3(-0.365, -0.931, -0.006),
-			[2] = Vec3(-0.876, -0.482, -0.025),
-		},
-		GoalType = "CAMP",
-		MaxCampTime = 120,
-		MinCampTime = 60,
-		Position = Vec3(-793.764, 6034.335, 337.125),
-		Radius = 32,
-		Stance = "crouch",
-	},
-	CAMP_Golf7 = 
-	{
-		AimVectors = 
-		{
-			[0] = Vec3(0.928, 0.372, -0.012),
-			[1] = Vec3(0.378, -0.926, -0.003),
-			[2] = Vec3(-0.564, -0.825, -0.027),
-		},
-		GoalType = "CAMP",
-		MaxCampTime = 120,
-		MinCampTime = 60,
-		Position = Vec3(-1037.888, 6343.446, 337.310),
-		Radius = 32,
-		Stance = "crouch",
-	},
-	CAMP_Golf8 = 
-	{
-		AimVectors = 
-		{
-			[0] = Vec3(0.993, 0.105, -0.051),
-			[1] = Vec3(-0.012, -0.998, -0.060),
-			[2] = Vec3(0.716, -0.697, -0.035),
-		},
-		GoalType = "CAMP",
-		MaxCampTime = 120,
-		MinCampTime = 60,
-		Position = Vec3(-2003.181, 6615.779, 385.608),
-		Radius = 32,
-		Stance = "crouch",
-	},
 	CAPPOINT_Generator = 
 	{
 		GoalType = "CapPoint",
@@ -1058,7 +1120,7 @@ global _MG =
 		Position = Vec3(-2048.000, 832.000, 312.000),
 		Roles = 
 		{
-			[0] = "DEFENDER1",
+			[0] = "DEFENDER2",
 		},
 	},
 	DEFEND_Alpha1 = 
@@ -1219,6 +1281,121 @@ global _MG =
 		},
 		Stance = "crouch",
 	},
+	DEFEND_Golf1 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(0.888, -0.419, -0.189),
+			[1] = Vec3(-0.257, -0.948, -0.186),
+		},
+		GoalType = "Defend",
+		MaxCampTime = 120,
+		MinCampTime = 60,
+		Position = Vec3(-646.255, 7478.623, 597.233),
+		Radius = 32,
+		Stance = "crouch",
+	},
+	DEFEND_Golf2 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(0.999, -0.010, -0.049),
+			[1] = Vec3(-0.474, -0.880, -0.015),
+		},
+		GoalType = "Defend",
+		MaxCampTime = 120,
+		MinCampTime = 60,
+		Position = Vec3(-970.985, 6762.510, 332.762),
+		Radius = 32,
+		Stance = "crouch",
+	},
+	DEFEND_Golf3 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(0.995, 0.079, -0.058),
+			[1] = Vec3(-0.783, -0.622, 0.025),
+		},
+		GoalType = "Defend",
+		MaxCampTime = 120,
+		MinCampTime = 60,
+		Position = Vec3(-531.050, 6633.860, 337.154),
+		Radius = 32,
+		Stance = "crouch",
+	},
+	DEFEND_Golf4 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(0.978, -0.202, -0.045),
+			[1] = Vec3(-0.897, -0.442, -0.011),
+		},
+		GoalType = "Defend",
+		MaxCampTime = 120,
+		MinCampTime = 60,
+		Position = Vec3(-533.075, 5680.425, 337.125),
+		Radius = 32,
+		Stance = "crouch",
+	},
+	DEFEND_Golf5 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(0.992, -0.112, -0.061),
+			[1] = Vec3(-0.902, -0.424, -0.077),
+		},
+		GoalType = "Defend",
+		MaxCampTime = 120,
+		MinCampTime = 60,
+		Position = Vec3(-1214.775, 5581.867, 346.912),
+		Radius = 32,
+		Stance = "crouch",
+	},
+	DEFEND_Golf6 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(0.341, -0.940, -0.012),
+			[1] = Vec3(-0.365, -0.931, -0.006),
+			[2] = Vec3(-0.876, -0.482, -0.025),
+		},
+		GoalType = "Defend",
+		MaxCampTime = 120,
+		MinCampTime = 60,
+		Position = Vec3(-793.764, 6034.335, 337.125),
+		Radius = 32,
+		Stance = "crouch",
+	},
+	DEFEND_Golf7 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(0.928, 0.372, -0.012),
+			[1] = Vec3(0.378, -0.926, -0.003),
+			[2] = Vec3(-0.564, -0.825, -0.027),
+		},
+		GoalType = "Defend",
+		MaxCampTime = 120,
+		MinCampTime = 60,
+		Position = Vec3(-1037.888, 6343.446, 337.310),
+		Radius = 32,
+		Stance = "crouch",
+	},
+	DEFEND_Golf8 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(0.993, 0.105, -0.051),
+			[1] = Vec3(-0.012, -0.998, -0.060),
+			[2] = Vec3(0.716, -0.697, -0.035),
+		},
+		GoalType = "Defend",
+		MaxCampTime = 120,
+		MinCampTime = 60,
+		Position = Vec3(-2003.181, 6615.779, 385.608),
+		Radius = 32,
+		Stance = "crouch",
+	},
 	ESCORT_Lorraine = 
 	{
 		GoalType = "ESCORT",
@@ -1344,6 +1521,10 @@ global _MG =
 	PLANT_Axis_MG42_Construction = 
 	{
 		CreateOnLoad = 0,
+		DetonateSpots = 
+		{
+			[0] = Vec3(-2500.548, 7493.632, 604.125),
+		},
 		ExplosiveType = 3,
 		GoalType = "PLANT",
 		Position = Vec3(-2322.000, 7195.001, 612.000),
@@ -1441,6 +1622,15 @@ global _MG =
 				position = Vec3(1391.486, -61.342, 433.628),
 				stance = "crouch",
 			},
+			[3] = 
+			{
+				AimVectors = 
+				{
+					[0] = Vec3(0.673, -0.663, 0.329),
+				},
+				position = Vec3(1226.834, 116.810, 381.596),
+				stance = "crouch",
+			},
 		},
 		CreateOnLoad = 0,
 		ExplosiveType = 1,
@@ -1536,6 +1726,18 @@ global _MG =
 		Position = Vec3(4145.100, -887.761, 481.125),
 		Radius = 125,
 	},
+	ROUTE_Depot_Yard_North = 
+	{
+		GoalType = "ROUTE",
+		Position = Vec3(-2031.489, 1039.948, 233.167),
+		Radius = 250,
+	},
+	ROUTE_Depot_Yard_South = 
+	{
+		GoalType = "ROUTE",
+		Position = Vec3(-2031.969, 624.221, 233.125),
+		Radius = 250,
+	},
 	ROUTE_FuelCan = 
 	{
 		GoalType = "ROUTE",
@@ -1581,7 +1783,7 @@ global _MG =
 	ROUTE_SouthNode3 = 
 	{
 		GoalType = "ROUTE",
-		Position = Vec3(-847.579, 4244.649, 225.125),
+		Position = Vec3(-843.290, 4126.224, 226.125),
 		Radius = 250,
 	},
 	ROUTE_SouthNodeDirect = 
@@ -1628,6 +1830,17 @@ global _MG =
 		},
 		GoalType = "SMOKEBOMB",
 		Position = Vec3(3852.604, -1014.223, 481.125),
+		Radius = 32,
+	},
+	SMOKEBOMB_Golf = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(0.163, 0.980, 0.113),
+			[1] = Vec3(0.219, 0.566, 0.795),
+		},
+		GoalType = "SMOKEBOMB",
+		Position = Vec3(-1508.262, 5212.462, 330.015),
 		Radius = 32,
 	},
 	SNIPE_498 = 

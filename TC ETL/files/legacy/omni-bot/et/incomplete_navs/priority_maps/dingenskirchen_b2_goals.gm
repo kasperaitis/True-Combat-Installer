@@ -852,20 +852,12 @@ global _MG =
 		GoalType = "CapPoint",
 		Position = Vec3(-6669.389, 5697.875, 496.125),
 		Radius = 35,
-		Roles = 
-		{
-			[0] = "DEFENDER2",
-		},
 	},
 	CAPPOINT_treasure = 
 	{
 		GoalType = "CapPoint",
 		Position = Vec3(-6734.792, 5268.202, 504.125),
 		Radius = 35,
-		Roles = 
-		{
-			[0] = "DEFENDER3",
-		},
 	},
 	CAPPOINT_treasure_axis = 
 	{

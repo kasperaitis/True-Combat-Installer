@@ -1,6 +1,6 @@
 
 -- WolfAdmin module for Wolfenstein: Enemy Territory servers.
--- Copyright (C) 2015-2019 Timo 'Timothy' Smit
+-- Copyright (C) 2015-2020 Timo 'Timothy' Smit
 
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -17,12 +17,12 @@
 
 local shrubbot = {}
 
-local players = require (wolfa_getLuaPath()..".players.players")
+local players = wolfa_requireModule("players.players")
 
 local flags
 
 function shrubbot.loadFlags(mod)
-    flags = require (wolfa_getLuaPath()..".auth.shrubbot."..mod)
+    flags = wolfa_requireModule("auth.shrubbot."..mod)
 end
 
 function shrubbot.isPlayerAllowed(clientId, permission)

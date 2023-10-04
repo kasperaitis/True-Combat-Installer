@@ -1,6 +1,6 @@
 
 -- WolfAdmin module for Wolfenstein: Enemy Territory servers.
--- Copyright (C) 2015-2019 Timo 'Timothy' Smit
+-- Copyright (C) 2015-2020 Timo 'Timothy' Smit
 
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -15,16 +15,17 @@
 -- You should have received a copy of the GNU General Public License
 -- along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-local db = require (wolfa_getLuaPath()..".db.db")
+local db = wolfa_requireModule("db.db")
 
-local players = require (wolfa_getLuaPath()..".players.players")
+local players = wolfa_requireModule("players.players")
 
-local events = require (wolfa_getLuaPath()..".util.events")
-local timers = require (wolfa_getLuaPath()..".util.timers")
+local events = wolfa_requireModule("util.events")
+local timers = wolfa_requireModule("util.timers")
 
 local mutes = {}
 
-local muteTimer
+local storedMuteTimer
+local liveMuteTimer
 
 function mutes.get(muteId)
     return db.getMute(muteId)
@@ -64,7 +65,11 @@ function mutes.removeByClient(clientId)
     end
 end
 
-function mutes.checkUnmutes()
+function mutes.checkStoredMutes()
+    db.removeExpiredMutes()
+end
+
+function mutes.checkLiveMutes()
     for clientId = 0, et.trap_Cvar_Get("sv_maxclients") - 1 do
         if players.isMuted(clientId) and players.getMuteExpiresAt(clientId) < os.time() then
             mutes.removeByClient(clientId)
@@ -75,7 +80,10 @@ function mutes.checkUnmutes()
 end
 
 function mutes.onInit()
-    muteTimer = timers.add(mutes.checkUnmutes, 1000, 0, false, false)
+    if db.isConnected() then
+        storedMuteTimer = timers.add(mutes.checkStoredMutes, 60000, 0, false, false)
+        liveMuteTimer = timers.add(mutes.checkLiveMutes, 1000, 0, false, false)
+    end
 end
 events.handle("onGameInit", mutes.onInit)
 

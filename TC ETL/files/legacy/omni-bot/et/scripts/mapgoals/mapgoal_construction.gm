@@ -65,6 +65,7 @@ this.UpgradeVersion = function(Props)
 		}
 
 		this.TraceInfo = Props.TraceInfo;
+		this.EntityName = Props.EntityName;
 		this.IgnoreEntity = Props.IgnoreEntity;
 		this.Facing = Props.Facing;
 
@@ -101,7 +102,11 @@ this.Render = function()
 		if(this.ExtraDebugText==null)
 		{
 			this.ExtraDebugText = "";
-			if (this.TraceEntity)
+			if (this.EntityName)
+			{
+				this.ExtraDebugText += "Entity name: " + this.EntityName + "\n";
+			}
+			else if (this.TraceEntity)
 			{
 				this.ExtraDebugText += format("TraceEnt: %d\n",this.TraceEntity);
 			}
@@ -212,6 +217,7 @@ this.SaveToTable = function(SaveTable)
 	if (this.Stance!="crouch"){ SaveTable.Stance = this.Stance; }
 	SaveTable.Vehicle = this.Vehicle;
 	if (tableCount(this.Offsets) > 0) { SaveTable.Offsets = this.Offsets; }
+	SaveTable.EntityName = this.EntityName;
 	SaveTable.IgnoreEntity = this.IgnoreEntity;
 	if (this.IgnoreEntity) { SaveTable.Facing = this.Facing; }
 	if (this.Wait >= 0) { SaveTable.Wait = this.Wait; }
@@ -223,6 +229,8 @@ this.Help = function()
 {
 	print(this.GoalType,"goal, version",this.Version);
 	print("Requires:");
+	print("     entityname - name of the entity");
+	print("  or");
 	print("     trace - the traceinfo of the entity to be built,");
 	print("             this MUST be an OID entity, use /oidlist to confirm");
 	print("  or");
@@ -271,6 +279,20 @@ this.SetProperty = function(property, value)
 				}
 			}
 		}
+		case "entityname":
+		{
+			this.TraceEntity = GetEntityByName(value);
+			if (this.TraceEntity)
+			{
+				this.EntityName = value;
+				this.IgnoreEntity = null;
+			}
+			else
+			{
+				this.EntityName = null;
+				print("Entity not found");
+			}
+		}
 		case "ignoreentity":
 		{
 			if (value == "0" || value == "false")
@@ -280,6 +302,7 @@ this.SetProperty = function(property, value)
 			else
 			{
 				this.TraceInfo = null;
+				this.EntityName = null;
 				this.TraceEntity = null;
 				this.IgnoreEntity = true;
 			}
@@ -383,6 +406,11 @@ this.Update = function()
 	while(1)
 	{
 		sleep(1);
+		if (this.EntityName)
+		{
+			this.TraceEntity = GetEntityByName(this.EntityName);
+			block(0);
+		}
 		if ( !this.TraceInfo || tableCount(this.TraceInfo) < 1 )
 		{
 			block(0);

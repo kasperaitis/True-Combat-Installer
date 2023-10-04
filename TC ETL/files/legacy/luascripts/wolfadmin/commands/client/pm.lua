@@ -1,6 +1,6 @@
 
 -- WolfAdmin module for Wolfenstein: Enemy Territory servers.
--- Copyright (C) 2015-2019 Timo 'Timothy' Smit
+-- Copyright (C) 2015-2020 Timo 'Timothy' Smit
 
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -15,13 +15,13 @@
 -- You should have received a copy of the GNU General Public License
 -- along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-local commands = require (wolfa_getLuaPath()..".commands.commands")
+local commands = wolfa_requireModule("commands.commands")
 
-local players = require (wolfa_getLuaPath()..".players.players")
+local players = wolfa_requireModule("players.players")
 
-local logs = require (wolfa_getLuaPath()..".util.logs")
-local settings = require (wolfa_getLuaPath()..".util.settings")
-local util = require (wolfa_getLuaPath()..".util.util")
+local logs = wolfa_requireModule("util.logs")
+local settings = wolfa_requireModule("util.settings")
+local util = wolfa_requireModule("util.util")
 
 function commandPersonalMessage(clientId, command, recipient, ...)
     if recipient and ... then
@@ -40,10 +40,10 @@ function commandPersonalMessage(clientId, command, recipient, ...)
         end
     end
 end
-commands.addclient("pm", commandPersonalMessage, "", "", true, (settings.get("fs_game") ~= "legacy"))
-commands.addclient("m", commandPersonalMessage, "", "", true, (settings.get("fs_game") ~= "legacy"))
+commands.addclient("pm", commandPersonalMessage, "", "", true, (settings.get("fs_game") == "legacy"))
+commands.addclient("m", commandPersonalMessage, "", "", true, (settings.get("fs_game") == "legacy"))
 
-function commandPersonalMessage(clientId, command, target, ...)
+function commandPersonalMessageLegacy(clientId, command, target, ...)
     if not target or not ... then
         et.trap_SendConsoleCommand(et.EXEC_APPEND, "csay "..clientId.." \"^9usage: "..commands.getclient("pm")["syntax"].."\";")
 
@@ -91,5 +91,5 @@ function commandPersonalMessage(clientId, command, target, ...)
 
     return true
 end
-commands.addclient("pm", commandPersonalMessage, "", "", true, (settings.get("fs_game") == "legacy"))
-commands.addclient("m", commandPersonalMessage, "", "", true, (settings.get("fs_game") == "legacy"))
+commands.addclient("pm", commandPersonalMessageLegacy, "", "[^2name^7|^2slot#^7] [^2message^7]", true, (settings.get("fs_game") ~= "legacy"))
+commands.addclient("m", commandPersonalMessageLegacy, "", "[^2name^7|^2slot#^7] [^2message^7]", true, (settings.get("fs_game") ~= "legacy"))

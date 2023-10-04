@@ -1,6 +1,6 @@
 
 -- WolfAdmin module for Wolfenstein: Enemy Territory servers.
--- Copyright (C) 2015-2019 Timo 'Timothy' Smit
+-- Copyright (C) 2015-2020 Timo 'Timothy' Smit
 
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -15,12 +15,12 @@
 -- You should have received a copy of the GNU General Public License
 -- along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-local players = require (wolfa_getLuaPath()..".players.players")
+local players = wolfa_requireModule("players.players")
 
-local constants = require (wolfa_getLuaPath()..".util.constants")
-local util = require (wolfa_getLuaPath()..".util.util")
-local settings = require (wolfa_getLuaPath()..".util.settings")
-local tables = require (wolfa_getLuaPath()..".util.tables")
+local constants = wolfa_requireModule("util.constants")
+local util = wolfa_requireModule("util.util")
+local settings = wolfa_requireModule("util.settings")
+local tables = wolfa_requireModule("util.tables")
 
 local luasql = require "luasql.mysql"
 
@@ -32,7 +32,7 @@ local cur
 
 -- config
 function mysql.isSchemaExistent()
-    cur = assert(con:execute("SELECT * FROM `information_schema`.`tables` WHERE `table_schema`='"..util.escape(settings.get("db_database")).."' AND `table_name`='config' LIMIT 1"))
+    cur = assert(con:execute("SELECT * FROM `information_schema`.`tables` WHERE `table_schema`='"..con:escape(settings.get("db_database")).."' AND `table_name`='config' LIMIT 1"))
 
     local tbl = cur:fetch({}, "a")
     cur:close()
@@ -42,11 +42,11 @@ end
 
 -- players
 function mysql.addPlayer(guid, ip, lastSeen, seen)
-    cur = assert(con:execute("INSERT INTO `player` (`guid`, `ip`, `level_id`, `lastseen`, `seen`) VALUES ('"..util.escape(guid).."', '"..util.escape(ip).."', 0, "..tonumber(lastSeen)..", "..tonumber(seen)..")"))
+    cur = assert(con:execute("INSERT INTO `player` (`guid`, `ip`, `level_id`, `lastseen`, `seen`) VALUES ('"..con:escape(guid).."', '"..con:escape(ip).."', 0, "..tonumber(lastSeen)..", "..tonumber(seen)..")"))
 end
 
 function mysql.updatePlayer(guid, ip, lastSeen)
-    cur = assert(con:execute("UPDATE `player` SET `ip`='"..util.escape(ip).."', `lastseen`="..lastSeen..", `seen`=`seen`+1 WHERE `guid`='"..util.escape(guid).."'"))
+    cur = assert(con:execute("UPDATE `player` SET `ip`='"..con:escape(ip).."', `lastseen`="..lastSeen..", `seen`=`seen`+1 WHERE `guid`='"..con:escape(guid).."'"))
 end
 
 function mysql.updatePlayerLevel(id, level)
@@ -86,7 +86,7 @@ function mysql.getPlayers(limit, offset)
 end
 
 function mysql.getPlayer(guid)
-    cur = assert(con:execute("SELECT * FROM `player` WHERE `guid`='"..util.escape(guid).."'"))
+    cur = assert(con:execute("SELECT * FROM `player` WHERE `guid`='"..con:escape(guid).."'"))
     
     local player = cur:fetch({}, "a")
     cur:close()
@@ -96,11 +96,11 @@ end
 
 -- levels
 function mysql.addLevel(id, name)
-    cur = assert(con:execute("INSERT INTO `level` (`id`, `name`) VALUES ('"..tonumber(id).."', '"..util.escape(name).."')"))
+    cur = assert(con:execute("INSERT INTO `level` (`id`, `name`) VALUES ('"..tonumber(id).."', '"..con:escape(name).."')"))
 end
 
 function mysql.updateLevel(id, name)
-    cur = assert(con:execute("UPDATE `level` SET `name`='"..util.escape(name).."' WHERE `id`='"..tonumber(id).."'"))
+    cur = assert(con:execute("UPDATE `level` SET `name`='"..con:escape(name).."' WHERE `id`='"..tonumber(id).."'"))
 end
 
 function mysql.removeLevel(id)
@@ -170,15 +170,15 @@ function mysql.getLevelPermissions()
 end
 
 function mysql.addLevelPermission(levelId, permission)
-    cur = assert(con:execute("INSERT INTO `level_permission` (`level_id`, `permission`) VALUES ("..tonumber(levelId)..", '"..util.escape(permission).."')"))
+    cur = assert(con:execute("INSERT INTO `level_permission` (`level_id`, `permission`) VALUES ("..tonumber(levelId)..", '"..con:escape(permission).."')"))
 end
 
 function mysql.removeLevelPermission(levelId, permission)
-    cur = assert(con:execute("DELETE FROM `level_permission` WHERE `level_id`="..tonumber(levelId).." AND permission='"..util.escape(permission).."'"))
+    cur = assert(con:execute("DELETE FROM `level_permission` WHERE `level_id`="..tonumber(levelId).." AND permission='"..con:escape(permission).."'"))
 end
 
 function mysql.copyLevelPermissions(levelId, newLevelId)
-    cur = assert(con:execute("INSERT INTO `level_permission` (`level_id`, `permission`) SELECT '"..tonumber(newLevelId).."' AS `level_id`, `permission` FROM `level_permission` WHERE `level_id`="..tonumber(levelId)))
+    cur = assert(con:execute("INSERT INTO `level_permission` (`level_id`, `permission`) SELECT "..tonumber(newLevelId).." AS `level_id`, `permission` FROM `level_permission` WHERE `level_id`="..tonumber(levelId).." EXCEPT SELECT `level_id`, `permission` FROM `level_permission` WHERE `level_id`="..tonumber(newLevelId)))
 end
 
 function mysql.removeLevelPermissions(levelId)
@@ -202,11 +202,11 @@ function mysql.getPlayerPermissions()
 end
 
 function mysql.addPlayerPermission(playerId, permission)
-    cur = assert(con:execute("INSERT INTO `player_permission` (`player_id`, `permission`) VALUES ("..tonumber(playerId)..", '"..util.escape(permission).."')"))
+    cur = assert(con:execute("INSERT INTO `player_permission` (`player_id`, `permission`) VALUES ("..tonumber(playerId)..", '"..con:escape(permission).."')"))
 end
 
 function mysql.removePlayerPermission(playerId, permission)
-    cur = assert(con:execute("DELETE FROM `player_permission` WHERE `player_id`="..tonumber(playerId).." AND permission='"..util.escape(permission).."'"))
+    cur = assert(con:execute("DELETE FROM `player_permission` WHERE `player_id`="..tonumber(playerId).." AND permission='"..con:escape(permission).."'"))
 end
 
 function mysql.copyPlayerPermissions(playerId, newPlayerId)
@@ -219,7 +219,7 @@ end
 
 -- aliases
 function mysql.addAlias(playerid, alias, lastused)
-    cur = assert(con:execute("INSERT INTO `alias` (`player_id`, `alias`, `cleanalias`, `lastused`, `used`) VALUES ("..tonumber(playerid)..", '"..util.escape(alias).."', '"..util.escape(util.removeColors(alias)).."', "..tonumber(lastused)..", 1)"))
+    cur = assert(con:execute("INSERT INTO `alias` (`player_id`, `alias`, `cleanalias`, `lastused`, `used`) VALUES ("..tonumber(playerid)..", '"..con:escape(alias).."', '"..con:escape(util.removeColors(alias)).."', "..tonumber(lastused)..", 1)"))
 end
 
 function mysql.updateAlias(aliasid, lastused)
@@ -264,11 +264,20 @@ function mysql.getAliasById(aliasid)
 end
 
 function mysql.getAliasByName(playerid, aliasname)
-    cur = assert(con:execute("SELECT * FROM `alias` WHERE `player_id`="..tonumber(playerid).." AND `alias`='"..util.escape(aliasname).."'"))
+    cur = assert(con:execute("SELECT * FROM `alias` WHERE `player_id`="..tonumber(playerid).." AND `alias`='"..con:escape(aliasname).."'"))
     
     local alias = cur:fetch({}, "a")
     cur:close()
     
+    return alias
+end
+
+function mysql.getMostUsedAlias(playerid)
+    cur = assert(con:execute("SELECT * FROM `alias` WHERE `player_id`="..tonumber(playerid).." ORDER BY `used` DESC LIMIT 1"))
+
+    local alias = cur:fetch({}, "a")
+    cur:close()
+
     return alias
 end
 
@@ -283,7 +292,7 @@ end
 
 -- history
 function mysql.addHistory(victimId, invokerId, type, datetime, reason)
-    cur = assert(con:execute("INSERT INTO `history` (`victim_id`, `invoker_id`, `type`, `datetime`, `reason`) VALUES ("..tonumber(victimId)..", "..tonumber(invokerId)..", '"..util.escape(type).."', "..tonumber(datetime)..", '"..util.escape(reason).."')"))
+    cur = assert(con:execute("INSERT INTO `history` (`victim_id`, `invoker_id`, `type`, `datetime`, `reason`) VALUES ("..tonumber(victimId)..", "..tonumber(invokerId)..", '"..con:escape(type).."', "..tonumber(datetime)..", '"..con:escape(reason).."')"))
 end
 
 function mysql.removeHistory(historyId)
@@ -329,11 +338,15 @@ end
 
 -- mutes
 function mysql.addMute(victimId, invokerId, type, issued, duration, reason)
-    cur = assert(con:execute("INSERT INTO `mute` (`victim_id`, `invoker_id`, `type`, `issued`, `expires`, `duration`, `reason`) VALUES ("..tonumber(victimId)..", "..tonumber(invokerId)..", "..tonumber(type)..", "..tonumber(issued)..", "..tonumber(issued + duration)..", "..tonumber(duration)..", '"..util.escape(reason).."')"))
+    cur = assert(con:execute("INSERT INTO `mute` (`victim_id`, `invoker_id`, `type`, `issued`, `expires`, `duration`, `reason`) VALUES ("..tonumber(victimId)..", "..tonumber(invokerId)..", "..tonumber(type)..", "..tonumber(issued)..", "..tonumber(issued + duration)..", "..tonumber(duration)..", '"..con:escape(reason).."')"))
 end
 
 function mysql.removeMute(muteId)
     cur = assert(con:execute("DELETE FROM `mute` WHERE `id`="..tonumber(muteId)..""))
+end
+
+function mysql.removeExpiredMutes()
+    cur = assert(con:execute("DELETE FROM `mute` WHERE `expires`<="..os.time()))
 end
 
 function mysql.getMutesCount()
@@ -384,11 +397,15 @@ end
 
 -- bans
 function mysql.addBan(victimId, invokerId, issued, duration, reason)
-    cur = assert(con:execute("INSERT INTO `ban` (`victim_id`, `invoker_id`, `issued`, `expires`, `duration`, `reason`) VALUES ("..tonumber(victimId)..", "..tonumber(invokerId)..", "..tonumber(issued)..", "..(tonumber(issued) + tonumber(duration))..", "..tonumber(duration)..", '"..util.escape(reason).."')"))
+    cur = assert(con:execute("INSERT INTO `ban` (`victim_id`, `invoker_id`, `issued`, `expires`, `duration`, `reason`) VALUES ("..tonumber(victimId)..", "..tonumber(invokerId)..", "..tonumber(issued)..", "..(tonumber(issued) + tonumber(duration))..", "..tonumber(duration)..", '"..con:escape(reason).."')"))
 end
 
 function mysql.removeBan(banId)
     cur = assert(con:execute("DELETE FROM `ban` WHERE `id`="..tonumber(banId)..""))
+end
+
+function mysql.removeExpiredBans()
+    cur = assert(con:execute("DELETE FROM `ban` WHERE `expires`<="..os.time()))
 end
 
 function mysql.getBansCount()
@@ -439,7 +456,7 @@ end
 
 -- maps
 function mysql.addMap(mapname, lastplayed)
-    cur = assert(con:execute("INSERT INTO `map` (`name`, `lastplayed`) VALUES ('"..util.escape(mapname).."', "..tonumber(lastplayed)..")"))
+    cur = assert(con:execute("INSERT INTO `map` (`name`, `lastplayed`) VALUES ('"..con:escape(mapname).."', "..tonumber(lastplayed)..")"))
 end
 
 function mysql.updateMap(mapid, lastplayed)
@@ -447,7 +464,7 @@ function mysql.updateMap(mapid, lastplayed)
 end
 
 function mysql.getMap(mapname)
-    cur = assert(con:execute("SELECT * FROM `map` WHERE `name`='"..util.escape(mapname).."'"))
+    cur = assert(con:execute("SELECT * FROM `map` WHERE `name`='"..con:escape(mapname).."'"))
     
     local map = cur:fetch({}, "a")
     cur:close()

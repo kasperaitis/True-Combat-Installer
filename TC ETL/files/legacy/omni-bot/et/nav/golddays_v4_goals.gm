@@ -23,11 +23,11 @@ global _MG =
 		MinRadius = 32,
 		Position = Vec3(975.758, 1813.875, 86.976),
 	},
-	ARTILLERY_S_alliedmg = 
+	ARTILLERY_S_ally_spawn = 
 	{
 		GoalType = "ARTILLERY_S",
 		MinRadius = 32,
-		Position = Vec3(1082.720, 2064.644, 62.125),
+		Position = Vec3(-1429.731, 2993.771, 185.125),
 	},
 	ARTILLERY_S_forest = 
 	{
@@ -35,11 +35,17 @@ global _MG =
 		MinRadius = 32,
 		Position = Vec3(-1056.561, 613.913, -12.105),
 	},
+	ARTILLERY_S_garage = 
+	{
+		GoalType = "ARTILLERY_S",
+		MinRadius = 32,
+		Position = Vec3(-595.295, 2610.716, -76.870),
+	},
 	ARTILLERY_S_pillarmg = 
 	{
 		GoalType = "CALLARTILLERY",
 		MinRadius = 32,
-		Position = Vec3(1304.507, 1883.220, 61.125),
+		Position = Vec3(-73.079, -272.712, 134.889),
 	},
 	ARTILLERY_S_yard = 
 	{
@@ -57,6 +63,64 @@ global _MG =
 		MinCampTime = 2,
 		Position = Vec3(-1364.825, 2121.147, -59.875),
 		Radius = 35,
+	},
+	ATTACK_alliedwall_1 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(-0.384, 0.110, 0.917),
+		},
+		DisableCM = 1,
+		GoalType = "Attack",
+		MaxCampTime = 120,
+		MinCampTime = 60,
+		Position = Vec3(-923.708, 1534.249, -245.875),
+		Radius = 32,
+	},
+	ATTACK_alliedwall_2 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(-0.082, -0.997, -0.013),
+		},
+		DisableCM = 1,
+		GoalType = "Attack",
+		MaxCampTime = 120,
+		MinCampTime = 10,
+		Position = Vec3(-918.125, 2214.904, -245.875),
+		Radius = 32,
+		Stance = "crouch",
+	},
+	ATTACK_alliedwall_3 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(0.198, -0.976, -0.094),
+		},
+		DisableCM = 1,
+		GoalType = "Attack",
+		MaxCampTime = 120,
+		MinCampTime = 60,
+		Position = Vec3(-984.002, 1860.435, -245.875),
+		Radius = 32,
+		Stance = "crouch",
+	},
+	ATTACK_alliedwall_4 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(0.996, -0.087, -0.035),
+		},
+		GoalType = "Attack",
+		MaxCampTime = 120,
+		MinCampTime = 10,
+		Position = Vec3(-1806.874, 2253.769, -245.875),
+		Radius = 32,
+		Stance = "crouch",
+		Weapons = 
+		{
+			[6] = 1,
+		},
 	},
 	ATTACK_basement_access_1 = 
 	{
@@ -152,6 +216,25 @@ global _MG =
 		Position = Vec3(-156.676, 1814.036, -228.748),
 		Radius = 32,
 	},
+	ATTACK_basement_access_6 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(-0.321, 0.582, 0.747),
+			[1] = Vec3(-0.284, 0.954, 0.095),
+			[2] = Vec3(-0.315, 0.924, 0.217),
+			[3] = Vec3(-0.081, 0.650, 0.756),
+		},
+		GoalType = "Attack",
+		MaxCampTime = 60,
+		MinCampTime = 10,
+		Position = Vec3(-171.142, 1531.339, -228.863),
+		Radius = 32,
+		Weapons = 
+		{
+			[6] = 1,
+		},
+	},
 	ATTACK_commandpost_1 = 
 	{
 		AimVectors = 
@@ -216,6 +299,22 @@ global _MG =
 		Position = Vec3(1033.530, 13.470, 3.598),
 		Radius = 32,
 		Stance = "prone",
+	},
+	ATTACK_garand = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(-0.382, -0.918, 0.107),
+		},
+		GoalType = "Attack",
+		MaxCampTime = 20,
+		MinCampTime = 10,
+		Position = Vec3(-1011.864, 3057.426, -58.874),
+		Radius = 32,
+		Weapons = 
+		{
+			[32] = 1,
+		},
 	},
 	ATTACK_gold_1 = 
 	{
@@ -359,6 +458,20 @@ global _MG =
 		MaxCampTime = 120,
 		MinCampTime = 40,
 		Position = Vec3(-1653.145, 1387.762, -45.059),
+		Radius = 32,
+	},
+	ATTACK_roof_1 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(0.123, 0.992, -0.011),
+			[1] = Vec3(0.752, 0.626, -0.204),
+			[2] = Vec3(0.346, 0.938, -0.013),
+		},
+		GoalType = "Attack",
+		MaxCampTime = 120,
+		MinCampTime = 10,
+		Position = Vec3(-1201.849, 2236.415, 179.126),
 		Radius = 32,
 	},
 	ATTACK_tower_1 = 
@@ -603,6 +716,7 @@ global _MG =
 		Position = Vec3(1064.000, -784.000, 24.000),
 		TagName = "Water Pump",
 		TeamAvailability = 2,
+		Wait = 1,
 	},
 	BUILD_alliedwall = 
 	{
@@ -623,6 +737,7 @@ global _MG =
 		CreateOnLoad = 0,
 		GoalType = "BUILD",
 		Position = Vec3(1356.000, -2841.000, 72.000),
+		Range = 6000,
 		TeamAvailability = 2,
 		Wait = 1,
 	},
@@ -631,6 +746,18 @@ global _MG =
 		GoalType = "CALLARTILLERY",
 		MinRadius = 32,
 		Position = Vec3(-1232.240, 693.608, -1.975),
+	},
+	CALLARTILLERY_allyspawn = 
+	{
+		GoalType = "CALLARTILLERY",
+		MinRadius = 32,
+		Position = Vec3(1167.547, 2610.608, 89.125),
+	},
+	CALLARTILLERY_garage = 
+	{
+		GoalType = "CALLARTILLERY",
+		MinRadius = 32,
+		Position = Vec3(995.396, 2489.257, -209.628),
 	},
 	CALLARTILLERY_ladder = 
 	{
@@ -642,7 +769,7 @@ global _MG =
 	{
 		GoalType = "CALLARTILLERY",
 		MinRadius = 32,
-		Position = Vec3(-1449.656, 1845.334, 555.125),
+		Position = Vec3(-1474.117, 1844.614, 546.125),
 	},
 	CALLARTILLERY_spawn_roof = 
 	{
@@ -816,26 +943,9 @@ global _MG =
 		},
 		DisableCM = 1,
 		GoalType = "Defend",
-		MaxCampTime = 20,
+		MaxCampTime = 60,
 		MinCampTime = 10,
 		Position = Vec3(-1750.807, 2298.293, -197.875),
-		Radius = 32,
-		Stance = "crouch",
-	},
-	DEFEND_gold_16 = 
-	{
-		AimVectors = 
-		{
-			[0] = Vec3(-0.584, 0.794, -0.172),
-			[1] = Vec3(-0.683, 0.729, -0.057),
-			[2] = Vec3(0.305, 0.913, -0.270),
-			[3] = Vec3(0.042, 0.995, -0.088),
-		},
-		DisableCM = 1,
-		GoalType = "Defend",
-		MaxCampTime = 20,
-		MinCampTime = 10,
-		Position = Vec3(-561.400, 1709.720, 8.125),
 		Radius = 32,
 		Stance = "crouch",
 	},
@@ -850,19 +960,6 @@ global _MG =
 		MaxCampTime = 90,
 		MinCampTime = 45,
 		Position = Vec3(-1675.071, 2319.158, -10.875),
-		Radius = 32,
-		Stance = "crouch",
-	},
-	DEFEND_gold_24 = 
-	{
-		AimVectors = 
-		{
-			[0] = Vec3(-0.987, -0.159, 0.017),
-		},
-		GoalType = "Defend",
-		MaxCampTime = 30,
-		MinCampTime = 30,
-		Position = Vec3(1000.869, 2438.960, -208.571),
 		Radius = 32,
 		Stance = "crouch",
 	},
@@ -883,19 +980,17 @@ global _MG =
 			[10] = 1,
 		},
 	},
-	DEFEND_gold_17 = 
+	DEFEND_gold_13 = 
 	{
 		AimVectors = 
 		{
-			[0] = Vec3(-0.707, -0.708, 0.003),
-			[1] = Vec3(-0.977, 0.021, 0.214),
-			[2] = Vec3(-1.000, 0.028, 0.006),
+			[0] = Vec3(-0.850, 0.430, -0.303),
 		},
 		DisableCM = 1,
 		GoalType = "Defend",
-		MaxCampTime = 20,
-		MinCampTime = 10,
-		Position = Vec3(-1022.391, 3003.076, -59.875),
+		MaxCampTime = 90,
+		MinCampTime = 45,
+		Position = Vec3(-1434.125, 1962.871, 39.125),
 		Radius = 32,
 		Stance = "crouch",
 	},
@@ -931,6 +1026,39 @@ global _MG =
 		Radius = 32,
 		Stance = "crouch",
 	},
+	DEFEND_gold_16 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(-0.584, 0.794, -0.172),
+			[1] = Vec3(-0.683, 0.729, -0.057),
+			[2] = Vec3(0.305, 0.913, -0.270),
+			[3] = Vec3(0.042, 0.995, -0.088),
+		},
+		DisableCM = 1,
+		GoalType = "Defend",
+		MaxCampTime = 20,
+		MinCampTime = 10,
+		Position = Vec3(-561.400, 1709.720, 8.125),
+		Radius = 32,
+		Stance = "crouch",
+	},
+	DEFEND_gold_17 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(-0.707, -0.708, 0.003),
+			[1] = Vec3(-0.977, 0.021, 0.214),
+			[2] = Vec3(-1.000, 0.028, 0.006),
+		},
+		DisableCM = 1,
+		GoalType = "Defend",
+		MaxCampTime = 20,
+		MinCampTime = 10,
+		Position = Vec3(-1022.391, 3003.076, -59.875),
+		Radius = 32,
+		Stance = "crouch",
+	},
 	DEFEND_gold_21 = 
 	{
 		AimVectors = 
@@ -962,22 +1090,6 @@ global _MG =
 		Radius = 32,
 		Stance = "crouch",
 	},
-	DEFEND_gold_25 = 
-	{
-		AimVectors = 
-		{
-			[0] = Vec3(0.838, 0.546, -0.024),
-			[1] = Vec3(0.870, 0.492, -0.036),
-			[2] = Vec3(-0.328, 0.945, -0.008),
-		},
-		DisableCM = 1,
-		GoalType = "Defend",
-		MaxCampTime = 50,
-		MinCampTime = 25,
-		Position = Vec3(-1361.099, 332.787, 4.129),
-		Radius = 32,
-		Stance = "prone",
-	},
 	DEFEND_gold_23 = 
 	{
 		AimVectors = 
@@ -994,19 +1106,34 @@ global _MG =
 		Radius = 32,
 		Stance = "prone",
 	},
-	DEFEND_gold_13 = 
+	DEFEND_gold_24 = 
 	{
 		AimVectors = 
 		{
-			[0] = Vec3(-0.850, 0.430, -0.303),
+			[0] = Vec3(-0.987, -0.159, 0.017),
+		},
+		GoalType = "Defend",
+		MaxCampTime = 30,
+		MinCampTime = 30,
+		Position = Vec3(1000.869, 2438.960, -208.571),
+		Radius = 32,
+		Stance = "crouch",
+	},
+	DEFEND_gold_25 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(0.838, 0.546, -0.024),
+			[1] = Vec3(0.870, 0.492, -0.036),
+			[2] = Vec3(-0.328, 0.945, -0.008),
 		},
 		DisableCM = 1,
 		GoalType = "Defend",
-		MaxCampTime = 90,
-		MinCampTime = 45,
-		Position = Vec3(-1434.125, 1962.871, 39.125),
+		MaxCampTime = 50,
+		MinCampTime = 25,
+		Position = Vec3(-1361.099, 332.787, 4.129),
 		Radius = 32,
-		Stance = "crouch",
+		Stance = "prone",
 	},
 	DEFEND_ladder_1 = 
 	{
@@ -1061,12 +1188,90 @@ global _MG =
 		Radius = 32,
 		Stance = "crouch",
 	},
+	DEFEND_truck = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(0.999, -0.035, 0.037),
+			[1] = Vec3(0.466, 0.663, 0.586),
+			[2] = Vec3(0.697, 0.561, 0.446),
+			[3] = Vec3(0.964, 0.230, 0.130),
+		},
+		DisableCM = 1,
+		GoalType = "Defend",
+		MaxCampTime = 120,
+		MinCampTime = 10,
+		Position = Vec3(-1846.631, -413.983, -238.875),
+		Radius = 32,
+		Weapons = 
+		{
+			[20] = 1,
+			[21] = 1,
+		},
+	},
 	FLAG_allies_gold_crate = 
 	{
 		CreateOnLoad = 0,
 		GoalType = "Flag",
 		Position = Vec3(-1824.000, 2115.000, -6.875),
 		TeamAvailability = 2,
+	},
+	GRENADE_allimg = 
+	{
+		Count = 2,
+		Facing = Vec3(-0.306, 0.627, 0.716),
+		GoalType = "GRENADE",
+		IgnoreDead = 1,
+		MinRadius = 32,
+		Position = Vec3(1608.176, 1163.955, -99.558),
+		PrimeGrenade = 1,
+		TargetGoal = "MOUNTMG42_Allied_MG",
+		TraceInfo = 
+		{
+		},
+	},
+	GRENADE_allimg_2 = 
+	{
+		Count = 2,
+		Facing = Vec3(0.558, 0.297, 0.775),
+		GoalType = "GRENADE",
+		IgnoreDead = 1,
+		MinRadius = 32,
+		Position = Vec3(204.358, 1417.800, -69.579),
+		PrimeGrenade = 1,
+		TargetGoal = "MOUNTMG42_Allied_MG",
+		TraceInfo = 
+		{
+		},
+	},
+	GRENADE_mg_gold = 
+	{
+		Facing = Vec3(-0.884, 0.343, 0.318),
+		GoalType = "GRENADE",
+		IgnoreDead = 1,
+		MinRadius = 32,
+		Position = Vec3(-972.826, 1928.752, -58.875),
+		PrimeGrenade = 3,
+		Range = 4800,
+		TargetGoal = "MOBILEMG42_gold",
+		TraceInfo = 
+		{
+		},
+	},
+	GRENADE_mg_gold_2 = 
+	{
+		Count = 2,
+		Facing = Vec3(-0.787, -0.612, -0.076),
+		GoalType = "GRENADE",
+		IgnoreDead = 1,
+		MinRadius = 32,
+		Position = Vec3(-1178.122, 2325.317, -59.875),
+		PrimeGrenade = 3,
+		Range = 5200,
+		TargetGoal = "MOBILEMG42_gold",
+		TraceInfo = 
+		{
+		},
 	},
 	HEALTHCAB_healthcabinet = 
 	{
@@ -1085,6 +1290,76 @@ global _MG =
 		TagName = "healthcabinet",
 		TeamAvailability = 6,
 	},
+	MOBILEMG42_CP = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(-0.328, 0.937, -0.116),
+			[1] = Vec3(-0.243, 0.968, -0.065),
+			[2] = Vec3(-0.037, 0.988, -0.151),
+		},
+		GoalType = "MOBILEMG42",
+		MaxCampTime = 120,
+		MinCampTime = 60,
+		MinRadius = 32,
+		Position = Vec3(855.640, 369.809, 121.519),
+	},
+	MOBILEMG42_MG42_Truck = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(-0.987, 0.014, 0.162),
+			[1] = Vec3(-0.958, -0.284, 0.045),
+			[2] = Vec3(-0.988, 0.123, 0.093),
+		},
+		GoalType = "MOBILEMG42",
+		MaxCampTime = 120,
+		MinCampTime = 60,
+		MinRadius = 32,
+		Position = Vec3(1012.180, 2669.476, -212.881),
+	},
+	MOBILEMG42_MG42_Truck2 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(-0.771, -0.617, -0.156),
+			[1] = Vec3(-0.913, -0.396, -0.101),
+			[2] = Vec3(-0.977, -0.213, 0.020),
+		},
+		GoalType = "MOBILEMG42",
+		MaxCampTime = 120,
+		MinCampTime = 60,
+		MinRadius = 32,
+		Position = Vec3(1190.961, 3183.771, 89.125),
+	},
+	MOBILEMG42_corner = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(-0.661, -0.749, 0.043),
+			[1] = Vec3(-0.750, -0.661, 0.026),
+			[2] = Vec3(-0.612, -0.741, 0.276),
+		},
+		GoalType = "MOBILEMG42",
+		MaxCampTime = 120,
+		MinCampTime = 60,
+		MinRadius = 32,
+		Position = Vec3(672.798, 3065.257, -223.212),
+	},
+	MOBILEMG42_field = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(-0.488, 0.872, -0.031),
+			[1] = Vec3(-0.629, 0.776, 0.045),
+			[2] = Vec3(-0.329, 0.944, -0.033),
+		},
+		GoalType = "MOBILEMG42",
+		MaxCampTime = 60,
+		MinCampTime = 30,
+		MinRadius = 32,
+		Position = Vec3(947.175, 1308.517, -146.453),
+	},
 	MOBILEMG42_gold = 
 	{
 		AimVectors = 
@@ -1097,18 +1372,45 @@ global _MG =
 		MinRadius = 32,
 		Position = Vec3(-1568.615, 2156.752, -58.875),
 	},
+	MOBILEMG42_gold1 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(0.990, -0.136, 0.031),
+		},
+		GoalType = "MOBILEMG42",
+		MaxCampTime = 120,
+		MinCampTime = 60,
+		MinRadius = 32,
+		Position = Vec3(-1583.333, 2123.641, -58.875),
+	},
+	MOBILEMG42_gold2 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(-0.536, 0.841, 0.069),
+			[1] = Vec3(-0.316, 0.947, 0.054),
+			[2] = Vec3(-0.627, 0.777, 0.060),
+			[3] = Vec3(-0.266, 0.963, 0.045),
+		},
+		GoalType = "MOBILEMG42",
+		MaxCampTime = 120,
+		MinCampTime = 60,
+		MinRadius = 32,
+		Position = Vec3(-1055.852, 2043.332, -58.866),
+	},
 	MOBILEMG42_goldladder = 
 	{
 		AimVectors = 
 		{
-			[0] = Vec3(-0.899, -0.362, 0.247),
-			[1] = Vec3(-0.937, -0.346, 0.043),
+			[0] = Vec3(-0.971, -0.241, -0.010),
+			[1] = Vec3(-0.659, -0.751, -0.030),
 		},
 		GoalType = "MOBILEMG42",
 		MaxCampTime = 120,
 		MinCampTime = 40,
 		MinRadius = 32,
-		Position = Vec3(-979.427, 3242.729, -58.875),
+		Position = Vec3(-905.428, 3165.157, -59.875),
 	},
 	MOBILEMG42_roof = 
 	{
@@ -1149,6 +1451,20 @@ global _MG =
 		MinRadius = 32,
 		Position = Vec3(764.592, 2868.193, -202.081),
 	},
+	MOBILEMG42_yard_x = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(-0.928, -0.282, 0.244),
+			[1] = Vec3(-0.973, -0.124, 0.196),
+			[2] = Vec3(-0.771, -0.637, 0.020),
+		},
+		GoalType = "MOBILEMG42",
+		MaxCampTime = 60,
+		MinCampTime = 30,
+		MinRadius = 32,
+		Position = Vec3(881.475, 2969.788, -221.527),
+	},
 	MOUNTMG42_Allied_MG = 
 	{
 		CreateOnLoad = 0,
@@ -1167,6 +1483,18 @@ global _MG =
 		MinCampTime = 15,
 		Position = Vec3(-95.000, -260.000, 78.000),
 		TeamAvailability = 6,
+	},
+	PLANTMINE_allies_backdoor_1 = 
+	{
+		GoalType = "PLANTMINE",
+		Position = Vec3(-1264.511, 1788.207, -16.324),
+		Radius = 32,
+	},
+	PLANTMINE_allies_backdoor_2 = 
+	{
+		GoalType = "PLANTMINE",
+		Position = Vec3(-1370.666, 1824.403, -19.030),
+		Radius = 32,
 	},
 	PLANTMINE_commandpost_1 = 
 	{
@@ -1208,18 +1536,6 @@ global _MG =
 	{
 		GoalType = "PLANTMINE",
 		Position = Vec3(-1337.767, 1492.191, -17.106),
-		Radius = 32,
-	},
-	PLANTMINE_allies_backdoor_1 = 
-	{
-		GoalType = "PLANTMINE",
-		Position = Vec3(-1264.511, 1788.207, -16.324),
-		Radius = 32,
-	},
-	PLANTMINE_allies_backdoor_2 = 
-	{
-		GoalType = "PLANTMINE",
-		Position = Vec3(-1370.666, 1824.403, -19.030),
 		Radius = 32,
 	},
 	PLANTMINE_tower_1 = 
@@ -1295,6 +1611,7 @@ global _MG =
 					[1] = Vec3(0.449, 0.893, 0.018),
 					[2] = Vec3(0.062, 0.519, 0.853),
 				},
+				Timeout = 25,
 				position = Vec3(-342.773, 1730.095, -205.875),
 				stance = "crouch",
 			},
@@ -1306,18 +1623,9 @@ global _MG =
 					[1] = Vec3(0.849, 0.293, 0.440),
 					[2] = Vec3(0.984, -0.092, 0.152),
 				},
-				Timeout = 23,
+				Timeout = 24,
 				position = Vec3(-703.657, 1788.073, -197.875),
 				stance = "stand",
-			},
-			[2] = 
-			{
-				AimVectors = 
-				{
-					[0] = Vec3(-0.079, -0.996, -0.046),
-				},
-				position = Vec3(-222.332, 3300.733, -152.460),
-				stance = "crouch",
 			},
 		},
 		CreateOnLoad = 0,
@@ -1377,7 +1685,7 @@ global _MG =
 	},
 	PLANT_alliedwall = 
 	{
-		CoverSplit = Vec3(-0.572, -0.596, -0.564),
+		CoverSplit = Vec3(-0.985, 0.045, -0.169),
 		CoverSpots = 
 		{
 			[0] = 
@@ -1386,7 +1694,6 @@ global _MG =
 				{
 					[0] = Vec3(0.990, -0.105, -0.091),
 				},
-				Timeout = 23,
 				position = Vec3(-1802.565, 2260.889, -222.875),
 				stance = "crouch",
 			},
@@ -1409,15 +1716,25 @@ global _MG =
 	},
 	PLANT_ladder = 
 	{
+		CoverSplit = Vec3(0.418, -0.028, 0.908),
 		CoverSpots = 
 		{
 			[0] = 
 			{
 				AimVectors = 
 				{
-					[0] = Vec3(-0.860, -0.509, -0.050),
+					[0] = Vec3(0.022, -0.994, -0.109),
 				},
-				position = Vec3(-894.054, 1854.041, 530.125),
+				position = Vec3(-1271.235, 1893.875, 14.466),
+				stance = "crouch",
+			},
+			[1] = 
+			{
+				AimVectors = 
+				{
+					[0] = Vec3(-0.838, -0.544, -0.047),
+				},
+				position = Vec3(-899.012, 1856.633, 530.125),
 				stance = "crouch",
 			},
 		},
@@ -1634,10 +1951,16 @@ global _MG =
 		Position = Vec3(-834.716, 1837.595, -444.875),
 		Radius = 50,
 	},
+	ROUTE_underwindows = 
+	{
+		GoalType = "ROUTE",
+		Position = Vec3(-35.551, 1284.923, -116.222),
+		Radius = 125,
+	},
 	ROUTE_walley = 
 	{
 		GoalType = "ROUTE",
-		Position = Vec3(184.381, -1257.552, -132.165),
+		Position = Vec3(379.002, -988.987, -148.082),
 		Radius = 50,
 	},
 	ROUTE_well = 

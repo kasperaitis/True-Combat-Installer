@@ -940,20 +940,12 @@ global _MG =
 		GoalType = "CapPoint",
 		MinRadius = 32,
 		Position = Vec3(-718.458, -263.629, 98.211),
-		Roles = 
-		{
-			[0] = "AMBUSHER",
-		},
 	},
 	CAPPOINT_Truck = 
 	{
 		GoalType = "CapPoint",
 		MinRadius = 32,
 		Position = Vec3(3319.875, 2580.686, -48.751),
-		Roles = 
-		{
-			[0] = "ROAMER",
-		},
 	},
 	CHECKPOINT_forward_flag = 
 	{

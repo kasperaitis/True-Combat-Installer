@@ -60,7 +60,7 @@ this.GetPriority = function()
 
 		if ( !goal.IgnoreEntity )
 		{
-			if ( goal.TraceInfo && tableCount(goal.TraceInfo) > 0 )
+			if ( goal.TraceEntity )
 			{
 				goalEnt = goal.TraceEntity;
 			}
@@ -147,9 +147,9 @@ this.Update = function()
 this.Exit = function()
 {
 	this.Bot.ReleaseButton(BTN.PRONE, BTN.CROUCH);
+	this.Bot.DoNotKill = null;
 
 	this.GoalEntity = null;
-	this.SatchelEntity = null;
 
 	// clear the occupied flag
 	if ( this.MapGoal && !IsNull(this.spotIndex) ) {
@@ -167,6 +167,19 @@ this.Exit = function()
 		this.Bot.DisableCombatMovement = false;
 		this.CombatMovementDisabled = false;
 	}
+
+	if (this.SatchelEntity && EntityIsValid(this.SatchelEntity) && GetModName() == "nitmod") {
+		//if the goal exited during RUNAWAY state then satchel is still on the ground and covertops cannot use another
+		sleep(1);
+		this.AddWeaponRequest(Priority.High, WEAPON.SATCHEL_DET);
+		sleep(1); //BlockForWeaponChange does not work
+		if (this.Bot && this.Bot.GetCurrentWeapon() == WEAPON.SATCHEL_DET) {
+			this.Bot.HoldButton(BTN.ATTACK1, 1);
+			sleep(1);
+		}
+		this.ReleaseWeaponRequest();
+	}
+	this.SatchelEntity = null;
 };
 
 this.CoverDisabled = function(position)
@@ -234,6 +247,7 @@ this.UpdateDynamite = function()
 
 				this.Bot.HoldButton(BTN.CROUCH, 99);
 				this.Priority = 2.0;
+				this.Bot.DoNotKill = true;
 
 				// for voice chat 'cover me'
 				signal(this.Bot.Name + "_plant");
@@ -320,6 +334,7 @@ this.UpdateDynamite = function()
 					}
 
 					this.Priority = goalPriority;
+					this.Bot.DoNotKill = null;
 					this.Goto(spot.position, 32.0);
 
 					if (spot.DisableCM > 0 && !this.Bot.DisableCombatMovement)
@@ -376,7 +391,14 @@ this.UpdateSatchel = function()
 				this.UpdateDebugString();
 
 				this.Priority = 2.0;
+				this.Bot.DoNotKill = true;
 
+				if (this.MapGoal.SatchelFunction)
+				{
+					this.MapGoal.SatchelFunction(this);
+					this.SatchelEntity = null;
+					this.Finished();
+				}
 				this.AddAimRequest(Priority.High, "position", this.MapGoal.GetPosition());
 				this.AddWeaponRequest(Priority.High, WEAPON.SATCHEL);
 				this.BlockForWeaponChange(WEAPON.SATCHEL);
@@ -458,6 +480,7 @@ this.UpdateSatchel = function()
 					yield();
 					timeout -= 1;
 				}
+				this.SatchelEntity = null;
 				this.Finished();
 			}
 			default:

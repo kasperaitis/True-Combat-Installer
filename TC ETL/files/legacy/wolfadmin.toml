@@ -25,7 +25,7 @@ admin = "admin.log"
 
 [omnibot]
 minbots = -1
-maxbots = 12
+maxbots = 16
 
 [admin]
 history = 1
@@ -45,7 +45,9 @@ timeout = 0
 restricted = []
 
 [banners]
-welcome = "Welcome to Legacy and WolfAdmin manager"
+file = "banners.toml"
+interval = 120
+random = 1
 area = 3
 
 [rules]
@@ -55,11 +57,3 @@ file = "rules.toml"
 file = "greetings.toml"
 area = 3
 bots = 1
-
-[records]
-bots = 0
-
-[sprees]
-file = "sprees.toml"
-messages = 0
-records = 0

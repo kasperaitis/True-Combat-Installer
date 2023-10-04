@@ -1,6 +1,6 @@
 
 -- WolfAdmin module for Wolfenstein: Enemy Territory servers.
--- Copyright (C) 2015-2019 Timo 'Timothy' Smit
+-- Copyright (C) 2015-2020 Timo 'Timothy' Smit
 
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -17,6 +17,7 @@
 
 local admin
 local balancer
+local banners
 local bans
 local history
 local mutes
@@ -31,7 +32,6 @@ local commands
 local bots
 local fireteams
 local game
-local sprees
 local teams
 local voting
 
@@ -50,12 +50,13 @@ local tables
 local timers
 local util
 
-local version = "1.2.0"
-local release = "4 January 2019"
+local version = "1.2.1"
+local release = "14 April 2020"
 
 local basepath
 local homepath
-local luapath
+local lualibspath
+local luamodspath
 
 -- need to do this somewhere else
 function wolfa_getVersion()
@@ -74,53 +75,70 @@ function wolfa_getHomePath()
     return homepath
 end
 
-function wolfa_getLuaPath()
-    return luapath
+function wolfa_getLuaLibsPath()
+    return lualibspath
+end
+
+function wolfa_getLuaModsPath()
+    return luamodspath
+end
+
+function wolfa_requireLib(lib)
+    return require(wolfa_getLuaLibsPath().."/"..string.gsub(lib, "%.", "/"))
+end
+
+function wolfa_requireModule(module)
+    return require(wolfa_getLuaModsPath().."/"..string.gsub(module, "%.", "/"))
 end
 
 function et_InitGame(levelTime, randomSeed, restartMap)
     -- set up paths
     basepath = string.gsub(et.trap_Cvar_Get("fs_basepath"), "\\", "/").."/"..et.trap_Cvar_Get("fs_game").."/"
     homepath = string.gsub(et.trap_Cvar_Get("fs_homepath"), "\\", "/").."/"..et.trap_Cvar_Get("fs_game").."/"
-    luapath = string.gsub(debug.getinfo(1).source, "[\\/]", "."):sub(0, -10)
+    lualibspath = "lualibs"
+    luamodspath = "luascripts/wolfadmin"
+
+    if debug then
+        luamodspath = string.sub(debug.getinfo(1).source, 0, -10)
+    end
 
     -- load modules
-    require (wolfa_getLuaPath()..".util.debug")
+    wolfa_requireModule("util.debug")
 
-    admin = require (wolfa_getLuaPath()..".admin.admin")
-    balancer = require (wolfa_getLuaPath()..".admin.balancer")
-    bans = require (wolfa_getLuaPath()..".admin.bans")
-    history = require (wolfa_getLuaPath()..".admin.history")
-    mutes = require (wolfa_getLuaPath()..".admin.mutes")
-    rules = require (wolfa_getLuaPath()..".admin.rules")
+    admin = wolfa_requireModule("admin.admin")
+    balancer = wolfa_requireModule("admin.balancer")
+    banners = wolfa_requireModule("admin.banners")
+    bans = wolfa_requireModule("admin.bans")
+    history = wolfa_requireModule("admin.history")
+    mutes = wolfa_requireModule("admin.mutes")
+    rules = wolfa_requireModule("admin.rules")
 
-    auth = require (wolfa_getLuaPath()..".auth.auth")
+    auth = wolfa_requireModule("auth.auth")
 
-    db = require (wolfa_getLuaPath()..".db.db")
+    db = wolfa_requireModule("db.db")
 
-    commands = require (wolfa_getLuaPath()..".commands.commands")
+    commands = wolfa_requireModule("commands.commands")
 
-    bots = require (wolfa_getLuaPath()..".game.bots")
-    game = require (wolfa_getLuaPath()..".game.game")
-    fireteams = require (wolfa_getLuaPath()..".game.fireteams")
-    sprees = require (wolfa_getLuaPath()..".game.sprees")
-    teams = require (wolfa_getLuaPath()..".game.teams")
-    voting = require (wolfa_getLuaPath()..".game.voting")
+    bots = wolfa_requireModule("game.bots")
+    game = wolfa_requireModule("game.game")
+    fireteams = wolfa_requireModule("game.fireteams")
+    teams = wolfa_requireModule("game.teams")
+    voting = wolfa_requireModule("game.voting")
 
-    greetings = require (wolfa_getLuaPath()..".players.greetings")
-    players = require (wolfa_getLuaPath()..".players.players")
-    stats = require (wolfa_getLuaPath()..".players.stats")
+    greetings = wolfa_requireModule("players.greetings")
+    players = wolfa_requireModule("players.players")
+    stats = wolfa_requireModule("players.stats")
 
-    bits = require (wolfa_getLuaPath()..".util.bits")
-    constants = require (wolfa_getLuaPath()..".util.constants")
-    events = require (wolfa_getLuaPath()..".util.events")
-    files = require (wolfa_getLuaPath()..".util.files")
-    logs = require (wolfa_getLuaPath()..".util.logs")
-    pagination = require (wolfa_getLuaPath()..".util.pagination")
-    settings = require (wolfa_getLuaPath()..".util.settings")
-    tables = require (wolfa_getLuaPath()..".util.tables")
-    timers = require (wolfa_getLuaPath()..".util.timers")
-    util = require (wolfa_getLuaPath()..".util.util")
+    bits = wolfa_requireModule("util.bits")
+    constants = wolfa_requireModule("util.constants")
+    events = wolfa_requireModule("util.events")
+    files = wolfa_requireModule("util.files")
+    logs = wolfa_requireModule("util.logs")
+    pagination = wolfa_requireModule("util.pagination")
+    settings = wolfa_requireModule("util.settings")
+    tables = wolfa_requireModule("util.tables")
+    timers = wolfa_requireModule("util.timers")
+    util = wolfa_requireModule("util.util")
 
     -- register the module
     et.RegisterModname("WolfAdmin "..wolfa_getVersion())
@@ -137,7 +155,10 @@ function et_InitGame(levelTime, randomSeed, restartMap)
 end
 
 function et_ShutdownGame(restartMap)
-    events.trigger("onGameShutdown", (restartMap == 1))
+    -- check whether the module has fully initialized
+    if events then
+        events.trigger("onGameShutdown", (restartMap == 1))
+    end
 end
 
 function et_ConsoleCommand(cmdText)

@@ -92,7 +92,7 @@ global Map =
 	{
 		Map.Antenna_Defense_Dyno = 0;
 		Map.Ant_Def = false;
-		SetAvailableMapGoals( TEAM.ALLIES, true, "PLANT_Main_Radiomast_1" );
+		SetAvailableMapGoals( TEAM.ALLIES, true, "PLANT_Main_Radiomast" );
 		SetAvailableMapGoals( TEAM.AXIS, true, "BUILD_Antenna_Defense" );
 		SetAvailableMapGoals( TEAM.ALLIES, false, "SMOKEBOMB_ant_def" );
 		SetAvailableMapGoals( TEAM.ALLIES, true, {
@@ -148,8 +148,8 @@ global Map =
 
 		if ( Map.Ant_Def == false ) //Defence not built
 		{
-			SetAvailableMapGoals( TEAM.ALLIES, true, "PLANT_Main_Radiomast_1" );
-			SetGoalPriority( "PLANT_Main_Radiomast_1", 0.9, TEAM.ALLIES, CLASS.ENGINEER );
+			SetAvailableMapGoals( TEAM.ALLIES, true, "PLANT_Main_Radiomast" );
+			SetGoalPriority( "PLANT_Main_Radiomast", 0.9, TEAM.ALLIES, CLASS.ENGINEER );
 			SetAvailableMapGoals( TEAM.ALLIES, true, {
 				"ATTACK_amast.*",
 				"ATTACK_mast.*",
@@ -266,8 +266,8 @@ global Map =
 		}
 		else if ( Map.Ant_Def == false ) //Defence not built
 		{
-			SetAvailableMapGoals( TEAM.ALLIES, true, "PLANT_Main_Radiomast_1" );
-			SetGoalPriority( "PLANT_Main_Radiomast_1", 0.9, TEAM.ALLIES, CLASS.ENGINEER );
+			SetAvailableMapGoals( TEAM.ALLIES, true, "PLANT_Main_Radiomast" );
+			SetGoalPriority( "PLANT_Main_Radiomast", 0.9, TEAM.ALLIES, CLASS.ENGINEER );
 			SetAvailableMapGoals( TEAM.ALLIES, true, {
 				"ATTACK_amast.*",
 				"ATTACK_mast.*",
@@ -301,8 +301,8 @@ global Map =
 		}
 		else if ( Map.Ant_Def == false ) //Defence not built
 		{
-			SetAvailableMapGoals( TEAM.ALLIES, true, "PLANT_Main_Radiomast_1" );
-			SetGoalPriority( "PLANT_Main_Radiomast_1", 0.9, TEAM.ALLIES, CLASS.ENGINEER );
+			SetAvailableMapGoals( TEAM.ALLIES, true, "PLANT_Main_Radiomast" );
+			SetGoalPriority( "PLANT_Main_Radiomast", 0.9, TEAM.ALLIES, CLASS.ENGINEER );
 			SetAvailableMapGoals( TEAM.ALLIES, true, {
 				"ATTACK_amast.*",
 				"ATTACK_mast.*",
@@ -411,8 +411,8 @@ global Map =
 
 		if ( Map.Ant_Def == false ) //Defence not built
 		{
-			SetAvailableMapGoals( TEAM.ALLIES, true, "PLANT_Main_Radiomast_1" );
-			SetGoalPriority( "PLANT_Main_Radiomast_1", 0.9, TEAM.ALLIES, CLASS.ENGINEER );
+			SetAvailableMapGoals( TEAM.ALLIES, true, "PLANT_Main_Radiomast" );
+			SetGoalPriority( "PLANT_Main_Radiomast", 0.9, TEAM.ALLIES, CLASS.ENGINEER );
 			SetAvailableMapGoals( TEAM.ALLIES, true, {
 				"ATTACK_amast.*",
 				"ATTACK_mast.*",
@@ -539,8 +539,8 @@ global Map =
 
 		if ( Map.Ant_Def == false ) //Defence not built
 		{
-			SetAvailableMapGoals( TEAM.ALLIES, true, "PLANT_Main_Radiomast_1" );
-			SetGoalPriority( "PLANT_Main_Radiomast_1", 0.9, TEAM.ALLIES, CLASS.ENGINEER );
+			SetAvailableMapGoals( TEAM.ALLIES, true, "PLANT_Main_Radiomast" );
+			SetGoalPriority( "PLANT_Main_Radiomast", 0.9, TEAM.ALLIES, CLASS.ENGINEER );
 			SetAvailableMapGoals( TEAM.ALLIES, true, {
 				"ATTACK_amast.*",
 				"ATTACK_mast.*",
@@ -678,19 +678,18 @@ global OnMapLoad = function()
 	OnTrigger( "Allies successfully stolen the Emitters and destroy the Main Radio Mast!", Map.Allies_Win);
 
 	Util.DisableGoal( ".*", true ); // all but routes
-	Util.RemoveGoal( "PLANT_Main_Radiomast" );
 //Add Use Wp
 	Util.AddUseWp("PLANT_Mainbunkergate", "maingate");
 	Util.AddUseWp("PLANT_Mainbunkergate", "maingate1");
 	Util.AddUseWp("PLANT_Mainbunkergate", "maingate2");
 	Util.AddUseWp("PLANT_Sidewall", "sidewall_right");
 	Util.AddUseWp("PLANT_Bunker_Sidewall", "sidewall_left");
-	Util.AddUseWp("PLANT_Main_Radiomast_1", "Main_Radio");
-	Util.AddUseWp("PLANT_Main_Radiomast_1", "Main_Radio1");
-	Util.AddUseWp("PLANT_Main_Radiomast_1", "Main_Radio2");
-	Util.AddUseWp("PLANT_Main_Radiomast_1", "Main_Radio3");
-	Util.AddUseWp("PLANT_Main_Radiomast_1", "Main_Radio4");
-	Util.AddUseWp("PLANT_Main_Radiomast_1", "Main_Radio5");
+	Util.AddUseWp("PLANT_Main_Radiomast", "Main_Radio");
+	Util.AddUseWp("PLANT_Main_Radiomast", "Main_Radio1");
+	Util.AddUseWp("PLANT_Main_Radiomast", "Main_Radio2");
+	Util.AddUseWp("PLANT_Main_Radiomast", "Main_Radio3");
+	Util.AddUseWp("PLANT_Main_Radiomast", "Main_Radio4");
+	Util.AddUseWp("PLANT_Main_Radiomast", "Main_Radio5");
 //SetAvailableMapGoals ALLIES
 	SetAvailableMapGoals( TEAM.ALLIES, true, {
 		Map.Mount_Bunker_MG,

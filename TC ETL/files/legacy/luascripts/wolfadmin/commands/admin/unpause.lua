@@ -1,6 +1,6 @@
 
 -- WolfAdmin module for Wolfenstein: Enemy Territory servers.
--- Copyright (C) 2015-2019 Timo 'Timothy' Smit
+-- Copyright (C) 2015-2020 Timo 'Timothy' Smit
 
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -15,11 +15,11 @@
 -- You should have received a copy of the GNU General Public License
 -- along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-local auth = require (wolfa_getLuaPath()..".auth.auth")
+local auth = wolfa_requireModule("auth.auth")
 
-local commands = require (wolfa_getLuaPath()..".commands.commands")
+local commands = wolfa_requireModule("commands.commands")
 
-local settings = require (wolfa_getLuaPath()..".util.settings")
+local settings = wolfa_requireModule("util.settings")
 
 function commandUnpause(clientId, command)
     et.trap_SendConsoleCommand(et.EXEC_APPEND, "cchat -1 \"^dpause: ^9map unpaused.\";")

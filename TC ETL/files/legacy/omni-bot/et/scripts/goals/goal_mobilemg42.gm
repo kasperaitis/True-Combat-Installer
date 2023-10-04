@@ -46,6 +46,7 @@ this.Update = function()
 	// given the limits of the weapon while it is set.
 	this.AimVector = Util.GetRandomTableValue( this.MapGoal.AimVectors );
 	this.AddAimRequest(Priority.High, "facing", this.AimVector);
+	this.Bot.MoveTowards(this.MapGoal.GetPosition(), 20);
 
 	// wait until bot stands up after revive
 	t = this.RevivedTime - GetTime() + 2;
@@ -62,11 +63,16 @@ this.Update = function()
 	// replace the aim request with a low priority one so the targeting system can take over
 	this.AddAimRequest(Priority.Low, "facing", this.AimVector);
 
-	timeout = RandFloat(this.MapGoal.MinCampTime, this.MapGoal.MaxCampTime);
-	while( timeout > 0 )
+	sleep(3);
+	if (this.Bot.HasEntityFlag(ENTFLAG.PRONE))
 	{
-		timeout -= 1;
-		sleep(1);
+		this.Bot.MoveTowards(this.Bot.GetPosition());
+		timeout = RandFloat(this.MapGoal.MinCampTime, this.MapGoal.MaxCampTime) - 3;
+		while( timeout > 0 )
+		{
+			timeout -= 1;
+			sleep(1);
+		}
 	}
 
 	this.BlackboardDelay(5);

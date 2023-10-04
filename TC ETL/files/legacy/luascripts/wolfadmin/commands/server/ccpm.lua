@@ -1,6 +1,6 @@
 
 -- WolfAdmin module for Wolfenstein: Enemy Territory servers.
--- Copyright (C) 2015-2019 Timo 'Timothy' Smit
+-- Copyright (C) 2015-2020 Timo 'Timothy' Smit
 
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -15,15 +15,16 @@
 -- You should have received a copy of the GNU General Public License
 -- along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-local commands = require (wolfa_getLuaPath()..".commands.commands")
+local commands = wolfa_requireModule("commands.commands")
 
-local util = require (wolfa_getLuaPath()..".util.util")
+local util = wolfa_requireModule("util.util")
 
-function commandClientCPM(command, clientId, text)
+function commandClientCPM(command, clientId, text, type)
     local clientId = tonumber(clientId)
+    local type = tonumber(type) and tonumber(type) or 4
 
     if clientId and clientId ~= -1337 then -- -1337 because -1 is a magic number/broadcasted to all clients
-        et.trap_SendServerCommand(clientId, "cpm \""..text.."\";")
+        et.trap_SendServerCommand(clientId, "cpm \""..text.."\" "..type..";")
     elseif clientId then
         et.G_Print(util.removeColors(text).."\n")
     end

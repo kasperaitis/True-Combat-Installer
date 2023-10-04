@@ -34,6 +34,7 @@ this.UpgradeVersion = function(Props)
 		this.ExplosiveType = Props.ExplosiveType;
 		this.IgnoreTargets = Props.IgnoreTargets;
 		this.TraceInfo = Props.TraceInfo;
+		this.EntityName = Props.EntityName;
 		this.IgnoreEntity = Props.IgnoreEntity;
 		this.DetonateSpots = Props.DetonateSpots;
 		this.CoverSpots = Props.CoverSpots;
@@ -77,7 +78,11 @@ this.Render = function(editMode)
 
 			if (this.GoalType != "DYNAMITE")
 			{
-				if (this.TraceEntity && EntityIsValid(this.TraceEntity))
+				if (this.EntityName)
+				{
+					this.ExtraDebugText += "Entity name: " + this.EntityName + "\n";
+				}
+				else if (this.TraceEntity && EntityIsValid(this.TraceEntity))
 				{
 					this.ExtraDebugText += format("TraceEnt: %d\n",this.TraceEntity);
 				}
@@ -194,6 +199,7 @@ this.SaveToTable = function(SaveTable)
 	if(this.IgnoreTargets){ SaveTable.IgnoreTargets = this.IgnoreTargets; }
 	SaveTable.TraceInfo  = this.TraceInfo;
 	SaveTable.CoverSpots = this.CoverSpots;
+	SaveTable.EntityName = this.EntityName;
 	SaveTable.IgnoreEntity = this.IgnoreEntity;
 	SaveTable.DetonateSpots = this.DetonateSpots;
 	SaveTable.CoverSplit = this.CoverSplit;
@@ -205,6 +211,8 @@ this.Help = function()
 {
 	print(this.GoalType,"goal, version",this.Version);
 	print("Requires:");
+	print("     entityname - name of the entity");
+	print("  or");
 	print("     trace - the traceinfo of the entity to destroy,");
 	print("             this should be an OID entity, use /oidlist to confirm");
 	print("  or");
@@ -273,6 +281,20 @@ this.SetProperty = function(property, value)
 				}
 			}
 		}
+		case "entityname":
+		{
+			this.TraceEntity = GetEntityByName(value);
+			if (this.TraceEntity)
+			{
+				this.EntityName = value;
+				this.IgnoreEntity = null;
+			}
+			else
+			{
+				this.EntityName = null;
+				print("Entity not found");
+			}
+		}
 		case "ignoreentity":
 		{
 			if (value == "0" || value == "false")
@@ -282,6 +304,7 @@ this.SetProperty = function(property, value)
 			else
 			{
 				this.TraceInfo = null;
+				this.EntityName = null;
 				this.TraceEntity = null;
 				this.IgnoreEntity = true;
 			}
@@ -490,6 +513,11 @@ this.Update = function()
 	while(1)
 	{
 		sleep(1);
+		if (this.EntityName)
+		{
+			this.TraceEntity = GetEntityByName(this.EntityName);
+			block(0);
+		}
 		if ( !this.TraceInfo || tableCount(this.TraceInfo) < 1 )
 		{
 			block(0);

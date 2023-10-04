@@ -221,6 +221,8 @@ global Map =
 			"FLAG_boxy",
 			"PLANT_Axis_Command_Post",
 			"PLANT_Axis_Construction",
+            "PLANT_lower_entrance",
+            "PLANT_upper_entrance",
 		});
 
 		Util.MapDebugPrint( "generator_gate_opened" );
@@ -314,6 +316,8 @@ global OnMapLoad = function()
     SetAvailableMapGoals( TEAM.ALLIES, true, {
         "PLANT_generator",
     });
+
+    Util.AddUsePoint( "PLANT_Axis_Construction", Vec3( 6820, -3390, 90 ) );
 
 	// Unreachable otherwise
 	Util.SetGoalOffset( -50, 0, 0, "PLANT_generator" );

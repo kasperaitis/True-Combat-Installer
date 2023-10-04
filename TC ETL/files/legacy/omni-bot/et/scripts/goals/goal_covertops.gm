@@ -412,6 +412,14 @@ this.Events[EVENT.KILLEDSOMEONE] = function(victim, mod)
 					}
 					if(!this.IsActive())
 					{
+						if (GetModName() == "nitmod" && (GetCvar("g_headshot") & 2) )
+						{
+							sleep(0.65 - timeout*0.2);
+							if(GetEntFlags(victim, ENTFLAG.LIMBO)){
+								//exploding headshot in N!tmod
+								return;
+							}
+						}
 						this.TargetPosition = null;
 						this.TargetEntity = victim;
 						this.State = this.GOTO_TARGET;
