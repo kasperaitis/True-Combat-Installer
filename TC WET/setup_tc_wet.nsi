@@ -14,12 +14,12 @@ Unicode True
 !define PRODUCT_CQB "CQB"
 !define PRODUCT_ENGINE "WET"
 !define SERVER_INGA "Inga"
-!define PRODUCT_VERSION "1.8.6"
+!define PRODUCT_VERSION "1.8.7"
 !define PRODUCT_PUBLISHER "Aivaras Kasperaitis"
 !define PRODUCT_WEB_SITE "http://www.truecombatelite.com"
 !define WEB_SITE_NAME "True Combat Elite and CQB Lithuania"
-!define INSTALLER_WEB_SITE "http://tc.garagegame.eu"
-!define IP_ADDRESS "78.57.195.107"
+!define INSTALLER_WEB_SITE "http://tc.oneladgames.com"
+!define IP_ADDRESS "78.63.43.229"
 
 !define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\et.exe"
 !define PRODUCT_UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}"
@@ -158,14 +158,14 @@ SetOverwrite try
 ; Put file there
 File /r "files\*"
 
-inetc::get /NOCANCEL "http://tc.garagegame.eu/files/wet/pak0.pk3" "$INSTDIR\etmain\pak0.pk3" /end
-inetc::get /NOCANCEL "http://tc.garagegame.eu/files/wet/pak1.pk3" "$INSTDIR\etmain\pak1.pk3" /end
-inetc::get /NOCANCEL "http://tc.garagegame.eu/files/wet/pak2.pk3" "$INSTDIR\etmain\pak2.pk3" /end
+inetc::get /NOCANCEL "http://tc.oneladgames.com/files/wet/pak0.pk3" "$INSTDIR\etmain\pak0.pk3" /end
+inetc::get /NOCANCEL "http://tc.oneladgames.com/files/wet/pak1.pk3" "$INSTDIR\etmain\pak1.pk3" /end
+inetc::get /NOCANCEL "http://tc.oneladgames.com/files/wet/pak2.pk3" "$INSTDIR\etmain\pak2.pk3" /end
 
 ${If} ${FileExists} "$INSTDIR\etmain\etkey"
 ${Else}
 ;NSISdl::download http://etkey.org/etkey.php $INSTDIR\etmain\etkey
-inetc::get /NOCANCEL "http://etkey.org/etkey.php" "$INSTDIR\etmain\etkey" /end
+inetc::get /NOCANCEL "https://etkey.eu/genkey.php" "$INSTDIR\etmain\etkey" /end
 ${EndIf}
 
 SectionEnd
@@ -192,8 +192,8 @@ SectionIn 3
 
 SetOutPath "$INSTDIR\tcetest"
 SetOverwrite try
-inetc::get /NOCANCEL "http://tc.garagegame.eu/files/maps/ingamaps.7z" "$INSTDIR\tcetest\ingamaps.7z" /end
-Nsis7z::ExtractWithDetails "maps.7z" "Extracting maps %s..."
+inetc::get /NOCANCEL "http://tc.oneladgames.com/files/maps/ingamaps.7z" "$INSTDIR\tcetest\ingamaps.7z" /end
+Nsis7z::ExtractWithDetails "ingamaps.7z" "Extracting maps %s..."
 Delete "$OUTDIR\ingamaps.7z"
 
 SetOutPath "$INSTDIR"
