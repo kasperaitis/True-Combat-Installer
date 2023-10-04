@@ -13,12 +13,12 @@ Unicode True
 !define PRODUCT_CQB "CQB"
 !define PRODUCT_ENGINE "ETL"
 !define SERVER_INGA "Inga"
-!define PRODUCT_VERSION "1.0.3"
+!define PRODUCT_VERSION "1.0.4"
 !define PRODUCT_PUBLISHER "Aivaras Kasperaitis"
 !define PRODUCT_WEB_SITE "http://www.truecombatelite.com"
 !define WEB_SITE_NAME "True Combat Elite and CQB Lithuania"
-!define INSTALLER_WEB_SITE "http://tc.garagegame.eu"
-!define IP_ADDRESS "78.57.195.107"
+!define INSTALLER_WEB_SITE "http://tc.oneladgames.com"
+!define IP_ADDRESS "78.63.43.229"
 
 !define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\etl.exe"
 !define PRODUCT_UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}"
@@ -153,9 +153,9 @@ SetOverwrite try
 ; Put file there
 File /r "files\*"
 
-inetc::get /NOCANCEL "http://tc.garagegame.eu/files/wet/pak0.pk3" "$INSTDIR\etmain\pak0.pk3" /end
-inetc::get /NOCANCEL "http://tc.garagegame.eu/files/wet/pak1.pk3" "$INSTDIR\etmain\pak1.pk3" /end
-inetc::get /NOCANCEL "http://tc.garagegame.eu/files/wet/pak2.pk3" "$INSTDIR\etmain\pak2.pk3" /end
+inetc::get /NOCANCEL "http://tc.oneladgames.com/files/wet/pak0.pk3" "$INSTDIR\etmain\pak0.pk3" /end
+inetc::get /NOCANCEL "http://tc.oneladgames.com/files/wet/pak1.pk3" "$INSTDIR\etmain\pak1.pk3" /end
+inetc::get /NOCANCEL "http://tc.oneladgames.com/files/wet/pak2.pk3" "$INSTDIR\etmain\pak2.pk3" /end
 
 SectionEnd
 
@@ -180,8 +180,8 @@ SectionIn 3
 
 SetOutPath "$DOCUMENTS\TCETL\tcetest"
 SetOverwrite try
-inetc::get /NOCANCEL "http://tc.garagegame.eu/files/maps/ingamaps.7z" "$DOCUMENTS\TCETL\tcetest\ingamaps.7z" /end
-Nsis7z::ExtractWithDetails "maps.7z" "Extracting maps %s..."
+inetc::get /NOCANCEL "http://tc.oneladgames.com/files/maps/ingamaps.7z" "$DOCUMENTS\TCETL\tcetest\ingamaps.7z" /end
+Nsis7z::ExtractWithDetails "ingamaps.7z" "Extracting maps %s..."
 Delete "$OUTDIR\ingamaps.7z"
 
 SetOutPath "$INSTDIR"
@@ -225,7 +225,7 @@ SectionEnd
 
 ; Section descriptions
   !insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
-  !insertmacro MUI_DESCRIPTION_TEXT ${TC} "This component is Required to run ${PRODUCT_NAME}. It contains Enemy Territory: Legacy 2.76, True Combat: Elite, True Combat: Close Quarters Battle. Downloads Wolfenstein: Enemy Territory Assets."
+  !insertmacro MUI_DESCRIPTION_TEXT ${TC} "This component is Required to run ${PRODUCT_NAME}. It contains Enemy Territory: Legacy 2.81.1, True Combat: Elite, True Combat: Close Quarters Battle. Downloads Wolfenstein: Enemy Territory Assets."
   !insertmacro MUI_DESCRIPTION_TEXT ${INGAMAPS} "This component is Optional. It downloads additional maps for Inga ETL Servers and adds shortcuts."
   !insertmacro MUI_DESCRIPTION_TEXT ${DESKTOP} "This component is Optional. It contains Desktop shortcuts for True Combat: Elite and True Combat: Close Quarters Battle."
   !insertmacro MUI_FUNCTION_DESCRIPTION_END
