@@ -7,12 +7,14 @@ Unicode True
 !define PRODUCT_CQB "CQB"
 !define PRODUCT_ENGINE "WET"
 !define SERVER_INGA "Inga"
-!define PRODUCT_VERSION "1.8.7"
+!define PRODUCT_VERSION "1.8.8"
 !define PRODUCT_PUBLISHER "Aivaras Kasperaitis"
 !define PRODUCT_WEB_SITE "http://www.truecombatelite.com"
 !define WEB_SITE_NAME "True Combat Elite and CQB Lithuania"
 !define INSTALLER_WEB_SITE "http://tc.oneladgames.com"
 !define IP_ADDRESS "78.63.43.229"
+
+!define /date TIME_STAMP "%Y%m%d%H%M%S"
 
 !define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\et.exe"
 !define PRODUCT_UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}"
@@ -94,6 +96,7 @@ FunctionEnd
 ; Uninstaller pages
 !insertmacro MUI_UNPAGE_WELCOME
 ;!insertmacro MUI_UNPAGE_CONFIRM
+!insertmacro MUI_UNPAGE_COMPONENTS
 !insertmacro MUI_UNPAGE_INSTFILES
 !insertmacro MUI_UNPAGE_FINISH
 
@@ -135,7 +138,7 @@ Function .onInit
 	Exec $INSTDIR\uninstall.exe
 FunctionEnd
 
-Section "WET. TCE. CQB."  TC
+Section "WET. TCE. CQB." TC
   SectionIn 1 RO
   SetOutPath "$INSTDIR"
   SetOverwrite try
@@ -153,7 +156,7 @@ Section "WET. TCE. CQB."  TC
   ${EndIf}
 SectionEnd
 
-Section "Desktop Shortcuts"  DESKTOP
+Section "Desktop Shortcuts" DESKTOP
   SectionIn 2
   SetOutPath "$INSTDIR"
   SetOverwrite try
@@ -165,7 +168,7 @@ Section "Desktop Shortcuts"  DESKTOP
   CreateShortCut "$DESKTOP\Alt+X.lnk" "$INSTDIR\etminpro.exe" "" "$INSTDIR\etminpro.ico" 0 "" ""
 SectionEnd
 
-Section "Inga Servers Package"  INGAMAPS
+Section "Inga Servers Package" INGAMAPS
   SectionIn 3
   ;SetOutPath "$INSTDIR\tcetest"
   ;SetOverwrite try
@@ -201,6 +204,49 @@ Section -AdditionalIcons
   CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\TC AIO Installer Website.lnk" "$INSTDIR\InstallerWebsite.url"
 SectionEnd
 
+Section "Default Profiles" PROFILES
+  SectionIn 4
+  ${If} ${FileExists} "$LOCALAPPDATA\VirtualStore\Program Files (x86)\True Combat WET\*.*"
+  ${Else}
+    SetOutPath "$LOCALAPPDATA\VirtualStore\Program Files (x86)\True Combat WET"
+    SetOverwrite try
+    ; Put file there
+    File /r "profiles\*"
+    Call SetProfile
+  ${EndIf}
+SectionEnd
+
+Function SetProfile
+  System::Call 'user32::GetSystemMetrics(i 1) i .r1'
+  System::Call 'user32::GetSystemMetrics(i 0) i .r0'
+
+  !define /date TIMESTAMP "%x %X"
+
+  FileOpen $4 "$LOCALAPPDATA\VirtualStore\Program Files (x86)\True Combat WET\tcetest\profiles\User\etconfig.cfg" a
+
+  FileSeek $4 0 END
+  FileWrite $4 "$\r$\n" ; we write a new line
+  FileWrite $4 'seta r_customheight "$1"'
+  FileWrite $4 "$\r$\n" ; we write a new line
+  FileWrite $4 'seta r_customwidth "$0"'
+  FileWrite $4 "$\r$\n" ; we write an extra line
+  FileWrite $4 'seta name "User-${TIME_STAMP}"'
+  FileWrite $4 "$\r$\n" ; we write an extra line
+  FileClose $4 ; and close the file
+
+  FileOpen $4 "$LOCALAPPDATA\VirtualStore\Program Files (x86)\True Combat WET\cqbtest\profiles\User\etconfig.cfg" a
+
+  FileSeek $4 0 END
+  FileWrite $4 "$\r$\n" ; we write a new line
+  FileWrite $4 'seta r_customheight "$1"'
+  FileWrite $4 "$\r$\n" ; we write a new line
+  FileWrite $4 'seta r_customwidth "$0"'
+  FileWrite $4 "$\r$\n" ; we write an extra line
+  FileWrite $4 'seta name "User-${TIME_STAMP}"'
+  FileWrite $4 "$\r$\n" ; we write an extra line
+  FileClose $4 ; and close the file
+FunctionEnd
+
 Section -Post
   WriteUninstaller "$INSTDIR\uninstall.exe"
   WriteRegStr HKLM "${PRODUCT_DIR_REGKEY}" "" "$INSTDIR\et.exe"
@@ -215,8 +261,9 @@ SectionEnd
 ; Section descriptions
 !insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
 !insertmacro MUI_DESCRIPTION_TEXT ${TC} "This component is Required to run ${PRODUCT_NAME}. It contains Wolfenstein: Enemy Territory, Punkbuster, True Combat: Elite, True Combat: Close Quarters Battle."
-!insertmacro MUI_DESCRIPTION_TEXT ${INGAMAPS} "This component is Optional. It downloads additional maps for Inga WET Servers and adds shortcuts."
 !insertmacro MUI_DESCRIPTION_TEXT ${DESKTOP} "This component is Optional. It contains Desktop shortcuts for True Combat: Elite and True Combat: Close Quarters Battle."
+!insertmacro MUI_DESCRIPTION_TEXT ${INGAMAPS} "This component is Optional. It downloads additional maps for Inga WET Servers and adds Desktop shortcuts."
+!insertmacro MUI_DESCRIPTION_TEXT ${PROFILES} "This component is Optional. It contains default User Profiles."
 !insertmacro MUI_FUNCTION_DESCRIPTION_END
 
 ; PunkBuster Activation.
@@ -227,7 +274,8 @@ Section -Prerequisites
   ;endActivatePB:
 SectionEnd
 
-Section Uninstall
+Section "un.WET. TCE. CQB." UNTC
+  SectionIn 1 RO
   ; Remove shortcuts and folder
   Delete "$DESKTOP\${PRODUCT_TCE} ${PRODUCT_ENGINE}.lnk"
   Delete "$DESKTOP\${PRODUCT_CQB} ${PRODUCT_ENGINE}.lnk"
@@ -253,3 +301,15 @@ Section Uninstall
   DeleteRegKey ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}"
   DeleteRegKey HKLM "${PRODUCT_DIR_REGKEY}"
 SectionEnd
+
+Section "un.Profiles" UNPROFILES
+  SectionIn 2
+    ; Remove Game Profiles 
+  RMDir /r "$LOCALAPPDATA\VirtualStore\Program Files (x86)\${PRODUCT_NAME}"
+SectionEnd
+
+; Section descriptions
+!insertmacro MUI_UNFUNCTION_DESCRIPTION_BEGIN
+!insertmacro MUI_DESCRIPTION_TEXT ${UNTC} "Remove ${PRODUCT_NAME}. It contains Wolfenstein: Enemy Territory, Punkbuster, True Combat: Elite, True Combat: Close Quarters Battle."
+!insertmacro MUI_DESCRIPTION_TEXT ${UNPROFILES} "Remove User Profiles."
+!insertmacro MUI_UNFUNCTION_DESCRIPTION_END
