@@ -82,14 +82,14 @@ BrandingText "True Combat WET"
 ;!define MUI_FINISHPAGE_RUN "$INSTDIR\et.exe"
 ;!define MUI_FINISHPAGE_RUN_PARAMETERS "+set fs_game tcetest +set com_hunkMegs 512 +set com_zoneMegs 256 +set com_soundMegs 64 +set r_primitives 2 +connect ${IP_ADDRESS}:27961"
 
-!define MUI_FINISHPAGE_RUN
-!define MUI_FINISHPAGE_RUN_FUNCTION RunTCE
+;!define MUI_FINISHPAGE_RUN
+;!define MUI_FINISHPAGE_RUN_FUNCTION RunTCE
 
-Function RunTCE
-  SetOutPath $INSTDIR
-  Exec "$INSTDIR\etminpro.exe"
-  Exec '"$INSTDIR\et.exe" +set fs_game tcetest +set com_hunkMegs 512 +set com_zoneMegs 256 +set com_soundMegs 64 +set r_primitives 2'
-FunctionEnd
+;Function RunTCE
+;  SetOutPath $INSTDIR
+;  Exec "$INSTDIR\etminpro.exe"
+;  Exec '"$INSTDIR\et.exe" +set fs_game tcetest +set com_hunkMegs 512 +set com_zoneMegs 256 +set com_soundMegs 64 +set r_primitives 2'
+;FunctionEnd
 
 !insertmacro MUI_PAGE_FINISH
 
