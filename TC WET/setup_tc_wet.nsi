@@ -71,10 +71,6 @@ BrandingText "True Combat WET"
 !define MUI_LICENSEPAGE_TEXT_BOTTOM "If you accept the terms of the agreement, click I Agree to continue. You must accept the agreement to install Wolfenstein: Enemy Territory"
 !insertmacro MUI_PAGE_LICENSE "licence\wet.txt"
 
-!define MUI_LICENSEPAGE_TEXT_TOP "Please review the license terms before installing PunkBuster"
-!define MUI_LICENSEPAGE_TEXT_BOTTOM "If you accept the terms of the agreement, click I Agree to continue. You must accept the agreement to install PunkBuster"
-!insertmacro MUI_PAGE_LICENSE "licence\pb.txt"
-
 !define MUI_LICENSEPAGE_TEXT_TOP "Please review the license terms before installing True Combat: Elite"
 !define MUI_LICENSEPAGE_TEXT_BOTTOM "If you accept the terms of the agreement, click I Agree to continue. You must accept the agreement to install True Combat: Elite"
 !insertmacro MUI_PAGE_LICENSE "licence\tce.txt"
@@ -210,19 +206,6 @@ Section "Inga Servers Package" INGAMAPS
   CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\${SERVER_INGA} ${PRODUCT_ENGINE} ${PRODUCT_CQB} BC.lnk" "$INSTDIR\et.exe" "+set fs_game cqbtest +set com_hunkMegs 512 +set com_zoneMegs 256 +set com_soundMegs 64 +set s_khz 44 +set r_maxpolyverts 16384 +set r_maxpolys 4096 +set r_primitives 2 +connect ${IP_ADDRESS}:27969" "$INSTDIR\cqb.ico" 0 "" ""
 SectionEnd
 
-Section -AdditionalIcons
-  ; Startmenu Shortcuts
-  CreateDirectory "$SMPROGRAMS\${PRODUCT_NAME}"
-  CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\${PRODUCT_TCE} ${PRODUCT_ENGINE}.lnk" "$INSTDIR\et.exe" "+set fs_game tcetest +set com_hunkMegs 512 +set com_zoneMegs 256 +set com_soundMegs 64 +set r_primitives 2" "$INSTDIR\tce.ico" 0 "" ""
-  CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\${PRODUCT_CQB} ${PRODUCT_ENGINE}.lnk" "$INSTDIR\et.exe" "+set fs_game cqbtest +set com_hunkMegs 512 +set com_zoneMegs 256 +set com_soundMegs 64 +set s_khz 44 +set r_maxpolyverts 16384 +set r_maxpolys 4096 +set r_primitives 2" "$INSTDIR\cqb.ico" 0 "" ""
-
-  CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\Uninstall.lnk" "$INSTDIR\uninstall.exe" "" "$INSTDIR\un.ico" 0 "" ""
-
-  ; Url Shortcuts
-  CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\TC Website.lnk" "$INSTDIR\TCWebsite.url"
-  CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\TC AIO Installer Website.lnk" "$INSTDIR\InstallerWebsite.url"
-SectionEnd
-
 Section "Default Profiles" PROFILES
   SectionIn 4
   ${If} ${FileExists} "$LOCALAPPDATA\VirtualStore\Program Files (x86)\True Combat WET\*.*"
@@ -266,6 +249,19 @@ Function SetProfile
   FileClose $4 ; and close the file
 FunctionEnd
 
+Section -AdditionalIcons
+  ; Startmenu Shortcuts
+  CreateDirectory "$SMPROGRAMS\${PRODUCT_NAME}"
+  CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\${PRODUCT_TCE} ${PRODUCT_ENGINE}.lnk" "$INSTDIR\et.exe" "+set fs_game tcetest +set com_hunkMegs 512 +set com_zoneMegs 256 +set com_soundMegs 64 +set r_primitives 2" "$INSTDIR\tce.ico" 0 "" ""
+  CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\${PRODUCT_CQB} ${PRODUCT_ENGINE}.lnk" "$INSTDIR\et.exe" "+set fs_game cqbtest +set com_hunkMegs 512 +set com_zoneMegs 256 +set com_soundMegs 64 +set s_khz 44 +set r_maxpolyverts 16384 +set r_maxpolys 4096 +set r_primitives 2" "$INSTDIR\cqb.ico" 0 "" ""
+
+  CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\Uninstall.lnk" "$INSTDIR\uninstall.exe" "" "$INSTDIR\un.ico" 0 "" ""
+
+  ; Url Shortcuts
+  CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\TC Website.lnk" "$INSTDIR\TCWebsite.url"
+  CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\TC AIO Installer Website.lnk" "$INSTDIR\InstallerWebsite.url"
+SectionEnd
+
 Section -Post
   WriteUninstaller "$INSTDIR\uninstall.exe"
   WriteRegStr HKLM "${PRODUCT_DIR_REGKEY}" "" "$INSTDIR\et.exe"
@@ -279,19 +275,11 @@ SectionEnd
 
 ; Section descriptions
 !insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
-!insertmacro MUI_DESCRIPTION_TEXT ${TC} "This component is Required to run ${PRODUCT_NAME}. It contains Wolfenstein: Enemy Territory, Punkbuster, True Combat: Elite, True Combat: Close Quarters Battle."
+!insertmacro MUI_DESCRIPTION_TEXT ${TC} "This component is Required to run ${PRODUCT_NAME}. It contains Wolfenstein: Enemy Territory, True Combat: Elite, True Combat: Close Quarters Battle."
 !insertmacro MUI_DESCRIPTION_TEXT ${DESKTOP} "This component is Optional. It contains Desktop shortcuts for True Combat: Elite and True Combat: Close Quarters Battle."
 !insertmacro MUI_DESCRIPTION_TEXT ${INGAMAPS} "This component is Optional. It downloads additional maps for Inga WET Servers and adds Desktop shortcuts."
 !insertmacro MUI_DESCRIPTION_TEXT ${PROFILES} "This component is Optional. It contains default User Profiles."
 !insertmacro MUI_FUNCTION_DESCRIPTION_END
-
-; PunkBuster Activation.
-Section -Prerequisites
-  SetOutPath $INSTDIR\pb
-  ; MessageBox MB_YESNO "Activate PunkBuster?" /SD IDYES IDNO endActivatePB
-    ExecWait "$INSTDIR\pb\pbsvc.exe"
-  ;endActivatePB:
-SectionEnd
 
 Section "un.WET. TCE. CQB." UNTC
   SectionIn 1 RO
@@ -310,8 +298,7 @@ Section "un.WET. TCE. CQB." UNTC
   ExecWait "taskkill /im et.exe"
   ExecWait "taskkill /im etminpro.exe"
 
-  ; Remove files and uninstaller
-
+    ; Remove files and uninstaller
   Rename $INSTDIR\etmain\etkey $PLUGINSDIR\etkey
   RMDir /r $INSTDIR # Remembering, of course, that you should do this with care
   CreateDirectory $INSTDIR\etmain
@@ -323,12 +310,12 @@ SectionEnd
 
 Section "un.Profiles" UNPROFILES
   SectionIn 2
-    ; Remove Game Profiles 
+  ; Remove Game Profiles 
   RMDir /r "$LOCALAPPDATA\VirtualStore\Program Files (x86)\${PRODUCT_NAME}"
 SectionEnd
 
 ; Section descriptions
 !insertmacro MUI_UNFUNCTION_DESCRIPTION_BEGIN
-!insertmacro MUI_DESCRIPTION_TEXT ${UNTC} "Remove ${PRODUCT_NAME}. It contains Wolfenstein: Enemy Territory, Punkbuster, True Combat: Elite, True Combat: Close Quarters Battle."
+!insertmacro MUI_DESCRIPTION_TEXT ${UNTC} "Remove ${PRODUCT_NAME}. It contains Wolfenstein: Enemy Territory, True Combat: Elite, True Combat: Close Quarters Battle."
 !insertmacro MUI_DESCRIPTION_TEXT ${UNPROFILES} "Remove User Profiles."
 !insertmacro MUI_UNFUNCTION_DESCRIPTION_END
