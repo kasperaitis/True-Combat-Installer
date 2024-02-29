@@ -5,6 +5,7 @@ etminpro/
 nsis/
 resources/
 maps/*
-pb/
 !maps/ingamaps/
 ingamaps.7z
+pb/
+deprecated/
