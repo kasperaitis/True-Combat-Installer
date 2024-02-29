@@ -222,31 +222,41 @@ Function SetProfile
   System::Call 'user32::GetSystemMetrics(i 1) i .r1'
   System::Call 'user32::GetSystemMetrics(i 0) i .r0'
 
-  !define /date TIMESTAMP "%x %X"
+  IntOp $3 $0 * 100
+  IntOp $4 $3 / $1
+  ${If} $4 == 133
+    StrCpy $2 2
+  ${Else}
+    StrCpy $2 1
+  ${EndIf}
 
-  FileOpen $4 "$LOCALAPPDATA\VirtualStore\Program Files (x86)\True Combat WET\tcetest\profiles\User\etconfig.cfg" a
+  FileOpen $5 "$LOCALAPPDATA\VirtualStore\Program Files (x86)\True Combat WET\tcetest\profiles\User\etconfig.cfg" a
 
-  FileSeek $4 0 END
-  FileWrite $4 "$\r$\n" ; we write a new line
-  FileWrite $4 'seta r_customheight "$1"'
-  FileWrite $4 "$\r$\n" ; we write a new line
-  FileWrite $4 'seta r_customwidth "$0"'
-  FileWrite $4 "$\r$\n" ; we write an extra line
-  FileWrite $4 'seta name "User-${TIME_STAMP}"'
-  FileWrite $4 "$\r$\n" ; we write an extra line
-  FileClose $4 ; and close the file
+  FileSeek $5 0 END
+  FileWrite $5 "$\r$\n" ; we write a new line
+  FileWrite $5 'seta r_customheight "$1"'
+  FileWrite $5 "$\r$\n" ; we write a new line
+  FileWrite $5 'seta r_customwidth "$0"'
+  FileWrite $5 "$\r$\n" ; we write an extra line
+  FileWrite $5 'seta cg_aspectMode "$2"'
+  FileWrite $5 "$\r$\n" ; we write an extra line
+  FileWrite $5 'seta name "User-${TIME_STAMP}"'
+  FileWrite $5 "$\r$\n" ; we write an extra line
+  FileClose $5 ; and close the file
 
-  FileOpen $4 "$LOCALAPPDATA\VirtualStore\Program Files (x86)\True Combat WET\cqbtest\profiles\User\etconfig.cfg" a
+  FileOpen $5 "$LOCALAPPDATA\VirtualStore\Program Files (x86)\True Combat WET\cqbtest\profiles\User\etconfig.cfg" a
 
-  FileSeek $4 0 END
-  FileWrite $4 "$\r$\n" ; we write a new line
-  FileWrite $4 'seta r_customheight "$1"'
-  FileWrite $4 "$\r$\n" ; we write a new line
-  FileWrite $4 'seta r_customwidth "$0"'
-  FileWrite $4 "$\r$\n" ; we write an extra line
-  FileWrite $4 'seta name "User-${TIME_STAMP}"'
-  FileWrite $4 "$\r$\n" ; we write an extra line
-  FileClose $4 ; and close the file
+  FileSeek $5 0 END
+  FileWrite $5 "$\r$\n" ; we write a new line
+  FileWrite $5 'seta r_customheight "$1"'
+  FileWrite $5 "$\r$\n" ; we write a new line
+  FileWrite $5 'seta r_customwidth "$0"'
+  FileWrite $5 "$\r$\n" ; we write an extra line
+  FileWrite $5 'seta cg_aspectMode "$2"'
+  FileWrite $5 "$\r$\n" ; we write an extra line
+  FileWrite $5 'seta name "User-${TIME_STAMP}"'
+  FileWrite $5 "$\r$\n" ; we write an extra line
+  FileClose $5 ; and close the file
 FunctionEnd
 
 Section -AdditionalIcons
