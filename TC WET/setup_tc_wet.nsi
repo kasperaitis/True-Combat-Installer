@@ -43,7 +43,7 @@ Unicode True
 BrandingText "True Combat WET"
 
 ; MUI
-!include "MUI.nsh"
+!include "MUI2.nsh"
 
 ; MUI Settings
 !define MUI_ABORTWARNING
@@ -85,8 +85,8 @@ BrandingText "True Combat WET"
 
 ; Components page
 !insertmacro MUI_PAGE_COMPONENTS
-; Directory page
-!insertmacro MUI_PAGE_DIRECTORY
+; Directory page ; Disabled until a better solution is found to VirtualStore files
+;!insertmacro MUI_PAGE_DIRECTORY
 ;!insertmacro MUI_PAGE_STARTMENU "Application" $StartMenuFolder
 ; Instfiles page
 !insertmacro MUI_PAGE_INSTFILES
