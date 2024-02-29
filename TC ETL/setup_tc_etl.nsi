@@ -17,12 +17,6 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-; Todo
-; Ask if user wants to leave etkey.
-; Delete unrequired files in installation folder.
-; Uninstaler supose to close all installed apps before uninstall.
-; Review maps.
-
 Unicode True
 
 ; HM NIS Edit Wizard helper defines
@@ -32,12 +26,14 @@ Unicode True
 !define PRODUCT_CQB "CQB"
 !define PRODUCT_ENGINE "ETL"
 !define SERVER_INGA "Inga"
-!define PRODUCT_VERSION "1.0.4"
+!define PRODUCT_VERSION "1.0.5"
 !define PRODUCT_PUBLISHER "Aivaras Kasperaitis"
 !define PRODUCT_WEB_SITE "http://www.truecombatelite.com"
 !define WEB_SITE_NAME "True Combat Elite and CQB Lithuania"
 !define INSTALLER_WEB_SITE "http://tc.oneladgames.com"
 !define IP_ADDRESS "78.63.43.229"
+
+!define /date TIME_STAMP "%Y%m%d%H%M%S"
 
 !define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\etl.exe"
 !define PRODUCT_UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}"
@@ -51,7 +47,6 @@ BrandingText "True Combat ETL"
 
 ; MUI Settings
 !define MUI_ABORTWARNING
-
 
 ; MUI Settings / Icons
 ;!define MUI_ICON "${NSISDIR}\Contrib\Graphics\Icons\modern-install-full.ico"
@@ -67,7 +62,6 @@ BrandingText "True Combat ETL"
 !define MUI_HEADERIMAGE_RIGHT
 !define MUI_HEADERIMAGE_BITMAP "images\installer-r.bmp"
 !define MUI_HEADERIMAGE_UNBITMAP "images\installer-r.bmp"
-
 
 ; Welcome page
 !insertmacro MUI_PAGE_WELCOME
@@ -98,33 +92,32 @@ BrandingText "True Combat ETL"
 !insertmacro MUI_PAGE_INSTFILES
 
 ; Finish page
-; !define MUI_FINISHPAGE_SHOWREADME_NOTCHECKED
-; !define MUI_FINISHPAGE_SHOWREADME "licence\readme.txt"
-; !define MUI_FINISHPAGE_RUN "$INSTDIR\et.exe"
-; !define MUI_FINISHPAGE_RUN_PARAMETERS "+set fs_game tcetest +set com_hunkMegs 512 +set com_zoneMegs 256 +set com_soundMegs 64 +set r_primitives 2 +connect ${IP_ADDRESS}:27971"
+;!define MUI_FINISHPAGE_SHOWREADME_NOTCHECKED
+;!define MUI_FINISHPAGE_SHOWREADME "licence\readme.txt"
+;!define MUI_FINISHPAGE_RUN "$INSTDIR\et.exe"
+;!define MUI_FINISHPAGE_RUN_PARAMETERS "+set fs_game tcetest +set com_hunkMegs 512 +set com_zoneMegs 256 +set com_soundMegs 64 +set r_primitives 2 +connect ${IP_ADDRESS}:27971"
 
-!define MUI_FINISHPAGE_RUN
-!define MUI_FINISHPAGE_RUN_FUNCTION RunTCE
+;!define MUI_FINISHPAGE_RUN
+;!define MUI_FINISHPAGE_RUN_FUNCTION RunTCE
 
-Function RunTCE
-SetOutPath $INSTDIR
-Exec '"$INSTDIR\etl.exe" +set fs_game tcetest +set com_hunkMegs 512 +set com_zoneMegs 256 +set com_soundMegs 64 +set r_primitives 2 +set fs_homepath $\"$DOCUMENTS\TCETL$\"'
-FunctionEnd
+;Function RunTCE
+;  SetOutPath $INSTDIR
+;  Exec '"$INSTDIR\etl.exe" +set fs_game tcetest +set com_hunkMegs 512 +set com_zoneMegs 256 +set com_soundMegs 64 +set r_primitives 2 +set fs_homepath $\"$DOCUMENTS\TCETL$\"'
+;FunctionEnd
 
 !insertmacro MUI_PAGE_FINISH
 
 ; Uninstaller pages
 !insertmacro MUI_UNPAGE_WELCOME
 ;!insertmacro MUI_UNPAGE_CONFIRM
+!insertmacro MUI_UNPAGE_COMPONENTS
 !insertmacro MUI_UNPAGE_INSTFILES
 !insertmacro MUI_UNPAGE_FINISH
-
 
 ; Language files
 !insertmacro MUI_LANGUAGE "English"
 
-; MUI end ------
-
+; MUI end
 
 Name "${PRODUCT_NAME} ${PRODUCT_VERSION}"
 Caption "True Combat ETL"
@@ -132,22 +125,19 @@ OutFile "setup_tc_etl_${PRODUCT_VERSION}.exe"
 InstallDir "$PROGRAMFILES\True Combat ETL"
 InstallDirRegKey HKLM "${PRODUCT_DIR_REGKEY}" ""
 
-
-;Request application privileges for Windows 7
+; Request application privileges for Windows 7
 RequestExecutionLevel admin
-
 
 XPStyle on
 WindowIcon on
 
-
 Function .onInit
-	# the plugins dir is automatically deleted when the installer exits
+	; The plugins dir is automatically deleted when the installer exits
 
 	InitPluginsDir
 	File /oname=$PLUGINSDIR\splash.bmp "splash\splash.bmp"
 
-	#optional
+	; Optional
 	File /oname=$PLUGINSDIR\splash.wav "splash\splash.wav"
 
 	advsplash::show 4000 600 400 -1 $PLUGINSDIR\splash
@@ -160,75 +150,117 @@ Function .onInit
 
 	; Unistall old version
 	Exec $INSTDIR\uninstall.exe
-
 FunctionEnd
 
+Section "ETL. TCE. CQB." TC
+  SectionIn 1 RO
+  SetOutPath "$INSTDIR"
+  SetOverwrite try
+  ; Put file there
+  File /r "files\*"
 
-Section "ETL. TCE. CQB."  TC
-
-SectionIn 1 RO
-SetOutPath "$INSTDIR"
-SetOverwrite try
-; Put file there
-File /r "files\*"
-
-inetc::get /NOCANCEL "http://tc.oneladgames.com/files/wet/pak0.pk3" "$INSTDIR\etmain\pak0.pk3" /end
-inetc::get /NOCANCEL "http://tc.oneladgames.com/files/wet/pak1.pk3" "$INSTDIR\etmain\pak1.pk3" /end
-inetc::get /NOCANCEL "http://tc.oneladgames.com/files/wet/pak2.pk3" "$INSTDIR\etmain\pak2.pk3" /end
-
+  inetc::get /NOCANCEL "http://tc.oneladgames.com/files/wet/pak0.pk3" "$INSTDIR\etmain\pak0.pk3" /end
+  inetc::get /NOCANCEL "http://tc.oneladgames.com/files/wet/pak1.pk3" "$INSTDIR\etmain\pak1.pk3" /end
+  inetc::get /NOCANCEL "http://tc.oneladgames.com/files/wet/pak2.pk3" "$INSTDIR\etmain\pak2.pk3" /end
 SectionEnd
 
+Section "Desktop Shortcuts" DESKTOP
+  SectionIn 2
+  SetOutPath "$INSTDIR"
+  SetOverwrite try
 
-Section "Desktop Shortcuts"  DESKTOP
-SectionIn 2
-SetOutPath "$INSTDIR"
-SetOverwrite try
-
-; Desktop Shortcuts
-CreateShortCut "$DESKTOP\${PRODUCT_TCE} ${PRODUCT_ENGINE}.lnk" "$INSTDIR\etl.exe" "+set fs_game tcetest +set com_hunkMegs 512 +set com_zoneMegs 256 +set com_soundMegs 64 +set r_primitives 2 +set fs_homepath $\"$DOCUMENTS\TCETL$\"" "$INSTDIR\tce.ico" 0 "" ""
-CreateShortCut "$DESKTOP\${PRODUCT_CQB} ${PRODUCT_ENGINE}.lnk" "$INSTDIR\etl.exe" "+set fs_game cqbtest +set com_hunkMegs 512 +set com_zoneMegs 256 +set com_soundMegs 64 +set s_khz 44 +set r_maxpolyverts 16384 +set r_maxpolys 4096 +set r_primitives 2 +set fs_homepath $\"$DOCUMENTS\TCETL$\"" "$INSTDIR\cqb.ico" 0 "" ""
-
+  ; Desktop Shortcuts
+  CreateShortCut "$DESKTOP\${PRODUCT_TCE} ${PRODUCT_ENGINE}.lnk" "$INSTDIR\etl.exe" "+set fs_game tcetest +set com_hunkMegs 512 +set com_zoneMegs 256 +set com_soundMegs 64 +set r_primitives 2 +set fs_homepath $\"$DOCUMENTS\TCETL$\"" "$INSTDIR\tce.ico" 0 "" ""
+  CreateShortCut "$DESKTOP\${PRODUCT_CQB} ${PRODUCT_ENGINE}.lnk" "$INSTDIR\etl.exe" "+set fs_game cqbtest +set com_hunkMegs 512 +set com_zoneMegs 256 +set com_soundMegs 64 +set s_khz 44 +set r_maxpolyverts 16384 +set r_maxpolys 4096 +set r_primitives 2 +set fs_homepath $\"$DOCUMENTS\TCETL$\"" "$INSTDIR\cqb.ico" 0 "" ""
 SectionEnd
 
+Section "Inga Servers Package" INGAMAPS
+  SectionIn 3
+  ;SetOutPath "$INSTDIR\tcetest"
+  ;SetOverwrite try
+  ;File "maps\*.*"
 
-Section "Inga Servers Package"  INGAMAPS
-SectionIn 3
-;SetOutPath "$INSTDIR\tcetest"
-;SetOverwrite try
-;File "maps\*.*"
+  SetOutPath "$DOCUMENTS\TCETL\tcetest"
+  SetOverwrite try
+  inetc::get /NOCANCEL "http://tc.oneladgames.com/files/maps/ingamaps.7z" "$INSTDIR\tcetest\ingamaps.7z" /end
+  Nsis7z::ExtractWithDetails "ingamaps.7z" "Extracting maps %s..."
+  Delete "$OUTDIR\ingamaps.7z"
 
-SetOutPath "$DOCUMENTS\TCETL\tcetest"
-SetOverwrite try
-inetc::get /NOCANCEL "http://tc.oneladgames.com/files/maps/ingamaps.7z" "$DOCUMENTS\TCETL\tcetest\ingamaps.7z" /end
-Nsis7z::ExtractWithDetails "ingamaps.7z" "Extracting maps %s..."
-Delete "$OUTDIR\ingamaps.7z"
+  SetOutPath "$INSTDIR"
 
-SetOutPath "$INSTDIR"
+  CreateShortCut "$DESKTOP\${SERVER_INGA} ${PRODUCT_ENGINE} ${PRODUCT_TCE} BC.lnk" "$INSTDIR\etl.exe" "+set fs_game tcetest +set com_hunkMegs 512 +set com_zoneMegs 256 +set com_soundMegs 64 +set r_primitives 2 +set fs_homepath $\"$DOCUMENTS\TCETL$\" +connect ${IP_ADDRESS}:27971" "$INSTDIR\tce.ico" 0 "" ""
+  CreateShortCut "$DESKTOP\${SERVER_INGA} ${PRODUCT_ENGINE} ${PRODUCT_TCE} OBJ.lnk" "$INSTDIR\etl.exe" "+set fs_game tcetest +set com_hunkMegs 512 +set com_zoneMegs 256 +set com_soundMegs 64 +set r_primitives 2 +set fs_homepath $\"$DOCUMENTS\TCETL$\" +connect ${IP_ADDRESS}:27972" "$INSTDIR\tce.ico" 0 "" ""
+  CreateShortCut "$DESKTOP\${SERVER_INGA} ${PRODUCT_ENGINE} ${PRODUCT_CQB} BC.lnk" "$INSTDIR\etl.exe" "+set fs_game cqbtest +set com_hunkMegs 512 +set com_zoneMegs 256 +set com_soundMegs 64 +set s_khz 44 +set r_maxpolyverts 16384 +set r_maxpolys 4096 +set r_primitives 2 +set fs_homepath $\"$DOCUMENTS\TCETL$\" +connect ${IP_ADDRESS}:27979" "$INSTDIR\cqb.ico" 0 "" ""
 
-CreateShortCut "$DESKTOP\${SERVER_INGA} ${PRODUCT_ENGINE} ${PRODUCT_TCE} BC.lnk" "$INSTDIR\etl.exe" "+set fs_game tcetest +set com_hunkMegs 512 +set com_zoneMegs 256 +set com_soundMegs 64 +set r_primitives 2 +set fs_homepath $\"$DOCUMENTS\TCETL$\" +connect ${IP_ADDRESS}:27971" "$INSTDIR\tce.ico" 0 "" ""
-CreateShortCut "$DESKTOP\${SERVER_INGA} ${PRODUCT_ENGINE} ${PRODUCT_TCE} OBJ.lnk" "$INSTDIR\etl.exe" "+set fs_game tcetest +set com_hunkMegs 512 +set com_zoneMegs 256 +set com_soundMegs 64 +set r_primitives 2 +set fs_homepath $\"$DOCUMENTS\TCETL$\" +connect ${IP_ADDRESS}:27972" "$INSTDIR\tce.ico" 0 "" ""
-CreateShortCut "$DESKTOP\${SERVER_INGA} ${PRODUCT_ENGINE} ${PRODUCT_CQB} BC.lnk" "$INSTDIR\etl.exe" "+set fs_game cqbtest +set com_hunkMegs 512 +set com_zoneMegs 256 +set com_soundMegs 64 +set s_khz 44 +set r_maxpolyverts 16384 +set r_maxpolys 4096 +set r_primitives 2 +set fs_homepath $\"$DOCUMENTS\TCETL$\" +connect ${IP_ADDRESS}:27979" "$INSTDIR\cqb.ico" 0 "" ""
-
-CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\${SERVER_INGA} ${PRODUCT_ENGINE} ${PRODUCT_TCE} BC.lnk" "$INSTDIR\etl.exe" "+set fs_game tcetest +set com_hunkMegs 512 +set com_zoneMegs 256 +set com_soundMegs 64 +set r_primitives 2 +set fs_homepath $\"$DOCUMENTS\TCETL$\" +connect ${IP_ADDRESS}:27971" "$INSTDIR\tce.ico" 0 "" ""
-CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\${SERVER_INGA} ${PRODUCT_ENGINE} ${PRODUCT_TCE} OBJ.lnk" "$INSTDIR\etl.exe" "+set fs_game tcetest +set com_hunkMegs 512 +set com_zoneMegs 256 +set com_soundMegs 64 +set r_primitives 2 +set fs_homepath $\"$DOCUMENTS\TCETL$\" +connect ${IP_ADDRESS}:27972" "$INSTDIR\tce.ico" 0 "" ""
-CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\${SERVER_INGA} ${PRODUCT_ENGINE} ${PRODUCT_CQB} BC.lnk" "$INSTDIR\etl.exe" "+set fs_game cqbtest +set com_hunkMegs 512 +set com_zoneMegs 256 +set com_soundMegs 64 +set s_khz 44 +set r_maxpolyverts 16384 +set r_maxpolys 4096 +set r_primitives 2 +set fs_homepath $\"$DOCUMENTS\TCETL$\" +connect ${IP_ADDRESS}:27979" "$INSTDIR\cqb.ico" 0 "" ""
+  CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\${SERVER_INGA} ${PRODUCT_ENGINE} ${PRODUCT_TCE} BC.lnk" "$INSTDIR\etl.exe" "+set fs_game tcetest +set com_hunkMegs 512 +set com_zoneMegs 256 +set com_soundMegs 64 +set r_primitives 2 +set fs_homepath $\"$DOCUMENTS\TCETL$\" +connect ${IP_ADDRESS}:27971" "$INSTDIR\tce.ico" 0 "" ""
+  CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\${SERVER_INGA} ${PRODUCT_ENGINE} ${PRODUCT_TCE} OBJ.lnk" "$INSTDIR\etl.exe" "+set fs_game tcetest +set com_hunkMegs 512 +set com_zoneMegs 256 +set com_soundMegs 64 +set r_primitives 2 +set fs_homepath $\"$DOCUMENTS\TCETL$\" +connect ${IP_ADDRESS}:27972" "$INSTDIR\tce.ico" 0 "" ""
+  CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\${SERVER_INGA} ${PRODUCT_ENGINE} ${PRODUCT_CQB} BC.lnk" "$INSTDIR\etl.exe" "+set fs_game cqbtest +set com_hunkMegs 512 +set com_zoneMegs 256 +set com_soundMegs 64 +set s_khz 44 +set r_maxpolyverts 16384 +set r_maxpolys 4096 +set r_primitives 2 +set fs_homepath $\"$DOCUMENTS\TCETL$\" +connect ${IP_ADDRESS}:27979" "$INSTDIR\cqb.ico" 0 "" ""
 SectionEnd
 
+Section "Default Profiles" PROFILES
+  SectionIn 4
+  ${If} ${FileExists} "$DOCUMENTS\TCETL\*.*"
+  ${Else}
+    SetOutPath "$DOCUMENTS\TCETL"
+    SetOverwrite try
+    ; Put file there
+    File /r "profiles\*"
+    Call SetProfile
+  ${EndIf}
+SectionEnd
+
+Function SetProfile
+  System::Call 'user32::GetSystemMetrics(i 1) i .r1'
+  System::Call 'user32::GetSystemMetrics(i 0) i .r0'
+
+  IntOp $3 $0 * 100
+  IntOp $4 $3 / $1
+  ${If} $4 == 133
+    StrCpy $2 2
+  ${Else}
+    StrCpy $2 1
+  ${EndIf}
+
+  FileOpen $5 "$DOCUMENTS\TCETL\tcetest\profiles\User\etconfig.cfg" a
+
+  FileSeek $5 0 END
+  FileWrite $5 "$\r$\n" ; we write a new line
+  FileWrite $5 'seta r_customheight "$1"'
+  FileWrite $5 "$\r$\n" ; we write a new line
+  FileWrite $5 'seta r_customwidth "$0"'
+  FileWrite $5 "$\r$\n" ; we write an extra line
+  FileWrite $5 'seta cg_aspectMode "$2"'
+  FileWrite $5 "$\r$\n" ; we write an extra line
+  FileWrite $5 'seta name "User-${TIME_STAMP}"'
+  FileWrite $5 "$\r$\n" ; we write an extra line
+  FileClose $5 ; and close the file
+
+  FileOpen $5 "$DOCUMENTS\TCETL\cqbtest\profiles\User\etconfig.cfg" a
+
+  FileSeek $5 0 END
+  FileWrite $5 "$\r$\n" ; we write a new line
+  FileWrite $5 'seta r_customheight "$1"'
+  FileWrite $5 "$\r$\n" ; we write a new line
+  FileWrite $5 'seta r_customwidth "$0"'
+  FileWrite $5 "$\r$\n" ; we write an extra line
+  FileWrite $5 'seta cg_aspectMode "$2"'
+  FileWrite $5 "$\r$\n" ; we write an extra line
+  FileWrite $5 'seta name "User-${TIME_STAMP}"'
+  FileWrite $5 "$\r$\n" ; we write an extra line
+  FileClose $5 ; and close the file
+FunctionEnd
 
 Section -AdditionalIcons
+  ; Startmenu Shortcuts
+  CreateDirectory "$SMPROGRAMS\${PRODUCT_NAME}"
+  CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\${PRODUCT_TCE} ${PRODUCT_ENGINE}.lnk" "$INSTDIR\etl.exe" "+set fs_game tcetest +set com_hunkMegs 512 +set com_zoneMegs 256 +set com_soundMegs 64 +set r_primitives 2 +set fs_homepath $\"$DOCUMENTS\TCETL$\"" "$INSTDIR\tce.ico" 0 "" ""
+  CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\${PRODUCT_CQB} ${PRODUCT_ENGINE}.lnk" "$INSTDIR\etl.exe" "+set fs_game cqbtest +set com_hunkMegs 512 +set com_zoneMegs 256 +set com_soundMegs 64 +set s_khz 44 +set r_maxpolyverts 16384 +set r_maxpolys 4096 +set r_primitives 2 +set fs_homepath $\"$DOCUMENTS\TCETL$\"" "$INSTDIR\cqb.ico" 0 "" ""
 
-SetOutPath "$INSTDIR"
+  CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\Uninstall.lnk" "$INSTDIR\uninstall.exe" "" "$INSTDIR\un.ico" 0 "" ""
 
-; Startmenu Shortcuts
-CreateDirectory "$SMPROGRAMS\${PRODUCT_NAME}"
-CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\${PRODUCT_TCE} ${PRODUCT_ENGINE}.lnk" "$INSTDIR\etl.exe" "+set fs_game tcetest +set com_hunkMegs 512 +set com_zoneMegs 256 +set com_soundMegs 64 +set r_primitives 2 +set fs_homepath $\"$DOCUMENTS\TCETL$\"" "$INSTDIR\tce.ico" 0 "" ""
-CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\${PRODUCT_CQB} ${PRODUCT_ENGINE}.lnk" "$INSTDIR\etl.exe" "+set fs_game cqbtest +set com_hunkMegs 512 +set com_zoneMegs 256 +set com_soundMegs 64 +set s_khz 44 +set r_maxpolyverts 16384 +set r_maxpolys 4096 +set r_primitives 2 +set fs_homepath $\"$DOCUMENTS\TCETL$\"" "$INSTDIR\cqb.ico" 0 "" ""
-
-CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\Uninstall.lnk" "$INSTDIR\uninstall.exe" "" "$INSTDIR\un.ico" 0 "" ""
-
-; Url Shortcuts
-CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\TC Website.lnk" "$INSTDIR\TCWebsite.url"
-CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\TC AIO Installer Website.lnk" "$INSTDIR\InstallerWebsite.url"
+  ; Url Shortcuts
+  CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\TC Website.lnk" "$INSTDIR\TCWebsite.url"
+  CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\TC AIO Installer Website.lnk" "$INSTDIR\InstallerWebsite.url"
 SectionEnd
 
 Section -Post
@@ -243,32 +275,43 @@ Section -Post
 SectionEnd
 
 ; Section descriptions
-  !insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
-  !insertmacro MUI_DESCRIPTION_TEXT ${TC} "This component is Required to run ${PRODUCT_NAME}. It contains Enemy Territory: Legacy 2.81.1, True Combat: Elite, True Combat: Close Quarters Battle. Downloads Wolfenstein: Enemy Territory Assets."
-  !insertmacro MUI_DESCRIPTION_TEXT ${INGAMAPS} "This component is Optional. It downloads additional maps for Inga ETL Servers and adds shortcuts."
-  !insertmacro MUI_DESCRIPTION_TEXT ${DESKTOP} "This component is Optional. It contains Desktop shortcuts for True Combat: Elite and True Combat: Close Quarters Battle."
-  !insertmacro MUI_FUNCTION_DESCRIPTION_END
+!insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
+!insertmacro MUI_DESCRIPTION_TEXT ${TC} "This component is Required to run ${PRODUCT_NAME}. It contains Enemy Territory: Legacy 2.81.1, True Combat: Elite, True Combat: Close Quarters Battle. Downloads Wolfenstein: Enemy Territory Assets."
+!insertmacro MUI_DESCRIPTION_TEXT ${DESKTOP} "This component is Optional. It contains Desktop shortcuts for True Combat: Elite and True Combat: Close Quarters Battle."
+!insertmacro MUI_DESCRIPTION_TEXT ${INGAMAPS} "This component is Optional. It downloads additional maps for Inga ETL Servers and adds Desktop shortcuts."
+!insertmacro MUI_DESCRIPTION_TEXT ${PROFILES} "This component is Optional. It contains default User Profiles."
+!insertmacro MUI_FUNCTION_DESCRIPTION_END
 
-Section Uninstall
+Section "un.ETL. TCE. CQB." UNTC
+  SectionIn 1 RO
+  ; Remove shortcuts and folder
+  Delete "$DESKTOP\${PRODUCT_TCE} ${PRODUCT_ENGINE}.lnk"
+  Delete "$DESKTOP\${PRODUCT_CQB} ${PRODUCT_ENGINE}.lnk"
+  Delete "$DESKTOP\${SERVER_INGA} ${PRODUCT_ENGINE} ${PRODUCT_TCE} BC.lnk"
+  Delete "$DESKTOP\${SERVER_INGA} ${PRODUCT_ENGINE} ${PRODUCT_TCE} OBJ.lnk"
+  Delete "$DESKTOP\${SERVER_INGA} ${PRODUCT_ENGINE} ${PRODUCT_CQB} BC.lnk"
 
-; Remove shortcuts and folder
-Delete "$DESKTOP\${PRODUCT_TCE} ${PRODUCT_ENGINE}.lnk"
-Delete "$DESKTOP\${PRODUCT_CQB} ${PRODUCT_ENGINE}.lnk"
-Delete "$DESKTOP\${SERVER_INGA} ${PRODUCT_ENGINE} ${PRODUCT_TCE} BC.lnk"
-Delete "$DESKTOP\${SERVER_INGA} ${PRODUCT_ENGINE} ${PRODUCT_TCE} OBJ.lnk"
-Delete "$DESKTOP\${SERVER_INGA} ${PRODUCT_ENGINE} ${PRODUCT_CQB} BC.lnk"
+  ; Remove shortcuts and folder
+  RMDir /r "$SMPROGRAMS\${PRODUCT_NAME}"
 
-; Remove shortcuts and folder
-RMDir /r "$SMPROGRAMS\${PRODUCT_NAME}"
+  ; Close files
+  ExecWait "taskkill /im etl.exe"
 
-; Close files
-ExecWait "taskkill /im etl.exe"
+  ; Remove files and uninstaller
+  RMDir /r $INSTDIR # Remembering, of course, that you should do this with care
 
-; Remove files and uninstaller
-
-RMDir /r $INSTDIR # Remembering, of course, that you should do this with care
-RMDir /r "$DOCUMENTS\TCETL"
-
-DeleteRegKey ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}"
-DeleteRegKey HKLM "${PRODUCT_DIR_REGKEY}"
+  DeleteRegKey ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}"
+  DeleteRegKey HKLM "${PRODUCT_DIR_REGKEY}"
 SectionEnd
+
+Section "un.Profiles" UNPROFILES
+  SectionIn 2
+  ; Remove Game Profiles 
+  RMDir /r "$DOCUMENTS\TCETL"
+SectionEnd
+
+; Section descriptions
+!insertmacro MUI_UNFUNCTION_DESCRIPTION_BEGIN
+!insertmacro MUI_DESCRIPTION_TEXT ${UNTC} "Remove ${PRODUCT_NAME}. It contains Wolfenstein: Enemy Territory, True Combat: Elite, True Combat: Close Quarters Battle."
+!insertmacro MUI_DESCRIPTION_TEXT ${UNPROFILES} "Remove User Profiles."
+!insertmacro MUI_UNFUNCTION_DESCRIPTION_END
