@@ -26,7 +26,7 @@ Unicode True
 !define PRODUCT_CQB "CQB"
 !define PRODUCT_ENGINE "WET"
 !define SERVER_INGA "Inga"
-!define PRODUCT_VERSION "1.8.8"
+!define PRODUCT_VERSION "1.9.0"
 !define PRODUCT_PUBLISHER "Aivaras Kasperaitis"
 !define PRODUCT_WEB_SITE "http://www.truecombatelite.com"
 !define WEB_SITE_NAME "True Combat Elite and CQB Lithuania"
@@ -50,9 +50,8 @@ BrandingText "${PRODUCT_NAME}"
 !define MUI_ABORTWARNING
 
 ; MUI Settings / Icons
-;!define MUI_ICON "${NSISDIR}\Contrib\Graphics\Icons\modern-install-full.ico"
 !define MUI_ICON "icons\tc.ico"
-!define MUI_UNICON "icons\tc.ico"
+!define MUI_UNICON "icons\un.ico"
 
 ; MUI Settings / Wizard
 !define MUI_WELCOMEFINISHPAGE_BITMAP "images\installer.bmp"
@@ -145,9 +144,16 @@ Function .onInit
 
 	Delete $PLUGINSDIR\splash.bmp
 	Delete $PLUGINSDIR\splash.waw
-
+  
 	; Unistall old version
 	Exec $INSTDIR\uninstall.exe
+
+  ; Moves etkey from Old Instalation
+  ${If} ${FileExists} "$INSTDIR\etmain\etkey"
+    SetOutPath "$DOCUMENTS\${PRODUCT_NAME}\etmain"
+    Rename $INSTDIR\etmain\etkey "$DOCUMENTS\${PRODUCT_NAME}\etmain\etkey"
+    RMDir /r $INSTDIR # Remembering, of course, that you should do this with care
+  ${EndIf}
 FunctionEnd
 
 Section "WET. TCE. CQB." TC
@@ -167,10 +173,10 @@ Section "WET. TCE. CQB." TC
 
   CreateShortCut "$INSTDIR\Alt+X.lnk" "$INSTDIR\etminpro.exe" "" "$INSTDIR\etminpro.ico" 0 "" ""
 
-  ${If} ${FileExists} "$INSTDIR\etmain\etkey"
+  ${If} ${FileExists} "$DOCUMENTS\${PRODUCT_NAME}\etmain\etkey"
   ${Else}
-    ;NSISdl::download http://etkey.org/etkey.php $INSTDIR\etmain\etkey
-    inetc::get /NOCANCEL "https://etkey.eu/genkey.php" "$INSTDIR\etmain\etkey" /end
+    SetOutPath "$DOCUMENTS\${PRODUCT_NAME}\etmain"
+    inetc::get /NOCANCEL "https://etkey.eu/genkey.php" "$DOCUMENTS\${PRODUCT_NAME}\etmain\etkey" /end
   ${EndIf}
 SectionEnd
 
@@ -268,7 +274,7 @@ Section -AdditionalIcons
   CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\${PRODUCT_ENGINE} ${PRODUCT_TCE}.lnk" "$INSTDIR\et.exe" "+set fs_game tcetest +set com_hunkMegs 512 +set com_zoneMegs 256 +set com_soundMegs 64 +set r_primitives 2 +set fs_homepath $\"$DOCUMENTS\${PRODUCT_NAME}$\"" "$INSTDIR\tce.ico" 0 "" ""
   CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\${PRODUCT_ENGINE} ${PRODUCT_CQB}.lnk" "$INSTDIR\et.exe" "+set fs_game cqbtest +set com_hunkMegs 512 +set com_zoneMegs 256 +set com_soundMegs 64 +set s_khz 44 +set r_maxpolyverts 16384 +set r_maxpolys 4096 +set r_primitives 2 +set fs_homepath $\"$DOCUMENTS\${PRODUCT_NAME}$\"" "$INSTDIR\cqb.ico" 0 "" ""
 
-  CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\Uninstall.lnk" "$INSTDIR\uninstall.exe" "" "$INSTDIR\un.ico" 0 "" ""
+  CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\Uninstall.lnk" "$INSTDIR\uninstall.exe" "" "$INSTDIR\tc.ico" 0 "" ""
 
   ; Url Shortcuts
   CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\TC Website.lnk" "$INSTDIR\TCWebsite.url"
@@ -280,7 +286,7 @@ Section -Post
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_DIR_REGKEY}" "" "$INSTDIR\et.exe"
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "DisplayName" "$(^Name)"
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "UninstallString" "$INSTDIR\uninstall.exe"
-  WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "DisplayIcon" "$INSTDIR\un.ico"
+  WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "DisplayIcon" "$INSTDIR\tc.ico"
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "DisplayVersion" "${PRODUCT_VERSION}"
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "URLInfoAbout" "${PRODUCT_WEB_SITE}"
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "Publisher" "${PRODUCT_PUBLISHER}"
@@ -312,10 +318,7 @@ Section "un.WET. TCE. CQB." UNTC
   ExecWait "taskkill /im etminpro.exe"
 
   ; Remove files and uninstaller
-  Rename $INSTDIR\etmain\etkey $PLUGINSDIR\etkey
   RMDir /r $INSTDIR # Remembering, of course, that you should do this with care
-  CreateDirectory $INSTDIR\etmain
-  Rename $PLUGINSDIR\etkey $INSTDIR\etmain\etkey
 
   DeleteRegKey ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}"
   DeleteRegKey ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_DIR_REGKEY}"
