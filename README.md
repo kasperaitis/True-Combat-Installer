@@ -20,9 +20,6 @@ http://tc.oneladgames.com/files/installer/setup_tc_etl_1.0.4.exe
 **TC WET**
 - Contains the script and files needed to create TC Installer with `Wolfenstein Enemy Territory`.
 
-**maps**
-- Contains additional maps.
-
 ### Compiling
 
 1. Clone https://gitlab.com/kasperaitis/true-combat-installer repository.
