@@ -38,12 +38,13 @@ Unicode True
 !define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\etl.exe"
 !define PRODUCT_UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}"
 !define PRODUCT_UNINST_ROOT_KEY "HKLM"
+;!define PRODUCT_UNINST_ROOT_KEY "HKCU"
 
 ; Branding text
-BrandingText "True Combat ETL"
+BrandingText "${PRODUCT_NAME}"
 
 ; MUI
-!include "MUI.nsh"
+!include "MUI2.nsh"
 
 ; MUI Settings
 !define MUI_ABORTWARNING
@@ -86,23 +87,18 @@ BrandingText "True Combat ETL"
 ; Components page
 !insertmacro MUI_PAGE_COMPONENTS
 ; Directory page
-!insertmacro MUI_PAGE_DIRECTORY
+;!insertmacro MUI_PAGE_DIRECTORY
 ;!insertmacro MUI_PAGE_STARTMENU "Application" $StartMenuFolder
 ; Instfiles page
 !insertmacro MUI_PAGE_INSTFILES
 
 ; Finish page
-;!define MUI_FINISHPAGE_SHOWREADME_NOTCHECKED
-;!define MUI_FINISHPAGE_SHOWREADME "licence\readme.txt"
-;!define MUI_FINISHPAGE_RUN "$INSTDIR\et.exe"
-;!define MUI_FINISHPAGE_RUN_PARAMETERS "+set fs_game tcetest +set com_hunkMegs 512 +set com_zoneMegs 256 +set com_soundMegs 64 +set r_primitives 2 +connect ${IP_ADDRESS}:27971"
-
 ;!define MUI_FINISHPAGE_RUN
 ;!define MUI_FINISHPAGE_RUN_FUNCTION RunTCE
 
 ;Function RunTCE
 ;  SetOutPath $INSTDIR
-;  Exec '"$INSTDIR\etl.exe" +set fs_game tcetest +set com_hunkMegs 512 +set com_zoneMegs 256 +set com_soundMegs 64 +set r_primitives 2 +set fs_homepath $\"$DOCUMENTS\TCETL$\"'
+;  Exec '"$INSTDIR\etl.exe" +set fs_game tcetest +set com_hunkMegs 512 +set com_zoneMegs 256 +set com_soundMegs 64 +set r_primitives 2 +set fs_homepath $\"$DOCUMENTS\${PRODUCT_NAME}$\"'
 ;FunctionEnd
 
 !insertmacro MUI_PAGE_FINISH
@@ -120,10 +116,11 @@ BrandingText "True Combat ETL"
 ; MUI end
 
 Name "${PRODUCT_NAME} ${PRODUCT_VERSION}"
-Caption "True Combat ETL"
+Caption "${PRODUCT_NAME}"
 OutFile "setup_tc_etl_${PRODUCT_VERSION}.exe"
-InstallDir "$PROGRAMFILES\True Combat ETL"
-InstallDirRegKey HKLM "${PRODUCT_DIR_REGKEY}" ""
+InstallDir "$PROGRAMFILES\${PRODUCT_NAME}"
+
+InstallDirRegKey ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_DIR_REGKEY}" ""
 
 ; Request application privileges for Windows 7
 RequestExecutionLevel admin
@@ -162,6 +159,10 @@ Section "ETL. TCE. CQB." TC
   inetc::get /NOCANCEL "http://tc.oneladgames.com/files/wet/pak0.pk3" "$INSTDIR\etmain\pak0.pk3" /end
   inetc::get /NOCANCEL "http://tc.oneladgames.com/files/wet/pak1.pk3" "$INSTDIR\etmain\pak1.pk3" /end
   inetc::get /NOCANCEL "http://tc.oneladgames.com/files/wet/pak2.pk3" "$INSTDIR\etmain\pak2.pk3" /end
+
+  ; Main Shortcuts
+  CreateShortCut "$INSTDIR\${PRODUCT_ENGINE} ${PRODUCT_TCE}.lnk" "$INSTDIR\etl.exe" "+set fs_game tcetest +set com_hunkMegs 512 +set com_zoneMegs 256 +set com_soundMegs 64 +set r_primitives 2 +set fs_homepath $\"$DOCUMENTS\${PRODUCT_NAME}$\"" "$INSTDIR\tce.ico" 0 "" ""
+  CreateShortCut "$INSTDIR\${PRODUCT_ENGINE} ${PRODUCT_CQB}.lnk" "$INSTDIR\etl.exe" "+set fs_game cqbtest +set com_hunkMegs 512 +set com_zoneMegs 256 +set com_soundMegs 64 +set s_khz 44 +set r_maxpolyverts 16384 +set r_maxpolys 4096 +set r_primitives 2 +set fs_homepath $\"$DOCUMENTS\${PRODUCT_NAME}$\"" "$INSTDIR\cqb.ico" 0 "" ""
 SectionEnd
 
 Section "Desktop Shortcuts" DESKTOP
@@ -170,8 +171,8 @@ Section "Desktop Shortcuts" DESKTOP
   SetOverwrite try
 
   ; Desktop Shortcuts
-  CreateShortCut "$DESKTOP\${PRODUCT_TCE} ${PRODUCT_ENGINE}.lnk" "$INSTDIR\etl.exe" "+set fs_game tcetest +set com_hunkMegs 512 +set com_zoneMegs 256 +set com_soundMegs 64 +set r_primitives 2 +set fs_homepath $\"$DOCUMENTS\TCETL$\"" "$INSTDIR\tce.ico" 0 "" ""
-  CreateShortCut "$DESKTOP\${PRODUCT_CQB} ${PRODUCT_ENGINE}.lnk" "$INSTDIR\etl.exe" "+set fs_game cqbtest +set com_hunkMegs 512 +set com_zoneMegs 256 +set com_soundMegs 64 +set s_khz 44 +set r_maxpolyverts 16384 +set r_maxpolys 4096 +set r_primitives 2 +set fs_homepath $\"$DOCUMENTS\TCETL$\"" "$INSTDIR\cqb.ico" 0 "" ""
+  CreateShortCut "$DESKTOP\${PRODUCT_ENGINE} ${PRODUCT_TCE}.lnk" "$INSTDIR\etl.exe" "+set fs_game tcetest +set com_hunkMegs 512 +set com_zoneMegs 256 +set com_soundMegs 64 +set r_primitives 2 +set fs_homepath $\"$DOCUMENTS\${PRODUCT_NAME}$\"" "$INSTDIR\tce.ico" 0 "" ""
+  CreateShortCut "$DESKTOP\${PRODUCT_ENGINE} ${PRODUCT_CQB}.lnk" "$INSTDIR\etl.exe" "+set fs_game cqbtest +set com_hunkMegs 512 +set com_zoneMegs 256 +set com_soundMegs 64 +set s_khz 44 +set r_maxpolyverts 16384 +set r_maxpolys 4096 +set r_primitives 2 +set fs_homepath $\"$DOCUMENTS\${PRODUCT_NAME}$\"" "$INSTDIR\cqb.ico" 0 "" ""
 SectionEnd
 
 Section "Inga Servers Package" INGAMAPS
@@ -180,28 +181,28 @@ Section "Inga Servers Package" INGAMAPS
   ;SetOverwrite try
   ;File "maps\*.*"
 
-  SetOutPath "$DOCUMENTS\TCETL\tcetest"
+  SetOutPath "$DOCUMENTS\${PRODUCT_NAME}\tcetest"
   SetOverwrite try
-  inetc::get /NOCANCEL "http://tc.oneladgames.com/files/maps/ingamaps.7z" "$INSTDIR\tcetest\ingamaps.7z" /end
+  inetc::get /NOCANCEL "http://tc.oneladgames.com/files/maps/ingamaps.7z" "$DOCUMENTS\${PRODUCT_NAME}\tcetest\ingamaps.7z" /end
   Nsis7z::ExtractWithDetails "ingamaps.7z" "Extracting maps %s..."
   Delete "$OUTDIR\ingamaps.7z"
 
   SetOutPath "$INSTDIR"
 
-  CreateShortCut "$DESKTOP\${SERVER_INGA} ${PRODUCT_ENGINE} ${PRODUCT_TCE} BC.lnk" "$INSTDIR\etl.exe" "+set fs_game tcetest +set com_hunkMegs 512 +set com_zoneMegs 256 +set com_soundMegs 64 +set r_primitives 2 +set fs_homepath $\"$DOCUMENTS\TCETL$\" +connect ${IP_ADDRESS}:27971" "$INSTDIR\tce.ico" 0 "" ""
-  CreateShortCut "$DESKTOP\${SERVER_INGA} ${PRODUCT_ENGINE} ${PRODUCT_TCE} OBJ.lnk" "$INSTDIR\etl.exe" "+set fs_game tcetest +set com_hunkMegs 512 +set com_zoneMegs 256 +set com_soundMegs 64 +set r_primitives 2 +set fs_homepath $\"$DOCUMENTS\TCETL$\" +connect ${IP_ADDRESS}:27972" "$INSTDIR\tce.ico" 0 "" ""
-  CreateShortCut "$DESKTOP\${SERVER_INGA} ${PRODUCT_ENGINE} ${PRODUCT_CQB} BC.lnk" "$INSTDIR\etl.exe" "+set fs_game cqbtest +set com_hunkMegs 512 +set com_zoneMegs 256 +set com_soundMegs 64 +set s_khz 44 +set r_maxpolyverts 16384 +set r_maxpolys 4096 +set r_primitives 2 +set fs_homepath $\"$DOCUMENTS\TCETL$\" +connect ${IP_ADDRESS}:27979" "$INSTDIR\cqb.ico" 0 "" ""
+  CreateShortCut "$DESKTOP\${SERVER_INGA} ${PRODUCT_ENGINE} ${PRODUCT_TCE} BC.lnk" "$INSTDIR\etl.exe" "+set fs_game tcetest +set com_hunkMegs 512 +set com_zoneMegs 256 +set com_soundMegs 64 +set r_primitives 2 +set fs_homepath $\"$DOCUMENTS\${PRODUCT_NAME}$\" +connect ${IP_ADDRESS}:27971" "$INSTDIR\tce.ico" 0 "" ""
+  CreateShortCut "$DESKTOP\${SERVER_INGA} ${PRODUCT_ENGINE} ${PRODUCT_TCE} OBJ.lnk" "$INSTDIR\etl.exe" "+set fs_game tcetest +set com_hunkMegs 512 +set com_zoneMegs 256 +set com_soundMegs 64 +set r_primitives 2 +set fs_homepath $\"$DOCUMENTS\${PRODUCT_NAME}$\" +connect ${IP_ADDRESS}:27972" "$INSTDIR\tce.ico" 0 "" ""
+  CreateShortCut "$DESKTOP\${SERVER_INGA} ${PRODUCT_ENGINE} ${PRODUCT_CQB} BC.lnk" "$INSTDIR\etl.exe" "+set fs_game cqbtest +set com_hunkMegs 512 +set com_zoneMegs 256 +set com_soundMegs 64 +set s_khz 44 +set r_maxpolyverts 16384 +set r_maxpolys 4096 +set r_primitives 2 +set fs_homepath $\"$DOCUMENTS\${PRODUCT_NAME}$\" +connect ${IP_ADDRESS}:27979" "$INSTDIR\cqb.ico" 0 "" ""
 
-  CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\${SERVER_INGA} ${PRODUCT_ENGINE} ${PRODUCT_TCE} BC.lnk" "$INSTDIR\etl.exe" "+set fs_game tcetest +set com_hunkMegs 512 +set com_zoneMegs 256 +set com_soundMegs 64 +set r_primitives 2 +set fs_homepath $\"$DOCUMENTS\TCETL$\" +connect ${IP_ADDRESS}:27971" "$INSTDIR\tce.ico" 0 "" ""
-  CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\${SERVER_INGA} ${PRODUCT_ENGINE} ${PRODUCT_TCE} OBJ.lnk" "$INSTDIR\etl.exe" "+set fs_game tcetest +set com_hunkMegs 512 +set com_zoneMegs 256 +set com_soundMegs 64 +set r_primitives 2 +set fs_homepath $\"$DOCUMENTS\TCETL$\" +connect ${IP_ADDRESS}:27972" "$INSTDIR\tce.ico" 0 "" ""
-  CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\${SERVER_INGA} ${PRODUCT_ENGINE} ${PRODUCT_CQB} BC.lnk" "$INSTDIR\etl.exe" "+set fs_game cqbtest +set com_hunkMegs 512 +set com_zoneMegs 256 +set com_soundMegs 64 +set s_khz 44 +set r_maxpolyverts 16384 +set r_maxpolys 4096 +set r_primitives 2 +set fs_homepath $\"$DOCUMENTS\TCETL$\" +connect ${IP_ADDRESS}:27979" "$INSTDIR\cqb.ico" 0 "" ""
+  CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\${SERVER_INGA} ${PRODUCT_ENGINE} ${PRODUCT_TCE} BC.lnk" "$INSTDIR\etl.exe" "+set fs_game tcetest +set com_hunkMegs 512 +set com_zoneMegs 256 +set com_soundMegs 64 +set r_primitives 2 +set fs_homepath $\"$DOCUMENTS\${PRODUCT_NAME}$\" +connect ${IP_ADDRESS}:27971" "$INSTDIR\tce.ico" 0 "" ""
+  CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\${SERVER_INGA} ${PRODUCT_ENGINE} ${PRODUCT_TCE} OBJ.lnk" "$INSTDIR\etl.exe" "+set fs_game tcetest +set com_hunkMegs 512 +set com_zoneMegs 256 +set com_soundMegs 64 +set r_primitives 2 +set fs_homepath $\"$DOCUMENTS\${PRODUCT_NAME}$\" +connect ${IP_ADDRESS}:27972" "$INSTDIR\tce.ico" 0 "" ""
+  CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\${SERVER_INGA} ${PRODUCT_ENGINE} ${PRODUCT_CQB} BC.lnk" "$INSTDIR\etl.exe" "+set fs_game cqbtest +set com_hunkMegs 512 +set com_zoneMegs 256 +set com_soundMegs 64 +set s_khz 44 +set r_maxpolyverts 16384 +set r_maxpolys 4096 +set r_primitives 2 +set fs_homepath $\"$DOCUMENTS\${PRODUCT_NAME}$\" +connect ${IP_ADDRESS}:27979" "$INSTDIR\cqb.ico" 0 "" ""
 SectionEnd
 
 Section "Default Profiles" PROFILES
   SectionIn 4
-  ${If} ${FileExists} "$DOCUMENTS\TCETL\*.*"
+  ${If} ${FileExists} "$DOCUMENTS\${PRODUCT_NAME}\tcetest\profiles\*.*"
   ${Else}
-    SetOutPath "$DOCUMENTS\TCETL"
+    SetOutPath "$DOCUMENTS\${PRODUCT_NAME}"
     SetOverwrite try
     ; Put file there
     File /r "profiles\*"
@@ -221,7 +222,7 @@ Function SetProfile
     StrCpy $2 1
   ${EndIf}
 
-  FileOpen $5 "$DOCUMENTS\TCETL\tcetest\profiles\User\etconfig.cfg" a
+  FileOpen $5 "$DOCUMENTS\${PRODUCT_NAME}\tcetest\profiles\User\etconfig.cfg" a
 
   FileSeek $5 0 END
   FileWrite $5 "$\r$\n" ; we write a new line
@@ -235,7 +236,7 @@ Function SetProfile
   FileWrite $5 "$\r$\n" ; we write an extra line
   FileClose $5 ; and close the file
 
-  FileOpen $5 "$DOCUMENTS\TCETL\cqbtest\profiles\User\etconfig.cfg" a
+  FileOpen $5 "$DOCUMENTS\${PRODUCT_NAME}\cqbtest\profiles\User\etconfig.cfg" a
 
   FileSeek $5 0 END
   FileWrite $5 "$\r$\n" ; we write a new line
@@ -253,8 +254,8 @@ FunctionEnd
 Section -AdditionalIcons
   ; Startmenu Shortcuts
   CreateDirectory "$SMPROGRAMS\${PRODUCT_NAME}"
-  CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\${PRODUCT_TCE} ${PRODUCT_ENGINE}.lnk" "$INSTDIR\etl.exe" "+set fs_game tcetest +set com_hunkMegs 512 +set com_zoneMegs 256 +set com_soundMegs 64 +set r_primitives 2 +set fs_homepath $\"$DOCUMENTS\TCETL$\"" "$INSTDIR\tce.ico" 0 "" ""
-  CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\${PRODUCT_CQB} ${PRODUCT_ENGINE}.lnk" "$INSTDIR\etl.exe" "+set fs_game cqbtest +set com_hunkMegs 512 +set com_zoneMegs 256 +set com_soundMegs 64 +set s_khz 44 +set r_maxpolyverts 16384 +set r_maxpolys 4096 +set r_primitives 2 +set fs_homepath $\"$DOCUMENTS\TCETL$\"" "$INSTDIR\cqb.ico" 0 "" ""
+  CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\${PRODUCT_ENGINE} ${PRODUCT_TCE}.lnk" "$INSTDIR\etl.exe" "+set fs_game tcetest +set com_hunkMegs 512 +set com_zoneMegs 256 +set com_soundMegs 64 +set r_primitives 2 +set fs_homepath $\"$DOCUMENTS\${PRODUCT_NAME}$\"" "$INSTDIR\tce.ico" 0 "" ""
+  CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\${PRODUCT_ENGINE} ${PRODUCT_CQB}.lnk" "$INSTDIR\etl.exe" "+set fs_game cqbtest +set com_hunkMegs 512 +set com_zoneMegs 256 +set com_soundMegs 64 +set s_khz 44 +set r_maxpolyverts 16384 +set r_maxpolys 4096 +set r_primitives 2 +set fs_homepath $\"$DOCUMENTS\${PRODUCT_NAME}$\"" "$INSTDIR\cqb.ico" 0 "" ""
 
   CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\Uninstall.lnk" "$INSTDIR\uninstall.exe" "" "$INSTDIR\un.ico" 0 "" ""
 
@@ -265,7 +266,7 @@ SectionEnd
 
 Section -Post
   WriteUninstaller "$INSTDIR\uninstall.exe"
-  WriteRegStr HKLM "${PRODUCT_DIR_REGKEY}" "" "$INSTDIR\etl.exe"
+  WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_DIR_REGKEY}" "" "$INSTDIR\etl.exe"
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "DisplayName" "$(^Name)"
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "UninstallString" "$INSTDIR\uninstall.exe"
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "DisplayIcon" "$INSTDIR\un.ico"
@@ -285,8 +286,8 @@ SectionEnd
 Section "un.ETL. TCE. CQB." UNTC
   SectionIn 1 RO
   ; Remove shortcuts and folder
-  Delete "$DESKTOP\${PRODUCT_TCE} ${PRODUCT_ENGINE}.lnk"
-  Delete "$DESKTOP\${PRODUCT_CQB} ${PRODUCT_ENGINE}.lnk"
+  Delete "$DESKTOP\${PRODUCT_ENGINE} ${PRODUCT_TCE}.lnk"
+  Delete "$DESKTOP\${PRODUCT_ENGINE} ${PRODUCT_CQB}.lnk"
   Delete "$DESKTOP\${SERVER_INGA} ${PRODUCT_ENGINE} ${PRODUCT_TCE} BC.lnk"
   Delete "$DESKTOP\${SERVER_INGA} ${PRODUCT_ENGINE} ${PRODUCT_TCE} OBJ.lnk"
   Delete "$DESKTOP\${SERVER_INGA} ${PRODUCT_ENGINE} ${PRODUCT_CQB} BC.lnk"
@@ -301,13 +302,13 @@ Section "un.ETL. TCE. CQB." UNTC
   RMDir /r $INSTDIR # Remembering, of course, that you should do this with care
 
   DeleteRegKey ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}"
-  DeleteRegKey HKLM "${PRODUCT_DIR_REGKEY}"
+  DeleteRegKey ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_DIR_REGKEY}"
 SectionEnd
 
 Section "un.Profiles" UNPROFILES
   SectionIn 2
   ; Remove Game Profiles 
-  RMDir /r "$DOCUMENTS\TCETL"
+  RMDir /r "$DOCUMENTS\${PRODUCT_NAME}"
 SectionEnd
 
 ; Section descriptions
