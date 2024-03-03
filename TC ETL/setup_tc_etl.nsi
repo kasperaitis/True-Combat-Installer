@@ -97,7 +97,7 @@ BrandingText "${PRODUCT_NAME}"
 
 ;Function RunTCE
 ;  SetOutPath $INSTDIR
-;  Exec '"$INSTDIR\etl.exe" +set fs_game tcetest +set com_hunkMegs 512 +set com_zoneMegs 256 +set com_soundMegs 64 +set r_primitives 2 +set fs_homepath $\"$DOCUMENTS\${PRODUCT_NAME}$\"'
+;  Exec '"$INSTDIR\etl.exe" +set fs_game tcetest +set fs_homepath $\"$DOCUMENTS\${PRODUCT_NAME}$\"'
 ;FunctionEnd
 
 !insertmacro MUI_PAGE_FINISH
@@ -160,8 +160,8 @@ Section "ETL. TCE. CQB." TC
   inetc::get /NOCANCEL "http://tc.oneladgames.com/files/wet/pak2.pk3" "$INSTDIR\etmain\pak2.pk3" /end
 
   ; Main Shortcuts
-  CreateShortCut "$INSTDIR\${PRODUCT_ENGINE} ${PRODUCT_TCE}.lnk" "$INSTDIR\etl.exe" "+set fs_game tcetest +set com_hunkMegs 512 +set com_zoneMegs 256 +set com_soundMegs 64 +set r_primitives 2 +set fs_homepath $\"$DOCUMENTS\${PRODUCT_NAME}$\"" "$INSTDIR\tce.ico" 0 "" ""
-  CreateShortCut "$INSTDIR\${PRODUCT_ENGINE} ${PRODUCT_CQB}.lnk" "$INSTDIR\etl.exe" "+set fs_game cqbtest +set com_hunkMegs 512 +set com_zoneMegs 256 +set com_soundMegs 64 +set s_khz 44 +set r_maxpolyverts 16384 +set r_maxpolys 4096 +set r_primitives 2 +set fs_homepath $\"$DOCUMENTS\${PRODUCT_NAME}$\"" "$INSTDIR\cqb.ico" 0 "" ""
+  CreateShortCut "$INSTDIR\${PRODUCT_ENGINE} ${PRODUCT_TCE}.lnk" "$INSTDIR\etl.exe" "+set fs_game tcetest +set fs_homepath $\"$DOCUMENTS\${PRODUCT_NAME}$\"" "$INSTDIR\tce.ico" 0 "" ""
+  CreateShortCut "$INSTDIR\${PRODUCT_ENGINE} ${PRODUCT_CQB}.lnk" "$INSTDIR\etl.exe" "+set fs_game cqbtest +set fs_homepath $\"$DOCUMENTS\${PRODUCT_NAME}$\"" "$INSTDIR\cqb.ico" 0 "" ""
 SectionEnd
 
 Section "Desktop Shortcuts" DESKTOP
@@ -170,8 +170,8 @@ Section "Desktop Shortcuts" DESKTOP
   SetOverwrite try
 
   ; Desktop Shortcuts
-  CreateShortCut "$DESKTOP\${PRODUCT_ENGINE} ${PRODUCT_TCE}.lnk" "$INSTDIR\etl.exe" "+set fs_game tcetest +set com_hunkMegs 512 +set com_zoneMegs 256 +set com_soundMegs 64 +set r_primitives 2 +set fs_homepath $\"$DOCUMENTS\${PRODUCT_NAME}$\"" "$INSTDIR\tce.ico" 0 "" ""
-  CreateShortCut "$DESKTOP\${PRODUCT_ENGINE} ${PRODUCT_CQB}.lnk" "$INSTDIR\etl.exe" "+set fs_game cqbtest +set com_hunkMegs 512 +set com_zoneMegs 256 +set com_soundMegs 64 +set s_khz 44 +set r_maxpolyverts 16384 +set r_maxpolys 4096 +set r_primitives 2 +set fs_homepath $\"$DOCUMENTS\${PRODUCT_NAME}$\"" "$INSTDIR\cqb.ico" 0 "" ""
+  CreateShortCut "$DESKTOP\${PRODUCT_ENGINE} ${PRODUCT_TCE}.lnk" "$INSTDIR\etl.exe" "+set fs_game tcetest +set fs_homepath $\"$DOCUMENTS\${PRODUCT_NAME}$\"" "$INSTDIR\tce.ico" 0 "" ""
+  CreateShortCut "$DESKTOP\${PRODUCT_ENGINE} ${PRODUCT_CQB}.lnk" "$INSTDIR\etl.exe" "+set fs_game cqbtest +set fs_homepath $\"$DOCUMENTS\${PRODUCT_NAME}$\"" "$INSTDIR\cqb.ico" 0 "" ""
 SectionEnd
 
 Section "Inga Servers Package" INGAMAPS
@@ -188,13 +188,13 @@ Section "Inga Servers Package" INGAMAPS
 
   SetOutPath "$INSTDIR"
 
-  CreateShortCut "$DESKTOP\${SERVER_INGA} ${PRODUCT_ENGINE} ${PRODUCT_TCE} BC.lnk" "$INSTDIR\etl.exe" "+set fs_game tcetest +set com_hunkMegs 512 +set com_zoneMegs 256 +set com_soundMegs 64 +set r_primitives 2 +set fs_homepath $\"$DOCUMENTS\${PRODUCT_NAME}$\" +connect ${IP_ADDRESS}:27971" "$INSTDIR\tce.ico" 0 "" ""
-  CreateShortCut "$DESKTOP\${SERVER_INGA} ${PRODUCT_ENGINE} ${PRODUCT_TCE} OBJ.lnk" "$INSTDIR\etl.exe" "+set fs_game tcetest +set com_hunkMegs 512 +set com_zoneMegs 256 +set com_soundMegs 64 +set r_primitives 2 +set fs_homepath $\"$DOCUMENTS\${PRODUCT_NAME}$\" +connect ${IP_ADDRESS}:27972" "$INSTDIR\tce.ico" 0 "" ""
-  CreateShortCut "$DESKTOP\${SERVER_INGA} ${PRODUCT_ENGINE} ${PRODUCT_CQB} BC.lnk" "$INSTDIR\etl.exe" "+set fs_game cqbtest +set com_hunkMegs 512 +set com_zoneMegs 256 +set com_soundMegs 64 +set s_khz 44 +set r_maxpolyverts 16384 +set r_maxpolys 4096 +set r_primitives 2 +set fs_homepath $\"$DOCUMENTS\${PRODUCT_NAME}$\" +connect ${IP_ADDRESS}:27979" "$INSTDIR\cqb.ico" 0 "" ""
+  CreateShortCut "$DESKTOP\${SERVER_INGA} ${PRODUCT_ENGINE} ${PRODUCT_TCE} BC.lnk" "$INSTDIR\etl.exe" "+set fs_game tcetest +set fs_homepath $\"$DOCUMENTS\${PRODUCT_NAME}$\" +connect ${IP_ADDRESS}:27971" "$INSTDIR\tce.ico" 0 "" ""
+  CreateShortCut "$DESKTOP\${SERVER_INGA} ${PRODUCT_ENGINE} ${PRODUCT_TCE} OBJ.lnk" "$INSTDIR\etl.exe" "+set fs_game tcetest +set fs_homepath $\"$DOCUMENTS\${PRODUCT_NAME}$\" +connect ${IP_ADDRESS}:27972" "$INSTDIR\tce.ico" 0 "" ""
+  CreateShortCut "$DESKTOP\${SERVER_INGA} ${PRODUCT_ENGINE} ${PRODUCT_CQB} BC.lnk" "$INSTDIR\etl.exe" "+set fs_game cqbtest +set fs_homepath $\"$DOCUMENTS\${PRODUCT_NAME}$\" +connect ${IP_ADDRESS}:27979" "$INSTDIR\cqb.ico" 0 "" ""
 
-  CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\${SERVER_INGA} ${PRODUCT_ENGINE} ${PRODUCT_TCE} BC.lnk" "$INSTDIR\etl.exe" "+set fs_game tcetest +set com_hunkMegs 512 +set com_zoneMegs 256 +set com_soundMegs 64 +set r_primitives 2 +set fs_homepath $\"$DOCUMENTS\${PRODUCT_NAME}$\" +connect ${IP_ADDRESS}:27971" "$INSTDIR\tce.ico" 0 "" ""
-  CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\${SERVER_INGA} ${PRODUCT_ENGINE} ${PRODUCT_TCE} OBJ.lnk" "$INSTDIR\etl.exe" "+set fs_game tcetest +set com_hunkMegs 512 +set com_zoneMegs 256 +set com_soundMegs 64 +set r_primitives 2 +set fs_homepath $\"$DOCUMENTS\${PRODUCT_NAME}$\" +connect ${IP_ADDRESS}:27972" "$INSTDIR\tce.ico" 0 "" ""
-  CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\${SERVER_INGA} ${PRODUCT_ENGINE} ${PRODUCT_CQB} BC.lnk" "$INSTDIR\etl.exe" "+set fs_game cqbtest +set com_hunkMegs 512 +set com_zoneMegs 256 +set com_soundMegs 64 +set s_khz 44 +set r_maxpolyverts 16384 +set r_maxpolys 4096 +set r_primitives 2 +set fs_homepath $\"$DOCUMENTS\${PRODUCT_NAME}$\" +connect ${IP_ADDRESS}:27979" "$INSTDIR\cqb.ico" 0 "" ""
+  CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\${SERVER_INGA} ${PRODUCT_ENGINE} ${PRODUCT_TCE} BC.lnk" "$INSTDIR\etl.exe" "+set fs_game tcetest +set fs_homepath $\"$DOCUMENTS\${PRODUCT_NAME}$\" +connect ${IP_ADDRESS}:27971" "$INSTDIR\tce.ico" 0 "" ""
+  CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\${SERVER_INGA} ${PRODUCT_ENGINE} ${PRODUCT_TCE} OBJ.lnk" "$INSTDIR\etl.exe" "+set fs_game tcetest +set fs_homepath $\"$DOCUMENTS\${PRODUCT_NAME}$\" +connect ${IP_ADDRESS}:27972" "$INSTDIR\tce.ico" 0 "" ""
+  CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\${SERVER_INGA} ${PRODUCT_ENGINE} ${PRODUCT_CQB} BC.lnk" "$INSTDIR\etl.exe" "+set fs_game cqbtest +set fs_homepath $\"$DOCUMENTS\${PRODUCT_NAME}$\" +connect ${IP_ADDRESS}:27979" "$INSTDIR\cqb.ico" 0 "" ""
 SectionEnd
 
 Section "Default Profiles" PROFILES
@@ -253,8 +253,8 @@ FunctionEnd
 Section -AdditionalIcons
   ; Startmenu Shortcuts
   CreateDirectory "$SMPROGRAMS\${PRODUCT_NAME}"
-  CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\${PRODUCT_ENGINE} ${PRODUCT_TCE}.lnk" "$INSTDIR\etl.exe" "+set fs_game tcetest +set com_hunkMegs 512 +set com_zoneMegs 256 +set com_soundMegs 64 +set r_primitives 2 +set fs_homepath $\"$DOCUMENTS\${PRODUCT_NAME}$\"" "$INSTDIR\tce.ico" 0 "" ""
-  CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\${PRODUCT_ENGINE} ${PRODUCT_CQB}.lnk" "$INSTDIR\etl.exe" "+set fs_game cqbtest +set com_hunkMegs 512 +set com_zoneMegs 256 +set com_soundMegs 64 +set s_khz 44 +set r_maxpolyverts 16384 +set r_maxpolys 4096 +set r_primitives 2 +set fs_homepath $\"$DOCUMENTS\${PRODUCT_NAME}$\"" "$INSTDIR\cqb.ico" 0 "" ""
+  CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\${PRODUCT_ENGINE} ${PRODUCT_TCE}.lnk" "$INSTDIR\etl.exe" "+set fs_game tcetest +set fs_homepath $\"$DOCUMENTS\${PRODUCT_NAME}$\"" "$INSTDIR\tce.ico" 0 "" ""
+  CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\${PRODUCT_ENGINE} ${PRODUCT_CQB}.lnk" "$INSTDIR\etl.exe" "+set fs_game cqbtest +set fs_homepath $\"$DOCUMENTS\${PRODUCT_NAME}$\"" "$INSTDIR\cqb.ico" 0 "" ""
 
   CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\Uninstall.lnk" "$INSTDIR\uninstall.exe" "" "$INSTDIR\tc.ico" 0 "" ""
 
