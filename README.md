@@ -1,7 +1,7 @@
 ## NSIS scripts to create Windows All in One True Combat installer.
 
 ### Wolfenstein Enemy Territory (TC WET)
-`Wolfenstein Enemy Territory` 2.60b, Downloads WET Assets, Punkbuster, True Combat Elite 0.49b, True Combat CQB 0.223, ETMinPro Minimizer, Some Fixes, Downloads Optional Maps, Gets etkey from etkey.eu, Activates PunkBuster.
+`Wolfenstein Enemy Territory` 2.60b, Downloads WET Assets, Punkbuster, True Combat Elite 0.49b, True Combat CQB 0.223, ETMinPro Minimizer, Some Fixes, Downloads Optional Maps, Gets etkey from etkey.eu.
 
 Compiled:
 http://tc.oneladgames.com/files/installer/setup_tc_wet_1.8.7.exe
