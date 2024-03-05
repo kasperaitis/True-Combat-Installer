@@ -1,4 +1,2 @@
-*.pk3 filter=lfs diff=lfs merge=lfs -text
-* !text !filter !merge !diff
 pak0.pk3 filter=lfs diff=lfs merge=lfs -text
 pak1.pk3 filter=lfs diff=lfs merge=lfs -text
