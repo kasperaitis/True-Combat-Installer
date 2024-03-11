@@ -294,7 +294,7 @@ SectionEnd
 
 ; Section descriptions
 !insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
-!insertmacro MUI_DESCRIPTION_TEXT ${TC} "This component is Required to run ${PRODUCT_NAME}. It contains Wolfenstein: Enemy Territory, True Combat: Elite, True Combat: Close Quarters Battle. Downloads Wolfenstein: Enemy Territory Assets."
+!insertmacro MUI_DESCRIPTION_TEXT ${TC} "This component is Required to run ${PRODUCT_NAME}. It contains Wolfenstein: Enemy Territory, True Combat: Elite, True Combat: Close Quarters Battle. Downloads Wolfenstein: Enemy Territory Assets. Gets etkey from etkey.eu."
 !insertmacro MUI_DESCRIPTION_TEXT ${DESKTOP} "This component is Optional. It contains Desktop shortcuts for True Combat: Elite and True Combat: Close Quarters Battle."
 !insertmacro MUI_DESCRIPTION_TEXT ${INGAMAPS} "This component is Optional. It downloads additional maps for Inga WET Servers and adds Desktop shortcuts."
 !insertmacro MUI_DESCRIPTION_TEXT ${PROFILES} "This component is Optional. It contains default User Profiles."
