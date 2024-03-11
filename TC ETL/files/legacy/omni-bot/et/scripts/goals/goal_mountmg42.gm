@@ -87,6 +87,7 @@ this.Update = function()
 				this.AddAimRequest(Priority.High, "position", this.MapGoal.GetPosition());
 				this.Bot.HoldButton(BTN.BACKWARD, 0.5); // sometimes if they are too close it's unmountable
 				this.Bot.PressButton(BTN.USE);
+				this.UseTime = GetTime();
 			}
 		}
 		else // mounted
@@ -145,10 +146,6 @@ this.DisableCombat = function()
 
 this.Exit = function()
 {
-	if (this.Bot.HasEntityFlag(ENTFLAG.MNT_MG42)){
-		this.Bot.PressButton(BTN.USE);
-	}
-
 	if ( this.CombatThread ) {
 		this.KillThread(this.CombatThread);
 	}
@@ -157,4 +154,12 @@ this.Exit = function()
 		this.CombatMovementDisabled = false;
 	}
 	this.Facings = null;
+
+	if (this.UseTime > GetTime() - 0.1){
+		//wait 2 frames because ENTFLAG.MNT_MG42 is false immediately after mount
+		sleep(0.1);
+	}
+	if (this.Bot && this.Bot.HasEntityFlag(ENTFLAG.MNT_MG42)) {
+		this.Bot.PressButton(BTN.USE);
+	}
 };

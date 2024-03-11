@@ -1,15 +1,17 @@
 // This script contains functionality to allow bots to choose primary weapons
 this.Name = "SelectWeapons";
-this.Parent = "Limbo";	
+this.Parent = "Limbo";
 this.Debug = false;
 this.AlwaysRecieveEvents = true;
-
-//this.LimitToClass(CLASS.SOLDIER, CLASS.COVERTOPS);
 
 // shared weapon counters
 this.UsingWeapons = {};
 this.UsingWeapons[ TEAM.ALLIES ] = {};
 this.UsingWeapons[ TEAM.AXIS ] = {};
+
+this.goals_mg42 = {};
+this.goals_mortar = {};
+this.NoFilters = { NoFilters=true };
 
 this.Initialize = function()
 {
@@ -59,6 +61,25 @@ this.NumWeaponUsers = function(weaponId)
 	return num;
 };
 
+this.CheckRole = function(goals)
+{
+	foreach (goal in goals) {
+		needRole = false;
+		foreach ( role in ROLE ) {
+			if (goal.HasRole(role)) {
+				if (this.Bot.HasRole(role)) {
+					return true; //goal has same role as this bot
+				}
+				needRole = true;
+			}
+		}
+		if (!needRole) {
+			return true; //goal does not have any role
+		}
+	}
+	return false; //no goal available for this bot
+};
+
 this.GetPriority = function()
 {
 	this.Priority = 1;
@@ -94,10 +115,8 @@ this.Update = function()
 			case CLASS.SOLDIER:
 			{
 				// count how many goals are available for each weapon type
-				goals_mg42 = Util.GoalTable("MOBILEMG42.*", myTeam);
-				goals_mortar = Util.GoalTable("MOBILEMORTAR.*", myTeam);
-				numMg42Goals = tableCount(goals_mg42);
-				numMortarGoals = tableCount(goals_mortar);
+				numMg42Goals = this.QueryGoals(this.goals_mg42, 0xbe8488ed /* MOBILEMG42 */, this.NoFilters);
+				numMortarGoals = this.QueryGoals(this.goals_mortar, 0x74708d7a /* MOBILEMORTAR */, this.NoFilters);
 
 				// count how many other bots have these weapons
 				numMg42Users = 9;
@@ -117,11 +136,11 @@ this.Update = function()
 				if(lastWeapon != WEAPON.MOBILE_MG42) { numMg42Users += 1; }
 				if(lastWeapon != WEAPON.MORTAR) { numMortarUsers += 1; }
 
-				if(numMortarUsers <= numMortarGoals && Server.NumPlayers >= MinPlayersForMortar * numMortarUsers)
+				if(numMortarUsers <= numMortarGoals && Server.NumPlayers >= MinPlayersForMortar * numMortarUsers && this.CheckRole(this.goals_mortar))
 				{
 					newWeapon = WEAPON.MORTAR;
 				}
-				else if(numMg42Users <= numMg42Goals && Server.NumPlayers >= MinPlayersForMobileMG * numMg42Users)
+				else if(numMg42Users <= numMg42Goals && Server.NumPlayers >= MinPlayersForMobileMG * numMg42Users && this.CheckRole(this.goals_mg42))
 				{
 					newWeapon = WEAPON.MOBILE_MG42;
 
@@ -153,9 +172,8 @@ this.Update = function()
 				}
 				else
 				{
-					goals_snipe = {};
-					GetGoals(goals_snipe,myTeam,"SNIPE_.*");
-					numSnipeGoals = tableCount(goals_snipe);
+					GetGoals(Util.QueryTable, myTeam, "SNIPE_.*");
+					numSnipeGoals = tableCount(Util.QueryTable);
 				}
 
 				if (numSnipeGoals > 0)
@@ -196,7 +214,17 @@ this.Update = function()
 
 this.Events[EVENT.CHANGETEAM] = function(newTeam)
 {
-	if (newTeam==TEAM.AXIS){ oldTeam=TEAM.ALLIES; } else { oldTeam=TEAM.AXIS; }
+	if (newTeam==TEAM.AXIS){ oldTeam=TEAM.ALLIES; }
+	else if (newTeam==TEAM.ALLIES){ oldTeam=TEAM.AXIS; }
+	else {
+		//experimental workaround to fix issue with CONNECTING bots which block server slots
+		sleep(0.2);
+		if (this.Bot && this.Bot.GetTeam() < 0) {
+			ExecCommand("kickbot " + this.Bot.GetGameId());
+			global DelayManagePlayers = true;
+		}
+		return;
+	}
 	weapon = this.UsingWeapons[oldTeam][this.Bot];
 	if (weapon) {
 		this.UsingWeapons[oldTeam][this.Bot] = null;

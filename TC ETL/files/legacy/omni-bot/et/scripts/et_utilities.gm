@@ -108,18 +108,6 @@ member ClearSecondaryGoals = function()
 
 ///////////////////////////////////////////////////////////////////////////////
 //
-member CheatsEnabled = function()
-{
-	if ( CheatsEnabled() ) {
-		return true;
-	}
-	Error("cheats must be enabled to use this command");
-	print("type /devmap", GetMapName(), "in console");
-	return false;
-};
-
-///////////////////////////////////////////////////////////////////////////////
-//
 member CheckVehiclePath = function( _params )
 {
 	if (this.CheckVehiclePathFlag)
@@ -128,7 +116,7 @@ member CheckVehiclePath = function( _params )
 		return;
 	}
 
-	if ( !this.CheatsEnabled() ) {
+	if ( !Util.CheatsEnabled() ) {
 		return;
 	}
 
@@ -147,7 +135,7 @@ member CheckVehiclePath = function( _params )
 	goalname2 = goal.Vehicle;
 	if (!goalname2)
 	{
-		print( "CheckVehiclePath: Goal", goalname, "is not vehicle" );
+		print( "CheckVehiclePath: Goal", goalname, "has no vehicle property (MOVER goal)" );
 		return;
 	}
 	goal2 = Util.GetGoal( goalname2, "ETUtil.CheckVehiclePath" );
@@ -217,7 +205,7 @@ member BuildVehiclePath = function( _params )
 		return;
 	}
 
-	if ( !this.CheatsEnabled() )
+	if ( !Util.CheatsEnabled() )
 	{
 		return;
 	}
@@ -259,141 +247,6 @@ member BuildVehiclePath = function( _params )
 	}
 
 	print( "Finished buidling vehicle path for:", goalname );
-};
-
-///////////////////////////////////////////////////////////////////////////////
-//
-member WarpToPosition = function( pos )
-{
-	if ( this.CheatsEnabled() )
-	{
-		s = "setviewpos " + pos[0] + " " + pos[1] + " " + pos[2] + " " + " 0";
-		print(s);
-		ExecCommandOnClient(GetLocalEntity(), s);
-	}
-};
-///////////////////////////////////////////////////////////////////////////////
-//
-member WarpTo = function( _params )
-{
-	pos = Util.GetPositionFromParam( _params[0] );
-	if ( pos )
-	{
-		this.WarpToPosition(pos + Vector3(0,0,24));
-	}
-	else
-		{ Error( "ETUtil.Warpto: Invalid goal name, waypoint name, waypoint UID or paththrough name!^2" ); }
-};
-///////////////////////////////////////////////////////////////////////////////
-//
-member WarpTestBot = function( _params )
-{
-	if ( !this.CheatsEnabled() )
-	{
-		return;
-	}
-
-	b = Util.GetBotByName("testbot");
-
-	if ( !b )
-	{
-		Error("no testbot found");
-		return;
-	}
-
-	localEnt = GetLocalEntity();
-
-	if ( _params[0] )
-	{
-		wp = Util.WpNameInfo(_params[0], "ETUtil.WarpTestBot");
-		if ( wp )
-		{
-			pos = wp.position + Vector3(0,0,24);
-		}
-	}
-	else
-	{
-		pos = GetEntPosition(localEnt);
-		if ( pos )
-		{
-			pos += Vector3(100,0,24);
-		}
-		else
-		{
-			Error( "ETUtil.WarpTestBot: Unable to get local position^2");
-		}
-	}
-
-	if (pos)
-	{
-		s = "setviewpos " + pos[0] + " " + pos[1] + " " + pos[2] + " " + " 0";
-		print(s);
-		ExecCommandOnClient(localEnt, s);
-		yield();
-		ExecCommandOnClient(b.GetGameEntity(), s);
-		yield();yield();
-		ExecCommandOnClient(localEnt, "say_team bot come");
-	}
-};
-
-///////////////////////////////////////////////////////////////////////////////
-//
-member WarpAnyBot = function(_params)
-{
-	if ( !this.CheatsEnabled() )
-	{
-		return;
-	}
-
-	if ( _params[0] ) {
-		foundMatch = null;
-
-		foreach ( bot in BotTable ) {
-			if ( bot.Name.Find(_params[0])!= -1 ) {
-				foundMatch = bot;
-				break;
-			}
-		}
-
-		if (foundMatch) {
-			// can't warp if dead or limbo
-			if ( foundMatch.Health < 1 || foundMatch.HasEntityFlag(ENTFLAG.LIMBO) ) {
-				Error("bot must be alive to warp!");
-				return;
-			}
-
-			pos = GetLocalPosition();
-			if (pos) {
-				pos += Vector3(0,0,24);
-				s = "setviewpos " + pos[0] + " " + pos[1] + " " + pos[2] + " " + " 0";
-
-				// disable the bot while it's getting ready to warp
-				foundMatch.Enable(false);
-				ExecCommandOnClient(foundMatch.GetGameEntity(), s);
-				sleep(2);
-				foundMatch.Enable(true);
-				return;
-			}
-		}
-
-		Error("no bot found with the name ", _params[0]);
-	}
-	else {
-		Error("/bot wab requires a partial or full bot name");
-	}
-};
-
-///////////////////////////////////////////////////////////////////////////////
-//
-member WarpToGoalOffset = function( _params )
-{
-	goal = Util.GetGoal( _params[0], "ETUtil.WarpToGoalOffset" );
-	offset = Vector3( _params[ 1 ], _params[ 2 ], _params[ 3 ] );
-
-	if ( goal )
-	{
-		this.WarpToPosition(GetEntityWorldSpace( goal.GetEntity(), offset));
-	}
 };
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -672,35 +525,6 @@ member TraceAllArty = function()
 		else
 		{
 			print( mapgoal.GetName(), "has visible targets", found );
-		}
-	}
-};
-
-///////////////////////////////////////////////////////////////////////////////
-//
-member DrawObjectiveInfoDisplays = function()
-{
-	for ( i = 64; i < 1024; i += 1 )
-	{
-		if (EntityIsValid(i) && GetEntClass(i) == CLASS.GOAL)
-		{
-			DrawEntityAABB( i, 60, COLOR.RED );
-			center = GetEntWorldAABB(i).CenterPoint();
-			DrawText3d(center, i + " : " + GetEntName(i) ,COLOR.WHITE,60,textDrawRadius);
-		}
-	}
-};
-
-///////////////////////////////////////////////////////////////////////////////
-//
-member DrawSpawns = function()
-{
-	for ( i = 64; i < 1024; i += 1 )
-	{
-		if (EntityIsValid(i) && GetEntClass(i) == CLASS.PLAYERSTART)
-		{
-			pos = GroundPoint(GetEntPosition(i));
-			DrawLine(pos,pos+Vector3(0,0,64),COLOR.RED,60);
 		}
 	}
 };

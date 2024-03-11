@@ -6,7 +6,6 @@
 //------------------------------------------------------------------------------------------
 //	Qiki		17 August 2013	Initial Script & waypoints
 //	Native12	02.05.2014	Finished
-//	Bugs and suggestions: PM on http://omni-bot.invisionzone.com/index.php?/index
 //
 //==========================================================================================
 
@@ -3318,43 +3317,8 @@ global Map =
 	},
 };
 
-/*Commands["botsgoals"] = function(_params)	//only for testing roles (thx. Palota) => called at the end of OnMapLoad
-{
-	foreach (team in TEAM)
-	{
-		foreach (class in Util.PlayerClassTable)
-		{
-			foreach ( bot in BotTable )
-			{
-				if(bot.GetClass()==class && bot.GetTeam()==team)
-				{
-					s="";
-					foreach ( id and role in ROLE )
-					{
-						if(bot.HasRole(role))
-						{
-							s= s + " " + id;
-						}
-					}
-					goal=bot.GetMapGoalName();
-					if(!goal)
-					{
-						goal=bot.GetHighLevelGoalName();
-					}
-					if(!goal)
-					{
-						goal = "";
-					}
-					print(Util.TeamName(team) + " " + Util.ClassName(class) + s + ": " + goal);
-				}
-			}
-		}
-	}
-};*/
-
 global OnMapLoad = function()
 {
-
 	OnTrigger( "The Axis Road MG Nest has been constructed.", Map.Axis_Road_MG_Nest_Built );
 	OnTrigger( "The Axis Watchtower MG Nest has been constructed.", Map.Axis_Watchtower_MG_Nest_Built );
 	OnTrigger( "The Bunker MG Nest has been constructed.", Map.Bunker_MG_Nest_Built );
@@ -3706,14 +3670,6 @@ global OnMapLoad = function()
 		Wp.SetWaypointFlag( "Ladder_1", "closed", true );
 		Wp.SetWaypointFlag( "Ladder_2", "closed", true );
 	}
-
-	/*while (1)	//for testing roles
-	{
-		print( "^3=========================Test Roles & Goals=========================" );
-		Commands["botsgoals"](_params);
-		print( "^3============================End of Test=============================" );
-		sleep(5);
-	}*/
 };
 
 global OnBotJoin = function( bot )
@@ -3761,18 +3717,6 @@ global OnBotJoin = function( bot )
 			}
 		}
 	}
-
-	/*	//replaced by new goal: goal_respawn.gm
-	while(1)
-	{
-		if ( bot.HasEntityFlag ( ENTFLAG.DEAD ) and ( GetModName() == "noquarter" ) )
-		{
-			bot.ExecCommand("kill");
-			//print( "^3I am dead" );
-		}
-
-		sleep(1);
-	}*/
 };
 
 global InitializeRoutes = function()

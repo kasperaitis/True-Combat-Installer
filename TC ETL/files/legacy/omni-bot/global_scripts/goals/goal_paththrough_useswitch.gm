@@ -76,6 +76,8 @@ this.Update = function()
 			this.Bot.MoveTowards(currentswitch.Waypoint.position);
 			this.Bot.PressButton( BTN.USE);
 
+			sleep(0.25);
+
 			if ( currentswitch.ExitConditions ) {
 				foreach ( func in currentswitch.ExitConditions ) {
 					if ( func(this.Bot) == true ) {
@@ -87,8 +89,6 @@ this.Update = function()
 					}
 				}
 			}
-
-			sleep(0.25);
 		}
 
 		this.ReleaseAimRequest();

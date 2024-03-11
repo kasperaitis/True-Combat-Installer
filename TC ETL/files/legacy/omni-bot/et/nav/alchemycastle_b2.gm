@@ -96,12 +96,13 @@ global Map =
 
 		documents =
 		{
-			gotowp = "doc",
 			navigate = function(_this)
 			{
-				for(i=0; i<40 && !_this.Bot.HasEntityFlag(ENTFLAG.CARRYINGGOAL); i+=1){
-					_this.Bot.MoveTowards(_this.wpinfo.position);
-					_this.AddAimRequest(Priority.High, "facing", _this.wpinfo.facing);
+				pos = Vec3(-4902.163, 3990.125, 756.966);
+				_this.AddAimRequest(Priority.High, "position", pos);
+				_this.Bot.MoveTowards(pos);
+				for(i=0; i<30 && !_this.Bot.HasEntityFlag(ENTFLAG.CARRYINGGOAL); i+=1){
+					_this.Bot.HoldButton(BTN.CROUCH, 0.3);
 					_this.Bot.PressButton(BTN.USE);
 					sleep(0.3);
 				}

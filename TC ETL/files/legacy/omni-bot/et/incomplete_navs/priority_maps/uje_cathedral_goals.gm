@@ -28,7 +28,7 @@ global _MG =
 	{
 		CreateOnLoad = 0,
 		GoalType = "BUILD",
-		Position = Vec3(1168.000, -750.000, 540.000),
+		Position = Vec3(1576.000, -700.000, 540.000),
 		TagName = "Command Post",
 		TeamAvailability = 6,
 	},
@@ -52,7 +52,7 @@ global _MG =
 	{
 		CreateOnLoad = 0,
 		GoalType = "BUILD",
-		Position = Vec3(2364.000, -1220.000, 72.000),
+		Position = Vec3(2364.000, -1860.000, 72.000),
 		TagName = "Tank Barrier 1",
 		TeamAvailability = 4,
 	},
@@ -984,16 +984,16 @@ global _MG =
 			{
 				AimVectors = 
 				{
-					[0] = Vec3(-0.478, -0.875, 0.077),
+					[0] = Vec3(0.903, -0.429, 0.039),
 				},
-				position = Vec3(1317.875, -459.456, 512.125),
+				position = Vec3(1138.125, -618.125, 512.125),
 				stance = "crouch",
 			},
 		},
 		CreateOnLoad = 0,
 		ExplosiveType = 3,
 		GoalType = "PLANT",
-		Position = Vec3(1138.500, -752.998, 540.000),
+		Position = Vec3(1605.499, -697.000, 540.000),
 		TagName = "Command Post",
 		TeamAvailability = 6,
 	},
@@ -1009,7 +1009,6 @@ global _MG =
 					[1] = Vec3(-0.844, 0.534, 0.052),
 					[2] = Vec3(-0.306, -0.939, 0.154),
 				},
-				Timeout = 30,
 				position = Vec3(-243.612, 130.068, 40.125),
 				stance = "crouch",
 			},

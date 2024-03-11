@@ -18,6 +18,7 @@ this.FindFreeRoleSlot = function()
 	}
 
 	team = this.Bot.GetTeam();
+	currentClass = this.Bot.GetClass();
 	teamRoles = Map.Roles[ Util.TeamName(team) ];
 	if (!teamRoles){ return; }
 
@@ -52,17 +53,27 @@ this.FindFreeRoleSlot = function()
 		currentBots = tableCount(role.bots);
 		botCount += currentBots;
 		numFree =  role.numbots - currentBots;
-
-		if ( this.Debug ) {
-			print( Util.TeamName(team), id, "current:", currentBots, "free:", numFree, "evalnum:" + evalNum );
-		}
+		eval = numFree * 100;
 
 		// prioritize roles that have no players
-		if (currentBots == 0) { numFree += 9; }
+		if (currentBots == 0) {
+			eval += 10000;
+			// prioritize roles that have correct class
+			if (role.crucialClass == currentClass) {
+				eval += 50;
+			}
+		}
+
+		// sort by spawnpt
+		if (IsInt(role.spawnpt)) { eval += role.spawnpt; }
+
+		if ( this.Debug ) {
+			print( Util.TeamName(team), id, "current:", currentBots, "free:", numFree, "eval:", eval);
+		}
 
 		// see which one needs a bot the most
-		if ( numFree > evalNum ) {
-			evalNum = numFree;
+		if ( eval > evalNum ) {
+			evalNum = eval;
 			newRole = id;
 
 			if ( currentBots == 0 ) {
@@ -113,6 +124,7 @@ this.FindFreeRoleSlot = function()
 
 		// spawnpoint too
 		if ( spawnPoint ) {
+			if (this.Debug) { print(this.Bot.Name, "spawn point set to", spawnPoint); }
 			this.Bot.ChangeSpawnPoint(spawnPoint);
 		}
 

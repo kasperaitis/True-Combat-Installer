@@ -9,7 +9,6 @@
 //	Native12	07.12.2014	Added Command post goals, Fixed stuckages
 //	Native12	12.12.2014	Added trigger for Nitmod
 //
-//	Bugs and suggestions: PM on http://omni-bot.invisionzone.com/index.php?/index
 //
 //==========================================================================================
 //
@@ -1109,40 +1108,6 @@ global Map =
 	},
 	
 };
-/*
-Commands["botsgoals"] = function(_params)	//only for testing roles (thx. Palota) => called at the end of OnMapLoad 
-{
-	foreach (team in TEAM)
-	{
-		foreach (class in Util.PlayerClassTable)
-		{
-			foreach ( bot in BotTable )
-			{
-				if(bot.GetClass()==class && bot.GetTeam()==team)
-				{
-					s="";
-					foreach ( id and role in ROLE )
-					{
-						if(bot.HasRole(role))
-						{
-							s= s + " " + id;
-						}
-					}
-					goal=bot.GetMapGoalName();
-					if(!goal)
-					{
-						goal=bot.GetHighLevelGoalName();
-					}
-					if(!goal)
-					{
-						goal = "";
-					}
-					print(Util.TeamName(team) + " " + Util.ClassName(class) + s + ": " + goal);
-				}
-			}
-		}
-	}
-};*/
 
 global OnMapLoad = function()
 {
@@ -1351,19 +1316,6 @@ global OnMapLoad = function()
 	Util.FixMoverPos("train1", Vec3(7798.641, 3924.056, -153.000), Vec3(7904.000, 4028.000, -214.000));
 	
 	print( "^3Omni-bot map script by ^3by ^1Q^2i^3k^4i ^3and ^1n^2a^4t^8i^3v^5e12^3 ^3for map: ^7" + GetMapName() );
-	/*
-	while (1)	//for testing roles
-	{
-		foreach ( id and bot in BotTable )
-		{
-			print( "^3=========================Test Roles & Goals=========================" );
-			Commands["botsgoals"](_params);
-			print( "^3============================End of Test=============================" );
-			sleep(5);
-		}
-		yield();
-		yield();
-	}*/
 };
 
 global OnBotJoin = function( bot )

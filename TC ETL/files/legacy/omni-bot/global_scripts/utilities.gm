@@ -1961,7 +1961,7 @@ member ScriptDebugPrint = function(goalName, dbgType, msg)
 	}
 	if(!goalName){ goalName = ""; }
 
-	message = format("%s: %s %s", dbgType, goalName, msg);
+	message = format("%s: %s %s", dbgType, goalName + Util.DebugColorString, msg);
 	print(format("%s%s", Util.DebugColorString, message));
 	Log(message, 1);
 };
@@ -2944,6 +2944,30 @@ member CappointForFlag = function(flag, cappoint)
 		}
 	}
 	return null;
+};
+
+///////////////////////////////////////////////////////////////////////////////
+//
+member CheatsEnabled = function()
+{
+	if ( CheatsEnabled() ) {
+		return true;
+	}
+	Error("cheats must be enabled to use this command");
+	print("type /devmap", GetMapName(), "in console");
+	return false;
+};
+
+///////////////////////////////////////////////////////////////////////////////
+//
+member WarpToPosition = function( pos )
+{
+	if ( this.CheatsEnabled() )
+	{
+		s = "setviewpos " + pos[0] + " " + pos[1] + " " + pos[2] + " " + " 0";
+		print(s);
+		ExecCommandOnClient(GetLocalEntity(), s);
+	}
 };
 
 ///////////////////////////////////////////////////////////////////////////////

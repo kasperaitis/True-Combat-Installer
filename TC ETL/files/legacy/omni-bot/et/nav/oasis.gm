@@ -360,9 +360,8 @@ global Map =
 			SetAvailableMapGoals( TEAM.AXIS, false, "PLANT_Old_City_Water_Pump" );
 		}
 
-		// cs: delay it long enough for the blockable status
-		// this prevents a ton of failed paths for allies
-		sleep(2.1);
+		sleep(0.1);
+		Wp.CheckBlockable();
 
 		// Allied goals
 		SetAvailableMapGoals( TEAM.ALLIES, true, {

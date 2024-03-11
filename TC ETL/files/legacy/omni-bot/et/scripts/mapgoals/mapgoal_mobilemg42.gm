@@ -1,6 +1,6 @@
 this.GoalType = "MOBILEMG42";
 this.Version = 1;
-this.DefaultPriority = 1.0;
+this.DefaultPriority = 0.89;
 this.DefaultMinCampTime = 30.0;
 this.DefaultMaxCamptime = 60.0;
 this.RolePriorityBonus = 0.1;

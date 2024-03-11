@@ -26,7 +26,7 @@ Unicode True
 !define PRODUCT_CQB "CQB"
 !define PRODUCT_ENGINE "ETL"
 !define SERVER_INGA "Inga"
-!define PRODUCT_VERSION "1.1.0"
+!define PRODUCT_VERSION "1.1.1"
 !define PRODUCT_PUBLISHER "Aivaras Kasperaitis"
 !define PRODUCT_WEB_SITE "http://www.truecombatelite.com"
 !define WEB_SITE_NAME "True Combat Elite and CQB Lithuania"
@@ -162,6 +162,16 @@ Section "ETL. TCE. CQB." TC
   ; Main Shortcuts
   CreateShortCut "$INSTDIR\${PRODUCT_ENGINE} ${PRODUCT_TCE}.lnk" "$INSTDIR\etl.exe" "+set fs_game tcetest +set fs_homepath $\"$DOCUMENTS\${PRODUCT_NAME}$\"" "$INSTDIR\tce.ico" 0 "" ""
   CreateShortCut "$INSTDIR\${PRODUCT_ENGINE} ${PRODUCT_CQB}.lnk" "$INSTDIR\etl.exe" "+set fs_game cqbtest +set fs_homepath $\"$DOCUMENTS\${PRODUCT_NAME}$\"" "$INSTDIR\cqb.ico" 0 "" ""
+
+  ${If} ${FileExists} "$DOCUMENTS\${PRODUCT_NAME}\etmain\etkey"
+  ${Else}
+    SetOutPath "$DOCUMENTS\${PRODUCT_NAME}\etmain"
+	  ${If} ${FileExists} "$DOCUMENTS\ETLegacy\etmain\etkey"
+		  CopyFiles /SILENT $DOCUMENTS\ETLegacy\etmain\etkey "$DOCUMENTS\${PRODUCT_NAME}\etmain\etkey"
+	  ${Else}
+    	inetc::get /NOCANCEL "https://etkey.eu/genkey.php" "$DOCUMENTS\${PRODUCT_NAME}\etmain\etkey" /end
+	  ${EndIf}
+  ${EndIf}
 SectionEnd
 
 Section "Desktop Shortcuts" DESKTOP
@@ -276,7 +286,7 @@ SectionEnd
 
 ; Section descriptions
 !insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
-!insertmacro MUI_DESCRIPTION_TEXT ${TC} "This component is Required to run ${PRODUCT_NAME}. It contains Enemy Territory: Legacy 2.81.1, True Combat: Elite, True Combat: Close Quarters Battle. Downloads Wolfenstein: Enemy Territory Assets."
+!insertmacro MUI_DESCRIPTION_TEXT ${TC} "This component is Required to run ${PRODUCT_NAME}. It contains Enemy Territory: Legacy 2.82.0, True Combat: Elite, True Combat: Close Quarters Battle. Downloads Wolfenstein: Enemy Territory Assets. Gets etkey from etkey.eu."
 !insertmacro MUI_DESCRIPTION_TEXT ${DESKTOP} "This component is Optional. It contains Desktop shortcuts for True Combat: Elite and True Combat: Close Quarters Battle."
 !insertmacro MUI_DESCRIPTION_TEXT ${INGAMAPS} "This component is Optional. It downloads additional maps for Inga ETL Servers and adds Desktop shortcuts."
 !insertmacro MUI_DESCRIPTION_TEXT ${PROFILES} "This component is Optional. It contains default User Profiles."

@@ -82,7 +82,7 @@ MinPlayersForMobileMG          = -1
 # ****************************************************************************
 [Log]
 # Controls how much information is written to log files.
-# Log files can be completely disabled by cvar omnibot_logsize
+# Log files must be enabled by cvar omnibot_logsize
 
 # LogInfo: Enables info logging. (true/false)
 LogInfo                        = false

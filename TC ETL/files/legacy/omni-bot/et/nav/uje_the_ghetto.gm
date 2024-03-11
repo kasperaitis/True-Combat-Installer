@@ -10,7 +10,6 @@
 //					removed navigation board_heli, stuckages
 //	Native12	12.03.2015	Added more roles for goal Plant_Bridge
 //
-//	Bugs and suggestions: PM on http://omni-bot.invisionzone.com/index.php?/index
 //
 //==========================================================================================
 //
@@ -1567,41 +1566,7 @@ global Map =
 		},
 	},
 };
-/*
-Commands["botsgoals"] = function(_params)	//only for testing roles (thx. Palota) => called at the end of OnMapLoad 
-{
-	foreach (team in TEAM)
-	{
-		foreach (class in Util.PlayerClassTable)
-		{
-			foreach ( bot in BotTable )
-			{
-				if(bot.GetClass()==class && bot.GetTeam()==team)
-				{
-					s="";
-					foreach ( id and role in ROLE )
-					{
-						if(bot.HasRole(role))
-						{
-							s= s + " " + id;
-						}
-					}
-					goal=bot.GetMapGoalName();
-					if(!goal)
-					{
-						goal=bot.GetHighLevelGoalName();
-					}
-					if(!goal)
-					{
-						goal = "";
-					}
-					print(Util.TeamName(team) + " " + Util.ClassName(class) + s + ": " + goal);
-				}
-			}
-		}
-	}
-};
-*/
+
 global OnMapLoad = function()
 {
 	// Register callback functions
@@ -1867,27 +1832,6 @@ global OnMapLoad = function()
 	
 	Heli1Leave = OnTriggerRegion(AABB(-33.079,-1248.835,364.358,4.921,-1210.835,438.358), Map.Heli_1_Leave);
 	Heli2Enter = OnTriggerRegion(AABB(-802.557,3608.702,1043.560,-764.557,3646.702,1117.560), Map.Heli_2_Enter);
-	
-	/*while (1)	//for testing roles
-	{
-		foreach ( id and bot in BotTable )
-		{
-			print( "^3=========================Test Roles & Goals=========================" );
-			Commands["botsgoals"](_params);
-			print( "^3============================End of Test=============================" );
-			sleep(5);
-		}
-		yield();
-		yield();
-	}*/
-};
-
-global OnBotJoin = function( bot )
-{
-	// Uncomment for shootable breakables
-	//~bot.TargetBreakableDist = 90.0;
-	// Only set MaxViewDistance on maps with limited sight (e.g. fog)
-	//~bot.MaxViewDistance = 2400;
 };
 
 global InitializeRoutes = function()

@@ -1,7 +1,7 @@
 ## NSIS scripts to create Windows All in One True Combat installer.
 
 ### Enemy Territory: Legacy (TC ETL)
-`Enemy Territory: Legacy` 2.81.1, Downloads WET Assets, True Combat Elite 0.49b, Close Quarters Battle 0.223, Downloads Optional Maps.
+`Enemy Territory: Legacy` 2.82.0, Downloads WET Assets, True Combat Elite 0.49b, Close Quarters Battle 0.223, Downloads Optional Maps, Gets etkey from etkey.eu.
 
 Compiled:
 http://tc.oneladgames.com/files/installer/setup_tc_etl_1.1.0.exe

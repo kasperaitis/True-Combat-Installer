@@ -1,4 +1,4 @@
-if (GetModName()!="noquarter") { return; }
+if (GetModName()!="noquarter" && (GetModName()!="legacy" || GetModVersion() < "v2.76")) { return; }
 
 WEAPON.MP34 = 91;
 this.Name = "MP34";

@@ -79,13 +79,17 @@ this.Enter = function()
 
 this.Exit = function()
 {
-	if (this.Bot.HasEntityFlag(ENTFLAG.MOUNTED)) {
-		this.Bot.PressButton(BTN.USE); // dismount
-	}
-
 	// stop ignoring it as a target
 	if ( this.VehicleEnt && GetEntTeam(this.VehicleEnt) ) {
 		this.Bot.IgnoreTarget(this.VehicleEnt, 0.1);
+	}
+
+	if (this.UseTime > GetTime() - 0.1){
+		//wait 2 frames because ENTFLAG.MOUNTED is false immediately after mount
+		sleep(0.1);
+	}
+	if (this.Bot && this.Bot.HasEntityFlag(ENTFLAG.MOUNTED)) {
+		this.Bot.PressButton(BTN.USE); // dismount
 	}
 };
 
@@ -214,6 +218,7 @@ this.Update = function()
 			this.Bot.MoveTowards(vehPos);
 
 			this.Bot.PressButton(BTN.USE);
+			this.UseTime = GetTime();
 
 			// if they got there and it's mounted, bail out
 			// but only delay it a couple seconds in case its the other

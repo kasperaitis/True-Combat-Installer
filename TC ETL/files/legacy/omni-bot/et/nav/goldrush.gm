@@ -11,7 +11,7 @@ global Map =
 
 	DispenseAmmoTime = 15,
 
-	rnadehall_bots = 0,
+	rnadehall_bot = false,
 
 	Navigation =
 	{
@@ -20,11 +20,11 @@ global Map =
 			wpInfo = Util.WpNameInfo("rNadeHall"),
 			EvalFunc = function(_this)
 			{
-				return Map.start_of_map && _this.Bot.HasAmmo(WEAPON.AXIS_GRENADE) && Map.rnadehall_bots < 1;
+				return Map.start_of_map && _this.Bot.HasAmmo(WEAPON.AXIS_GRENADE) && !Map.rnadehall_bot;
 			},
 			navigate = function(_this)
 			{
-				Map.rnadehall_bots += 1;
+				Map.rnadehall_bot = true;
 
 				_this.AddAimRequest(Priority.High, "facing", Map.Navigation.rnadehall.wpInfo.facing);
 				_this.AddWeaponRequest(Priority.High, WEAPON.AXIS_GRENADE );
@@ -35,8 +35,10 @@ global Map =
 					_this.Bot.HoldButton(BTN.ATTACK1, 0.5);
 					sleep(1);
 				}
-
-				Map.rnadehall_bots -= 1;
+			},
+			OnExit = function()
+			{
+				Map.rnadehall_bot = false;
 			},
 		},
 	},
@@ -229,7 +231,8 @@ global Map =
 
 	blow_doors = function( trigger )
 	{
-		sleep( 2 ); //wait for waypoint connection to change from red to green
+		sleep(0.1);
+		Wp.CheckBlockable();
 
 		// Allied goals
 		SetAvailableMapGoals( TEAM.ALLIES, false, {

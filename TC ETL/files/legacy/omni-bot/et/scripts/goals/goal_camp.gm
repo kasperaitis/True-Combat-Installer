@@ -32,6 +32,10 @@ this.Exit = function()
 		//command /bot reload_weapons causes error "getdot failed on null user type"
 		wpn.PrimaryFire.DefaultDesirability = this.OldDesirability;
 		this.OldDesirability = null;
+		if (this.DisabledReload) {
+			this.DisabledReload = false;
+			wpn.PrimaryFire.IgnoreReload = false;
+		}
 	}
 };
 
@@ -80,13 +84,16 @@ this.Update = function()
 				this.DesirableWeapon = weap;
 				if (UsingWeapon) {
 					weap.PrimaryFire.DefaultDesirability = 0.9;
+					if (IsSniper && !weap.PrimaryFire.IgnoreReload) {
+						weap.PrimaryFire.IgnoreReload = true;
+						this.DisabledReload = true;
+					}
 				} else if(this.OldDesirability > 0) {
 					weap.PrimaryFire.DefaultDesirability = this.OldDesirability + 0.15;
 				}
 			}
 		}
 	}
-
 
 	peektime = 0;
 	CampTime = RandFloat(this.MapGoal.MinCampTime, this.MapGoal.MaxCampTime);

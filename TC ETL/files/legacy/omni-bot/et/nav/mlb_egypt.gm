@@ -751,8 +751,9 @@ global OnMapLoad = function()
 			 _this.Finished();
 		}
 	};
-
-	Map.boatDiff = Util.FixMoverPos("boat", Vec3(-5345.721, 6025.444, -1218.000), Vec3(-5344.000, 5999.000, -1302.000));
+	//boat position
+	if(GetEntPosition(GetGoal("MOVER_boat").GetEntity()).y < 4000){ yield(); } //Silent mod
+	Map.boatDiff = Util.FixMoverPos("boat", Vec3(-5345.721, 6025.444, -1218.000), Vec3(-5344.000, 5999.000, -1302.000)); //old mods
 };
 
 global InitializeRoutes = function()

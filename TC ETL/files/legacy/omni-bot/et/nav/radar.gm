@@ -133,7 +133,8 @@ global Map =
 		Util.ChangeSpawnForRole( TEAM.AXIS, ROLE.DEFENDER2, 4 );
 		Util.ChangeSpawnForRole( TEAM.AXIS, ROLE.DEFENDER1, 5 );
 
-		sleep(2); //wait for blockable waypoint connection
+		sleep(0.1);
+		Wp.CheckBlockable();
 
 		// Allied goals
 		Util.SetMaxUsersInProgress( 8, "FLAG_.*" );
@@ -209,7 +210,8 @@ global Map =
 	{
 		Map.SideDoorStatus = 1;
 
-		sleep(2); //wait for blockable waypoint connection
+		sleep(0.1);
+		Wp.CheckBlockable();
 
 		// let allies build it now
 		Util.ClearRoleForGoals( "BUILD_Command_Post", ROLE.DEFENDER3 );

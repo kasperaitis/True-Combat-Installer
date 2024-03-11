@@ -212,7 +212,7 @@ global Map =
 	{
 		Map.BridgeStatus = 1;
 
-		sleep(2);
+		Wp.CheckBlockable();
 
 		if ( Map.Tunnel_Doors )
 		{
@@ -305,7 +305,7 @@ global Map =
 		if ( !Map.Depot_Gates )
 		{
 			SetAvailableMapGoals( TEAM.ALLIES, false, "PLANT_.*_Axis_Base_Fortification");
-			sleep(2); //wait for blockwall waypoint connection
+			Wp.CheckBlockable();
 			SetAvailableMapGoals( TEAM.ALLIES, true, "PLANT_Fuel_Dump" );
 			SetAvailableMapGoals( TEAM.ALLIES, true, "PLANT_.*_Axis_Base_Fortification");
 		}
@@ -360,7 +360,7 @@ global Map =
 	{
 		Map.FootBridgeStatus = 1;
 
-		sleep(2);
+		Wp.CheckBlockable();
 
 		if ( Map.Tunnel_Doors )
 		{
@@ -508,7 +508,7 @@ global Map =
 
 		Util.DisableGroup( "roadmg", TEAM.ALLIES );
 
-		sleep( 2 );
+		Wp.CheckBlockable();
 		SetAvailableMapGoals( TEAM.ALLIES, false, {
 			"BUILD_Bridge",
 			"BUILD_Foot_Bridge",
@@ -594,7 +594,7 @@ global Map =
 		SetGoalPriority( "MOUNT_tank", 0.5, TEAM.ALLIES, CLASS.ENGINEER, CLASS.MEDIC, CLASS.FIELDOPS, CLASS.COVERTOPS );
 		SetGoalPriority( "MOUNT_tank", 0.8, TEAM.ALLIES, CLASS.SOLDIER );
 
-		sleep( 2 );
+		Wp.CheckBlockable();
 		SetAvailableMapGoals( TEAM.ALLIES, false, {
 			"ATTACK_Depot_Gates.*",
 			"ATTACK_Tank_Bay.*",

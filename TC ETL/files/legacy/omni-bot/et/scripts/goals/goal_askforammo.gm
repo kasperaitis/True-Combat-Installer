@@ -83,9 +83,14 @@ this.GetPriority = function()
 				this.BlackboardId = botId;
 				this.Priority = 0.8;
 			}
-			else {
-				if ( (this.Counter % askForDelay == 0) && (Util.AliveCount(this.Bot.GetTeam(), CLASS.FIELDOPS) > 0) && GetGameState() == "Playing" ) {
-					this.Bot.SayVoice(VOICE.NEED_AMMO);
+			else if ( this.Counter % askForDelay == 0 ) {
+				if (Util.AliveCount(this.Bot.GetTeam(), CLASS.FIELDOPS) > 0) {
+					if ( GetGameState() == "Playing" ) {
+						this.Bot.SayVoice(VOICE.NEED_AMMO);
+					}
+				}
+				else if (isMortaring) {
+					this.Counter -= 3;
 				}
 			}
 		}

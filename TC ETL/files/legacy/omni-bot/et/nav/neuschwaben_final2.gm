@@ -14,6 +14,8 @@
 //	Qiki			29.04.2021	Stuckages
 //	Qiki			12.07.2021	Stuckages
 //	native12		12.07.2021	released (with Mateos's consent )
+//	Qiki			20.05.2022	Stuckages
+//	native12		20.05.2022	correction in navigate
 //
 //==========================================================================================
 //
@@ -230,16 +232,87 @@ global Map =
 			},
 		},
 		
-		//	/bot waypoint_setproperty paththrough Navigation_PT:wrong_position
+		//	/bot waypoint_setproperty paththrough Navigation_PT:wrong_position	//-1001.875
 		wrong_position =
 		{
 			EvalFunc = function(_this)	// if this function returns false, navigation will not run
 			{
-				_this.Bot.GetPosition().z;
+				return ( _this.Bot.GetPosition().z < -1060 );
 			},
 			navigate = function(_this)
 			{
 				_this.Goto(_this.Bot.GetPosition());
+				Util.MapDebugPrint( "^1Navigate position");
+			},
+		},
+		
+		//	/bot waypoint_setproperty paththrough Navigation_PT:wrong_position1	//-702.241
+		wrong_position1 =
+		{
+			EvalFunc = function(_this)	// if this function returns false, navigation will not run
+			{
+				return ( _this.Bot.GetPosition().z < -810 );
+			},
+			navigate = function(_this)
+			{
+				_this.Goto(_this.Bot.GetPosition());
+				Util.MapDebugPrint( "^1Navigate position 1");
+			},
+		},
+		
+		//	/bot waypoint_setproperty paththrough Navigation_PT:wrong_position2	//-487.875
+		wrong_position2 =
+		{
+			EvalFunc = function(_this)	// if this function returns false, navigation will not run
+			{
+				return ( _this.Bot.GetPosition().z < -550 );
+			},
+			navigate = function(_this)
+			{
+				_this.Goto(_this.Bot.GetPosition());
+				Util.MapDebugPrint( "^1Navigate position 2");
+			},
+		},
+		
+		//	/bot waypoint_setproperty paththrough Navigation_PT:wrong_position3	//-227.875
+		wrong_position3 =
+		{
+			EvalFunc = function(_this)	// if this function returns false, navigation will not run
+			{
+				return ( _this.Bot.GetPosition().z < -290 );
+			},
+			navigate = function(_this)
+			{
+				_this.Goto(_this.Bot.GetPosition());
+				Util.MapDebugPrint( "^1Navigate position 3");
+			},
+		},
+		
+		//	/bot waypoint_setproperty paththrough Navigation_PT:wrong_position5	//-627.630
+		wrong_position5 =
+		{
+			EvalFunc = function(_this)	// if this function returns false, navigation will not run
+			{
+				return ( _this.Bot.GetPosition().z < -690 );
+			},
+			navigate = function(_this)
+			{
+				_this.Goto(_this.Bot.GetPosition());
+				Util.MapDebugPrint( "^1Navigate position 5");
+			},
+		},
+		
+		//	/bot waypoint_setproperty paththrough Navigation_PT:wrong_position4	//-1352.875
+		wrong_position4 =
+		{
+			EvalFunc = function(_this)	// if this function returns false, navigation will not run
+			{
+				return ( _this.Bot.GetPosition().z < -1410 );
+			},
+			navigate = function(_this)
+			{
+				_this.Goto(_this.Bot.GetPosition());
+				Util.MapDebugPrint( "^1Navigate position 4");
 			},
 		},
 		

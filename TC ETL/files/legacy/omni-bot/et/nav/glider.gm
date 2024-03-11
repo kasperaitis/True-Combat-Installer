@@ -58,7 +58,7 @@ global Map =
      */
     AxisClassManager = function()
     {
-        nbAxisBots = Server.Team[TEAM.AXIS].numBots;
+        nbAxisBots = Server.Team[TEAM.AXIS].NumBots;
 
         if ( nbAxisBots < 4 )
         {

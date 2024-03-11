@@ -39,28 +39,25 @@ this.Update = function()
 {
 	sleep(1); // give it some time to update internally
 	goalEnt = this.GetEntity();
-	if ( (GetPointContents(this.GetPosition()) & CONTENT.WATER)
-			|| (!GetEntFlags(goalEnt, ENTFLAG.DEAD) && Util.GetEntHealth(goalEnt) > 0)  //check health because ENTFLAG.DEAD does not work in ETNam mod
-			|| GetEntFlags(goalEnt, ENTFLAG.LIMBO) )
+
+	if (!GetEntFlags(goalEnt, ENTFLAG.DEAD) && Util.GetEntHealth(goalEnt) > 0  //check health because ENTFLAG.DEAD does not work in ETNam mod
+		|| GetEntFlags(goalEnt, ENTFLAG.LIMBO) )
 	{
 		this.SetAvailable(0, false);
 		this.SetRemoveFlag(true);
 	}
-	else
+	else if(this.IsDisabled())
 	{
-		if(this.IsDisabled())
+		entPos = GetEntPosition(goalEnt);
+		if (DistanceBetween(this.EntPosition,entPos) < 2)
 		{
-			entPos = GetEntPosition(goalEnt);
-			if(this.EntPosition == entPos)
-			{
-				this.DisableGoal(false);
-				// cs: actually can't block here or the goal will never get removed.
-				//block(0);
-			}
-			else
-			{
-				this.EntPosition = entPos;
-			}
+			this.DisableGoal(false);
+			// cs: actually can't block here or the goal will never get removed.
+			//block(0);
+		}
+		else
+		{
+			this.EntPosition = entPos;
 		}
 	}
 };

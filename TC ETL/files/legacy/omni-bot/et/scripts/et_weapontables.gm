@@ -14,7 +14,7 @@ isJaymod = modName == "Jaymod";
 isNitmod = modName == "nitmod";
 isETblight = modName == "etblight";
 isBastard = modName == "bastardmod";
-isLegacy = modname == "legacy";
+isLegacy = modName == "legacy";
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 // TABLES
@@ -167,11 +167,14 @@ if (isEtnam) {
 }else{
 	tbl1[WEAPON.FG42] = true;
 }
-if (isNq) {
+if (isNq || isLegacy && GetModVersion()>="v2.76") {
 	tbl1[WEAPON.MP34] = true;
-	tbl2[WEAPON.BAR] = true;
 }else{
 	tbl1[WEAPON.STEN] = true;
+}
+if (isNq) {
+	tbl2[WEAPON.BAR] = true;
+}else{
 	tbl2[WEAPON.FG42] = true; //M16 SCOPED
 }
 if (isETblight) {

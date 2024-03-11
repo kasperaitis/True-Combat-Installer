@@ -26,8 +26,7 @@ this.Enter = function()
 this.ChooseAimVector = function()
 {
 	//choose random index from MortarAim which was not used yet
-	tbl = this.MapGoal.MortarAim;
-	n = tableCount(tbl) - 1;
+	n = tableCount(this.MapGoal.MortarAim) - 1;
 	if(tableCount(this.UsedIndex) > n){
 		tableClear(this.UsedIndex);
 	}
@@ -35,7 +34,7 @@ this.ChooseAimVector = function()
 		index = RandInt(0, n);
 	}
 	this.UsedIndex[index] = true;
-	this.AimVector = tbl[index];
+	this.AimIndex = index;
 };
 
 this.Update = function()
@@ -62,13 +61,18 @@ this.Update = function()
 
 	while(1)
 	{
-		sleep(2);
+		sleep(1.5);
 
 		//don't shoot if another player is standing in front of soldier (usually fieldops giving ammo)
 		nearestPlayer = this.Bot.GetNearestAlly(CAT.PLAYER);
 		if ( !nearestPlayer || this.Bot.DistanceTo(nearestPlayer) > 150 || !this.Bot.InFieldOfView(GetEntPosition(nearestPlayer), 160.0) )
 		{
-			this.Bot.FireWeapon();
+			this.AimVector = this.MapGoal.MortarAim[this.AimIndex];
+			sleep(0.5);
+			if ( !this.MapGoal.DontShootMortar )
+			{
+				this.Bot.FireWeapon();
+			}
 		}
 	}
 

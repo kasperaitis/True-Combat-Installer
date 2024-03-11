@@ -4,7 +4,6 @@ this.WeaponAliasId = WEAPON.FG42;
 
 this.PrimaryFire.CrouchToMoveWhenZoomed = true;
 this.PrimaryFire.HasClip = true;
-this.PrimaryFire.IgnoreReload = true;
 this.PrimaryFire.DefaultDesirability = 0.7;
 this.PrimaryFire.SetDesirabilityRange(500, 4000, 0.8);
 // Use a 1-2 second delay between every 1 shot for stability.

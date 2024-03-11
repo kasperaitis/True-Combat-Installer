@@ -1,0 +1,251 @@
+//==========================================================================================
+//
+//	et_powescape_b2.gm
+//
+//	Who       	When		What
+//------------------------------------------------------------------------------------------
+//	^1[UJE]^3Niek	24 November 2022	Initial Script
+//
+//==========================================================================================
+//
+
+global Map =
+{
+	Debug = 1, // please set to zero before distributing your script
+
+	Lab_Command_Post_Built = function( trigger )
+	{
+		Util.MapDebugPrint( "Lab_Command_Post_Built" );
+	},
+
+	North_Command_Post_Built = function( trigger )
+	{
+		Util.MapDebugPrint( "North_Command_Post_Built" );
+	},
+
+	Train_Station_Command_Post_Built = function( trigger )
+	{
+		Util.MapDebugPrint( "Train_Station_Command_Post_Built" );
+	},
+
+	Lab_Command_Post_Destroyed = function( trigger )
+	{
+		Util.MapDebugPrint( "Lab_Command_Post_Destroyed" );
+	},
+
+	North_Command_Post_Destroyed = function( trigger )
+	{
+		Util.MapDebugPrint( "North_Command_Post_Destroyed" );
+	},
+
+	Train_Station_Command_Post_Destroyed = function( trigger )
+	{
+		Util.MapDebugPrint( "Train_Station_Command_Post_Destroyed" );
+	},
+
+	activationkey1_Taken = function( trigger )
+	{
+		Util.MapDebugPrint( "activationkey1_Taken" );
+	},
+
+	activationkey2_Taken = function( trigger )
+	{
+		Util.MapDebugPrint( "activationkey2_Taken" );
+	},
+
+	activationkey3_Taken = function( trigger )
+	{
+		Util.MapDebugPrint( "activationkey3_Taken" );
+	},
+
+	secretdocs1_Taken = function( trigger )
+	{
+		Util.MapDebugPrint( "secretdocs1_Taken" );
+	},
+
+	secretdocs2_Taken = function( trigger )
+	{
+		Util.MapDebugPrint( "secretdocs2_Taken" );
+	},
+
+	secretdocs3_Taken = function( trigger )
+	{
+		Util.MapDebugPrint( "secretdocs3_Taken" );
+	},
+
+	secretdocs4_Taken = function( trigger )
+	{
+		Util.MapDebugPrint( "secretdocs4_Taken" );
+	},
+
+	activationkey1_Returned = function( trigger )
+	{
+		Util.MapDebugPrint( "activationkey1_Returned" );
+	},
+
+	activationkey2_Returned = function( trigger )
+	{
+		Util.MapDebugPrint( "activationkey2_Returned" );
+	},
+
+	activationkey3_Returned = function( trigger )
+	{
+		Util.MapDebugPrint( "activationkey3_Returned" );
+	},
+
+	secretdocs1_Returned = function( trigger )
+	{
+		Util.MapDebugPrint( "secretdocs1_Returned" );
+	},
+
+	secretdocs2_Returned = function( trigger )
+	{
+		Util.MapDebugPrint( "secretdocs2_Returned" );
+	},
+
+	secretdocs3_Returned = function( trigger )
+	{
+		Util.MapDebugPrint( "secretdocs3_Returned" );
+	},
+
+	secretdocs4_Returned = function( trigger )
+	{
+		Util.MapDebugPrint( "secretdocs4_Returned" );
+	},
+
+	activationkey1_Secured = function( trigger )
+	{
+		Util.MapDebugPrint( "activationkey1_Secured" );
+	},
+
+	activationkey2_Secured = function( trigger )
+	{
+		Util.MapDebugPrint( "activationkey2_Secured" );
+	},
+
+	activationkey3_Secured = function( trigger )
+	{
+		Util.MapDebugPrint( "activationkey3_Secured" );
+	},
+
+	secretdocs1_Secured = function( trigger )
+	{
+		Util.MapDebugPrint( "secretdocs1_Secured" );
+	},
+
+	secretdocs2_Secured = function( trigger )
+	{
+		Util.MapDebugPrint( "secretdocs2_Secured" );
+	},
+
+	secretdocs3_Secured = function( trigger )
+	{
+		Util.MapDebugPrint( "secretdocs3_Secured" );
+	},
+
+	secretdocs4_Secured = function( trigger )
+	{
+		Util.MapDebugPrint( "secretdocs4_Secured" );
+	},
+
+};
+
+global OnMapLoad = function()
+{
+	// Register callback functions
+	OnTrigger( "MISSING_STRING", Map.Lab_Command_Post_Built );
+	OnTrigger( "MISSING_STRING", Map.North_Command_Post_Built );
+	OnTrigger( "MISSING_STRING", Map.Train_Station_Command_Post_Built );
+	OnTrigger( "MISSING_STRING", Map.Lab_Command_Post_Destroyed );
+	OnTrigger( "MISSING_STRING", Map.North_Command_Post_Destroyed );
+	OnTrigger( "MISSING_STRING", Map.Train_Station_Command_Post_Destroyed );
+	OnTrigger( "MISSING_STRING", Map.activationkey1_Taken );
+	OnTrigger( "MISSING_STRING", Map.activationkey2_Taken );
+	OnTrigger( "MISSING_STRING", Map.activationkey3_Taken );
+	OnTrigger( "MISSING_STRING", Map.secretdocs1_Taken );
+	OnTrigger( "MISSING_STRING", Map.secretdocs2_Taken );
+	OnTrigger( "MISSING_STRING", Map.secretdocs3_Taken );
+	OnTrigger( "MISSING_STRING", Map.secretdocs4_Taken );
+	OnTrigger( "MISSING_STRING", Map.activationkey1_Returned );
+	OnTrigger( "MISSING_STRING", Map.activationkey2_Returned );
+	OnTrigger( "MISSING_STRING", Map.activationkey3_Returned );
+	OnTrigger( "MISSING_STRING", Map.secretdocs1_Returned );
+	OnTrigger( "MISSING_STRING", Map.secretdocs2_Returned );
+	OnTrigger( "MISSING_STRING", Map.secretdocs3_Returned );
+	OnTrigger( "MISSING_STRING", Map.secretdocs4_Returned );
+	OnTrigger( "MISSING_STRING", Map.activationkey1_Secured );
+	OnTrigger( "MISSING_STRING", Map.activationkey2_Secured );
+	OnTrigger( "MISSING_STRING", Map.activationkey3_Secured );
+	OnTrigger( "MISSING_STRING", Map.secretdocs1_Secured );
+	OnTrigger( "MISSING_STRING", Map.secretdocs2_Secured );
+	OnTrigger( "MISSING_STRING", Map.secretdocs3_Secured );
+	OnTrigger( "MISSING_STRING", Map.secretdocs4_Secured );
+
+	//~Util.DisableGoal( ".*", true ); // all but routes
+	//~SetAvailableMapGoals( TEAM.AXIS, true, "ATTACK_.*" );
+	//~SetAvailableMapGoals( TEAM.ALLIES, true, "ATTACK_.*" );
+
+	// Max users per goal
+	//Util.SetMaxUsers( 1, "MOUNTMG42_.*" );
+
+	// Camp times
+	//SetMapGoalProperties( "MOUNTMG42_.*", {MinCampTime=15, MaxCampTime=90} );
+
+
+	Util.MapDebugPrint( "Omni-bot map script for " + GetMapName() + " executed." );
+};
+
+global OnBotJoin = function( bot )
+{
+	// Uncomment for shootable breakables
+	//~bot.TargetBreakableDist = 90.0;
+	// Only set MaxViewDistance on maps with limited sight (e.g. fog)
+	//~bot.MaxViewDistance = 2400;
+};
+
+global InitializeRoutes = function()
+{
+	MapRoutes =
+	{
+		FLAG_activationkey3 =
+		{
+		},
+		FLAG_secretdocs4 =
+		{
+		},
+		FLAG_secretdocs3 =
+		{
+		},
+		FLAG_secretdocs2 =
+		{
+		},
+		FLAG_secretdocs1 =
+		{
+		},
+		FLAG_activationkey1 =
+		{
+		},
+		BUILD_Train_Station_Command_Post =
+		{
+		},
+		PLANT_Train_Station_Command_Post =
+		{
+		},
+		BUILD_North_Command_Post =
+		{
+		},
+		PLANT_North_Command_Post =
+		{
+		},
+		FLAG_activationkey2 =
+		{
+		},
+		BUILD_Lab_Command_Post =
+		{
+		},
+		PLANT_Lab_Command_Post =
+		{
+		},
+	};
+	Util.Routes(MapRoutes);
+};

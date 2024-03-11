@@ -9,4 +9,5 @@ if (mod!="etblight" && mod!="bastardmod") {
 
 this.PrimaryFire.DefaultDesirability = 0.2;
 this.PrimaryFire.LowAmmoThreshold = 10;
-this.PrimaryFire.LowAmmoPriority = 0.8;
+this.PrimaryFire.LowAmmoPriority = 0.89;
+this.PrimaryFire.LowAmmoGetAmmoAmount = 300;

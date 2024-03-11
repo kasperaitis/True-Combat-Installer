@@ -14,6 +14,8 @@ global Map =
 	iw1 = 0,
 	iw2 = 0,
 
+	PrintCableCar1GoalAvailability = false,
+
 	// MGs
 	Mount_airfield_south_MG = "MOUNTMG42_1040",
 	Repair_airfield_south_MG = "REPAIRMG42_1040",
@@ -175,7 +177,6 @@ global Map =
 			"BUILD_Town_Command_Post",
 			"CHECKPOINT_town_flag",
 			"MOBILEMG42_town_allies.*",
-			"PLANT_Generator",
 			"PLANT_Guardhouse",
 			"PLANT_Town_Command_Post",
 			"PLANT_Tram_Door",
@@ -251,6 +252,7 @@ global Map =
 		Util.MapDebugPrint("OnDynoTramDoor", true);
 	},
 
+	// Tram Door destroyed
 	OnTownPermanent = function(trigger)
 	{
 		if ( Map.Talk && MAP_TALK )
@@ -291,11 +293,12 @@ global Map =
 			"SNIPE_phase2_allies.*",
 			"ATTACK_cable.*",
 			"ATTACK_hall.*",
+			"PLANT_Generator",
 		});
 		SetAvailableMapGoals( TEAM.ALLIES, false, {
 			"SNIPE_start.*",
-			"PLANT_Avalanche_Wall",
-			"PLANT_Tunnel_Entrance",
+			"PLANT_Avalanche_Wall", // TODO Might be already destroyed
+			"PLANT_Tunnel_Entrance", // TODO Might be already destroyed
 			"CALLARTILLERY_start_allies.*",
 		});
 		Util.MapDebugPrint("OnTownPermanent");
@@ -436,7 +439,7 @@ global Map =
 	OnBusDamaged = function(trigger)
 	{
 		//Util.SetPositionGoal( "BUILD_bus", "MOVER_bus" );
-		rand = ETUtil.CountTeam(TEAM.ALLIES) * 2;
+		rand = Server.Team[ TEAM.ALLIES ].NumBots * 2;
 
 		if ( Map.Talk && MAP_TALK )
 		{
@@ -521,6 +524,9 @@ global Map =
 		ac2 = OnTriggerRegion( AABB(2958.740,3627.479,1023.404,3211.639,3789.152,1186.735), RegionTrigger.AllClear );
 		iw3 = OnTriggerRegion( AABB(2871.704,2756.586,1024.083,3178.867,3255.766,1275.218), RegionTrigger.IntrusionWarning );
 		iw4 = OnTriggerRegion( AABB(2968.512,3493.874,1049.776,3438.225,3812.013,1174.605), RegionTrigger.IntrusionWarning );
+
+		sleep( 0.1 );
+		Wp.CheckBlockable();
 
 		SetAvailableMapGoals( TEAM.AXIS, false, "CALLARTILLERY_bridge_axis.*" );
 		SetAvailableMapGoals( TEAM.AXIS, true, "DEFEND_radio.*" );
@@ -630,7 +636,7 @@ global Map =
 					SetAvailableMapGoals( TEAM.ALLIES, true, "ROUTE_cable1_3" );
 					SetAvailableMapGoals( TEAM.ALLIES, false, "ROUTE_cable2_4" );
 
-					Util.MapDebugPrint("c1 going down, c2 up.");
+					Util.MapDebugPrint("c1 going down, c2 up.", !Map.PrintCableCar1GoalAvailability);
 				}
 				if ( Map.Mover1Position == 0 )
 				{
@@ -639,7 +645,7 @@ global Map =
 					SetAvailableMapGoals( TEAM.ALLIES, false, "ROUTE_cable1_3" );
 					SetAvailableMapGoals( TEAM.ALLIES, true, "ROUTE_cable2_4" );
 
-					Util.MapDebugPrint("c1 going up, c2 down.");
+					Util.MapDebugPrint("c1 going up, c2 down.", !Map.PrintCableCar1GoalAvailability);
 				}
 				Map.Mover1Position = -1;
 				Map.Mover2Position = -1;
@@ -692,7 +698,7 @@ global OnMapLoad = function()
 
 	// Vehicle triggers
 	OnTrigger("bus at location", Map.bus_at_gate);
-	busatgate = OnTriggerRegion(AABB(2383.125,729.657,1046.125,2640.875,888.875,1165.004),RegionTrigger.VehicleTrigger);
+	busatgate = OnTriggerRegion(AABB(2383.125,729.657,1046.125,2640.875,888.875,1165.004),RegionTrigger.VehicleTrigger); // TODO Triggered 1 bus movement earlier atm...
 
 	//Util.SetGoalOffset( 22, 0, 0, "BUILD_Airfield_Command_Post" );
 	//Util.SetGoalOffset( -40, 0, 0, "BUILD_Bridge" );

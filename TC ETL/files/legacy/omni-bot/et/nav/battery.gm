@@ -213,7 +213,7 @@ global Map =
 
 	Allied_Beach_Assault_Ramp_Built = function( trigger )
 	{
-		sleep( 2 );
+		Wp.CheckBlockable();
 		Map.beachplanks = true;
 
 		// Allied goals

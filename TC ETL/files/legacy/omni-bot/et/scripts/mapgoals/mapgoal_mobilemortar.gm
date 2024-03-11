@@ -1,6 +1,6 @@
 this.GoalType = "MOBILEMORTAR";
 this.Version = 1;
-this.DefaultPriority = 1.0;
+this.DefaultPriority = 0.89;
 this.RolePriorityBonus = 0.1;
 this.MaxUsers_InUse(1);
 this.MaxUsers_InProgress(1);
